@@ -96,9 +96,10 @@ def wechat_friends_analysis():
     final_city, final_count = [], []
 
     for i, j in new_list:
-        if len(i):
-            final_city.append(i)
-            final_count.append(j)
+        if not len(i):
+            i = "未知"
+        final_city.append(i)
+        final_count.append(j)
 
     print(final_city, final_count)
 
@@ -137,10 +138,11 @@ def download_files(msg):
 @itchat.msg_register(itchat.content.TEXT)
 def text_reply(msg):
 
-    # if msg.user["NickName"] == "CTT" or msg.user["NickName"] == "JJ1" or msg.user["NickName"] == "fat fish":
-    #     # print("自己人，别乱来")
-    #     print("{} ---> {}".format(msg["User"]["NickName"], msg.text))
-    #     return
+    if msg.user["NickName"] == "CTT" or msg.user["NickName"] == "JJ1" or msg.user["NickName"] == "fat fish":
+        # print("自己人，别乱来")
+        print("{} ---> {}".format(msg["User"]["NickName"], msg.text))
+        return
+
     myself = itchat.get_friends()[0]["UserName"]
     if myself == msg["ToUserName"]:
         if isinstance(msg.text, str):
@@ -207,6 +209,5 @@ class TuringBot:
         return response.json()["results"][0]["values"]["text"]
 
 
-if __name__ == '__main__':
-    itchat.run()
-    wechat_friends_analysis()
+wechat_friends_analysis()
+itchat.run()
