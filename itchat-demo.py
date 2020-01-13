@@ -147,6 +147,7 @@ def text_reply(msg):
     if myself == msg["ToUserName"]:
         if isinstance(msg.text, str):
             content = TuringBot.automatic_reply(msg.text)
+            print("{} ---> {}".format(msg["User"]["NickName"], msg.text))
             print("机器人：%s" % content)
             if content == "请求次数超限制!":
                 return "我变成个么得感情的复读机了:\n {}".format(msg.text)
