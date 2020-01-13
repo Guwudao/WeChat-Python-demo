@@ -61,54 +61,56 @@ class Person:
 
 itchat.auto_login(hotReload=True)
 
-print(itchat.get_friends()[0]["City"])
 
-friends = itchat.get_friends()
-sex_title = ["未知", "男", "女"]
-sex_count = [0, 0, 0]
-cities, count = [], []
+def wechat_friends_analysis():
+    print(itchat.get_friends()[0]["City"])
 
-for friend in friends:
-    sex = friend["Sex"]
-    sex_count[sex] += 1
-    # print(friend["City"])
+    friends = itchat.get_friends()
+    sex_title = ["未知", "男", "女"]
+    sex_count = [0, 0, 0]
+    cities, count = [], []
 
-    city = friend["City"]
-    if city not in cities:
-        cities.append(city)
+    for friend in friends:
+        sex = friend["Sex"]
+        sex_count[sex] += 1
+        # print(friend["City"])
 
-length = len(cities)
+        city = friend["City"]
+        if city not in cities:
+            cities.append(city)
 
-for i in range(length):
-    count.append(0)
+    length = len(cities)
 
-for friend in friends:
     for i in range(length):
-        if friend["City"] == cities[i]:
-            count[i] += 1
+        count.append(0)
 
-new_list = [(i, j) for (i, j) in zip(cities, count) if j >= 4]
-new_list.sort(key=lambda x: x[1], reverse=True)
-print(new_list)
+    for friend in friends:
+        for i in range(length):
+            if friend["City"] == cities[i]:
+                count[i] += 1
 
-final_city, final_count = [], []
+    new_list = [(i, j) for (i, j) in zip(cities, count) if j >= 4]
+    new_list.sort(key=lambda x: x[1], reverse=True)
+    print(new_list)
 
-for i, j in new_list:
-    if len(i):
-        final_city.append(i)
-        final_count.append(j)
+    final_city, final_count = [], []
 
-print(final_city, final_count)
+    for i, j in new_list:
+        if len(i):
+            final_city.append(i)
+            final_count.append(j)
 
-bar_sex = Bar()
-bar_sex.add_xaxis(sex_title)
-bar_sex.add_yaxis("微信好友性别数据统计", sex_count)
-bar_sex.render("sex.html")
+    print(final_city, final_count)
 
-bar_city = Bar()
-bar_city.add_xaxis(final_city)
-bar_city.add_yaxis("微信好友地区数据统计", final_count)
-bar_city.render("city.html")
+    bar_sex = Bar()
+    bar_sex.add_xaxis(sex_title)
+    bar_sex.add_yaxis("微信好友性别数据统计", sex_count)
+    bar_sex.render("sex.html")
+
+    bar_city = Bar()
+    bar_city.add_xaxis(final_city)
+    bar_city.add_yaxis("微信好友地区数据统计", final_count)
+    bar_city.render("city.html")
 
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
@@ -205,4 +207,6 @@ class TuringBot:
         return response.json()["results"][0]["values"]["text"]
 
 
-itchat.run()
+if __name__ == '__main__':
+    itchat.run()
+    wechat_friends_analysis()
