@@ -7,12 +7,6 @@ import re
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
-url = "http://openapi.tuling123.com/openapi/api/v2"
-
-signal_thread = "0e4dc4f3608b4da38dbbac4c746b6428"
-not_robot_key = "7714085bddd24e7aa77b071d8eaec5db"
-
-
 class Person:
 
     def __init__(self, name, age, height, weight, gender):
