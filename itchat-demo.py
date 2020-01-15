@@ -3,6 +3,7 @@ from itchat.content import *
 import requests
 from lxml import etree
 from pyecharts.charts import Bar
+from pyecharts.options import InitOpts, TitleOpts
 import re
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
@@ -61,12 +62,16 @@ def wechat_friends_analysis():
 
     friends = itchat.get_friends()
     sex_title = ["未知", "男", "女"]
-    sex_count = [0, 0, 0]
+    remark_sex_count = [0, 0, 0]
+    no_remark_sex_count = [0, 0, 0]
     cities, count = [], []
 
     for friend in friends:
         sex = friend["Sex"]
-        sex_count[sex] += 1
+        if len(friend["RemarkName"]):
+            remark_sex_count[sex] += 1
+        else:
+            no_remark_sex_count[sex] += 1
         # print(friend["City"])
 
         city = friend["City"]
@@ -97,9 +102,12 @@ def wechat_friends_analysis():
 
     print(final_city, final_count)
 
-    bar_sex = Bar()
+    page_title = "好友性别数据统计"
+    bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
     bar_sex.add_xaxis(sex_title)
-    bar_sex.add_yaxis("微信好友性别数据统计", sex_count)
+    bar_sex.add_yaxis("有备注", remark_sex_count)
+    bar_sex.add_yaxis("无备注", no_remark_sex_count)
+    bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left=60))
     bar_sex.render("sex.html")
 
     bar_city = Bar()
