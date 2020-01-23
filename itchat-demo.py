@@ -2,8 +2,12 @@ import itchat
 from itchat.content import *
 import requests
 from lxml import etree
-from pyecharts.charts import Bar
-from pyecharts.options import InitOpts, TitleOpts
+from pyecharts.charts import Bar, Pie
+from pyecharts.options import InitOpts, TitleOpts, ToolboxOpts
+from pyecharts.render import make_snapshot
+
+# 使用 snapshot-selenium 渲染图片
+from snapshot_selenium import snapshot
 import re
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
@@ -58,7 +62,7 @@ itchat.auto_login(hotReload=True)
 
 
 def wechat_friends_analysis():
-    print(itchat.get_friends()[0]["City"])
+    print(itchat.get_friends()[1])
 
     friends = itchat.get_friends()
     sex_title = ["未知", "男", "女"]
@@ -90,7 +94,6 @@ def wechat_friends_analysis():
 
     new_list = [(i, j) for (i, j) in zip(cities, count) if j >= 4]
     new_list.sort(key=lambda x: x[1], reverse=True)
-    print(new_list)
 
     final_city, final_count = [], []
 
@@ -107,13 +110,26 @@ def wechat_friends_analysis():
     bar_sex.add_xaxis(sex_title)
     bar_sex.add_yaxis("有备注", remark_sex_count)
     bar_sex.add_yaxis("无备注", no_remark_sex_count)
-    bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left=60))
+    bar_sex.set_global_opts(title_opts=TitleOpts(title="    微信好友性别数据统计", pos_left=60))
     bar_sex.render("sex.html")
 
     bar_city = Bar()
     bar_city.add_xaxis(final_city)
     bar_city.add_yaxis("微信好友地区数据统计", final_count)
+    bar_city.set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
     bar_city.render("city.html")
+
+    data_list = [list(z) for z in zip(final_city, final_count)]
+    pie = (
+        Pie(init_opts=InitOpts(page_title="微信好友分析饼状图", width="1200px", height="800px"))
+        .add(data_pair=data_list,
+             series_name="微信好友分布")
+        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="40px"),
+                         title_opts=TitleOpts(title="微信好友分析", pos_top="40px", pos_left="100px"))
+        # .render("pie.html")
+    )
+
+    make_snapshot(snapshot, pie.render(), "pie.png")
 
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])

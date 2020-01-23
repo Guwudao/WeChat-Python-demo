@@ -10,6 +10,7 @@ itchat = "*"
 pyecharts = "*"
 lxml = "*"
 requests = "*"
+snapshot-selenium = "*"
 
 [requires]
 python_version = "3.7"

@@ -7,11 +7,11 @@
 
 </head>
 <body>
-    <div id="af7071cf08d44f4ebcef041fef0d4c14" class="chart-container" style="width:900px; height:500px;"></div>
+    <div id="1f64005276e344dfb2ed1e1782bc0f11" class="chart-container" style="width:900px; height:500px;"></div>
     <script>
-        var chart_af7071cf08d44f4ebcef041fef0d4c14 = echarts.init(
-            document.getElementById('af7071cf08d44f4ebcef041fef0d4c14'), 'white', {renderer: 'canvas'});
-        var option_af7071cf08d44f4ebcef041fef0d4c14 = {
+        var chart_1f64005276e344dfb2ed1e1782bc0f11 = echarts.init(
+            document.getElementById('1f64005276e344dfb2ed1e1782bc0f11'), 'white', {renderer: 'canvas'});
+        var option_1f64005276e344dfb2ed1e1782bc0f11 = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -51,10 +51,10 @@
             "type": "bar",
             "name": "\u5fae\u4fe1\u597d\u53cb\u5730\u533a\u6570\u636e\u7edf\u8ba1",
             "data": [
-                191,
+                193,
                 163,
                 117,
-                88,
+                87,
                 14,
                 14,
                 11,
@@ -83,7 +83,12 @@
             ],
             "selected": {
                 "\u5fae\u4fe1\u597d\u53cb\u5730\u533a\u6570\u636e\u7edf\u8ba1": true
-            }
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
         }
     ],
     "tooltip": {
@@ -159,9 +164,45 @@
                 }
             }
         }
-    ]
+    ],
+    "title": [
+        {
+            "padding": 5,
+            "itemGap": 10
+        }
+    ],
+    "toolbox": {
+        "show": true,
+        "orient": "horizontal",
+        "itemSize": 15,
+        "itemGap": 10,
+        "left": "80%",
+        "feature": {
+            "saveAsImage": {
+                "show": true,
+                "title": "save as image",
+                "type": "png"
+            },
+            "restore": {
+                "show": true,
+                "title": "restore"
+            },
+            "dataView": {
+                "show": true,
+                "title": "data view",
+                "readOnly": false
+            },
+            "dataZoom": {
+                "show": true,
+                "title": {
+                    "zoom": "data zoom",
+                    "back": "data zoom restore"
+                }
+            }
+        }
+    }
 };
-        chart_af7071cf08d44f4ebcef041fef0d4c14.setOption(option_af7071cf08d44f4ebcef041fef0d4c14);
+        chart_1f64005276e344dfb2ed1e1782bc0f11.setOption(option_1f64005276e344dfb2ed1e1782bc0f11);
     </script>
 </body>
 </html>
