@@ -2,16 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>微信好友分析饼状图</title>
+    <title>微信好友省份分析</title>
             <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
 
 </head>
 <body>
-    <div id="1ff959c437ef49a1b96e539069198837" class="chart-container" style="width:1200px; height:800px;"></div>
+    <div id="4bf3b07e25ea4875803fdc24adf03f35" class="chart-container" style="width:1200px; height:800px;"></div>
     <script>
-        var chart_1ff959c437ef49a1b96e539069198837 = echarts.init(
-            document.getElementById('1ff959c437ef49a1b96e539069198837'), 'white', {renderer: 'canvas'});
-        var option_1ff959c437ef49a1b96e539069198837 = {
+        var chart_4bf3b07e25ea4875803fdc24adf03f35 = echarts.init(
+            document.getElementById('4bf3b07e25ea4875803fdc24adf03f35'), 'white', {renderer: 'canvas'});
+        var option_4bf3b07e25ea4875803fdc24adf03f35 = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -53,78 +53,91 @@
             "clockwise": true,
             "data": [
                 {
-                    "name": "\u5e7f\u5dde",
-                    "value": 193
+                    "name": "\u5e7f\u4e1c",
+                    "value": 452
                 },
                 {
                     "name": "\u672a\u77e5",
-                    "value": 163
+                    "value": 124
                 },
                 {
-                    "name": "\u6df1\u5733",
-                    "value": 117
+                    "name": "\u6cb3\u5357",
+                    "value": 22
                 },
                 {
-                    "name": "\u6e5b\u6c5f",
-                    "value": 87
-                },
-                {
-                    "name": "\u4f5b\u5c71",
+                    "name": "\u5317\u4eac",
                     "value": 14
                 },
                 {
-                    "name": "\u897f\u5b89",
+                    "name": "\u9655\u897f",
                     "value": 14
                 },
                 {
-                    "name": "\u90d1\u5dde",
-                    "value": 11
+                    "name": "\u6e56\u5357",
+                    "value": 13
                 },
                 {
-                    "name": "\u676d\u5dde",
-                    "value": 7
+                    "name": "\u6d59\u6c5f",
+                    "value": 10
                 },
                 {
-                    "name": "\u4e1c\u839e",
-                    "value": 7
+                    "name": "\u6c5f\u82cf",
+                    "value": 10
                 },
                 {
-                    "name": "\u6210\u90fd",
-                    "value": 7
+                    "name": "\u4e0a\u6d77",
+                    "value": 10
                 },
                 {
-                    "name": "\u957f\u6c99",
+                    "name": "\u6e56\u5317",
+                    "value": 10
+                },
+                {
+                    "name": "\u56db\u5ddd",
+                    "value": 9
+                },
+                {
+                    "name": "\u6cb3\u5317",
                     "value": 6
                 },
                 {
-                    "name": "\u6b66\u6c49",
+                    "name": "\u5e7f\u897f",
                     "value": 5
                 },
                 {
-                    "name": "\u60e0\u5dde",
+                    "name": "\u798f\u5efa",
                     "value": 4
                 },
                 {
-                    "name": "\u73e0\u6d77",
-                    "value": 4
+                    "name": "\u4e91\u5357",
+                    "value": 3
                 },
                 {
-                    "name": "\u6d77\u6dc0",
-                    "value": 4
+                    "name": "\u5b89\u5fbd",
+                    "value": 3
                 },
                 {
-                    "name": "\u6c55\u5934",
-                    "value": 4
+                    "name": "Dubayy",
+                    "value": 3
+                },
+                {
+                    "name": "California",
+                    "value": 3
+                },
+                {
+                    "name": "\u5176\u4ed6",
+                    "value": 3
                 }
             ],
             "radius": [
-                "0%",
+                "25%",
                 "75%"
             ],
             "center": [
                 "50%",
                 "50%"
             ],
+            "roseType": "Mapping",
             "label": {
                 "show": true,
                 "position": "top",
@@ -135,22 +148,25 @@
     "legend": [
         {
             "data": [
-                "\u5e7f\u5dde",
+                "\u5e7f\u4e1c",
                 "\u672a\u77e5",
-                "\u6df1\u5733",
-                "\u6e5b\u6c5f",
-                "\u4f5b\u5c71",
-                "\u897f\u5b89",
-                "\u90d1\u5dde",
-                "\u676d\u5dde",
-                "\u4e1c\u839e",
-                "\u6210\u90fd",
-                "\u957f\u6c99",
-                "\u6b66\u6c49",
-                "\u60e0\u5dde",
-                "\u73e0\u6d77",
-                "\u6d77\u6dc0",
-                "\u6c55\u5934"
+                "\u6cb3\u5357",
+                "\u5317\u4eac",
+                "\u9655\u897f",
+                "\u6e56\u5357",
+                "\u6d59\u6c5f",
+                "\u6c5f\u82cf",
+                "\u4e0a\u6d77",
+                "\u6e56\u5317",
+                "\u56db\u5ddd",
+                "\u6cb3\u5317",
+                "\u5e7f\u897f",
+                "\u798f\u5efa",
+                "\u4e91\u5357",
+                "\u5b89\u5fbd",
+                "Dubayy",
+                "California",
+                "\u5176\u4ed6"
             ],
             "selected": {},
             "show": true,
@@ -174,9 +190,9 @@
     },
     "title": [
         {
-            "text": "\u5fae\u4fe1\u597d\u53cb\u5206\u6790",
-            "left": "100px",
-            "top": "40px",
+            "text": "\u5fae\u4fe1\u597d\u53cb\u7701\u4efd\u5206\u6790",
+            "left": "50px",
+            "top": "60px",
             "padding": 5,
             "itemGap": 10
         }
@@ -187,7 +203,7 @@
         "itemSize": 15,
         "itemGap": 10,
         "left": "80%",
-        "top": "40px",
+        "top": "60px",
         "feature": {
             "saveAsImage": {
                 "show": true,
@@ -213,7 +229,7 @@
         }
     }
 };
-        chart_1ff959c437ef49a1b96e539069198837.setOption(option_1ff959c437ef49a1b96e539069198837);
+        chart_4bf3b07e25ea4875803fdc24adf03f35.setOption(option_4bf3b07e25ea4875803fdc24adf03f35);
     </script>
 </body>
 </html>

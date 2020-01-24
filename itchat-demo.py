@@ -12,6 +12,7 @@ import re
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
+
 class Person:
 
     def __init__(self, name, age, height, weight, gender):
@@ -61,14 +62,43 @@ class Person:
 itchat.auto_login(hotReload=True)
 
 
+def wechat_information_refine(key, filter_count) -> []:
+    friends = itchat.get_friends()
+    information, count = [], []
+
+    for friend in friends:
+        info = friend[key]
+
+        if info not in information:
+            information.append(info)
+            count.append(0)
+
+    info_length = len(count)
+
+    for friend in friends:
+        for i in range(info_length):
+            if friend[key] == information[i]:
+                count[i] += 1
+
+    temp_list = [(i, j) for i, j in zip(information, count) if j >= filter_count]
+    temp_list.sort(key=lambda x: x[1], reverse=True)
+
+    # print(temp_list)
+    return temp_list
+
+
 def wechat_friends_analysis():
-    print(itchat.get_friends()[1])
+    # print(itchat.get_friends()[1])
+
+    provinces, province_count, cities, city_count = [], [], [], []
+
+    tuple_city_list = wechat_information_refine("City", 3)
+    tuple_province_list = wechat_information_refine("Province", 3)
 
     friends = itchat.get_friends()
     sex_title = ["未知", "男", "女"]
     remark_sex_count = [0, 0, 0]
     no_remark_sex_count = [0, 0, 0]
-    cities, count = [], []
 
     for friend in friends:
         sex = friend["Sex"]
@@ -76,60 +106,73 @@ def wechat_friends_analysis():
             remark_sex_count[sex] += 1
         else:
             no_remark_sex_count[sex] += 1
-        # print(friend["City"])
 
-        city = friend["City"]
-        if city not in cities:
-            cities.append(city)
-
-    length = len(cities)
-
-    for i in range(length):
-        count.append(0)
-
-    for friend in friends:
-        for i in range(length):
-            if friend["City"] == cities[i]:
-                count[i] += 1
-
-    new_list = [(i, j) for (i, j) in zip(cities, count) if j >= 4]
-    new_list.sort(key=lambda x: x[1], reverse=True)
-
-    final_city, final_count = [], []
-
-    for i, j in new_list:
+    for i, j in tuple_province_list:
         if not len(i):
             i = "未知"
-        final_city.append(i)
-        final_count.append(j)
+        provinces.append(i)
+        province_count.append(j)
 
-    print(final_city, final_count)
+    for i, j in tuple_city_list:
+        if not len(i):
+            i = "未知"
+        cities.append(i)
+        city_count.append(j)
+
+    print(cities, city_count)
+    print(provinces, province_count)
 
     page_title = "好友性别数据统计"
     bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
     bar_sex.add_xaxis(sex_title)
     bar_sex.add_yaxis("有备注", remark_sex_count)
     bar_sex.add_yaxis("无备注", no_remark_sex_count)
-    bar_sex.set_global_opts(title_opts=TitleOpts(title="    微信好友性别数据统计", pos_left=60))
+    bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left=60))
     bar_sex.render("sex.html")
 
     bar_city = Bar()
-    bar_city.add_xaxis(final_city)
-    bar_city.add_yaxis("微信好友地区数据统计", final_count)
+    bar_city.add_xaxis(cities)
+    bar_city.add_yaxis("微信好友地区数据统计", city_count)
     bar_city.set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
     bar_city.render("city.html")
 
-    data_list = [list(z) for z in zip(final_city, final_count)]
-    pie = (
-        Pie(init_opts=InitOpts(page_title="微信好友分析饼状图", width="1200px", height="800px"))
-        .add(data_pair=data_list,
-             series_name="微信好友分布")
-        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="40px"),
-                         title_opts=TitleOpts(title="微信好友分析", pos_top="40px", pos_left="100px"))
-        # .render("pie.html")
+    city_data_list = [(i, j) for i, j in zip(cities, city_count)]
+    pie_city = (
+        Pie(init_opts=InitOpts(
+                               page_title="微信好友城市分析",
+                               width="1400px",
+                               height="800px",
+                               ))
+        .add(
+             data_pair=city_data_list,
+             series_name="微信好友分布",
+             # radius=["25%", "75%"],
+             # rosetype="radius"
+             )
+        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
+                         title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
+        # .render("pie_city.html")
     )
+    make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
 
-    make_snapshot(snapshot, pie.render(), "pie.png")
+    province_data_list = [(i, j) for i, j in zip(provinces, province_count)]
+    pie_province = (
+        Pie(init_opts=InitOpts(
+            page_title="微信好友省份分析",
+            width="1200px",
+            height="800px",
+        ))
+        .add(
+            data_pair=province_data_list,
+            series_name="微信好友分布",
+            radius=["25%", "75%"],
+            rosetype="Mapping"
+        )
+        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
+                         title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
+        # .render("pie_province.html")
+    )
+    make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
 
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
@@ -229,4 +272,4 @@ class TuringBot:
 
 
 wechat_friends_analysis()
-itchat.run()
+# itchat.run()
