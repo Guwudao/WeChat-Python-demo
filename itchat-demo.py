@@ -2,8 +2,8 @@ import itchat
 from itchat.content import *
 import requests
 from lxml import etree
-from pyecharts.charts import Bar, Pie
-from pyecharts.options import InitOpts, TitleOpts, ToolboxOpts
+from pyecharts.charts import Bar, Pie, Geo, Map
+from pyecharts.options import InitOpts, TitleOpts, ToolboxOpts, VisualMapOpts
 from pyecharts.render import make_snapshot
 
 # 使用 snapshot-selenium 渲染图片
@@ -107,6 +107,8 @@ def wechat_friends_analysis():
         else:
             no_remark_sex_count[sex] += 1
 
+    print([item[0] for item in tuple_city_list])
+
     for i, j in tuple_province_list:
         if not len(i):
             i = "未知"
@@ -119,8 +121,8 @@ def wechat_friends_analysis():
         cities.append(i)
         city_count.append(j)
 
-    print(cities, city_count)
-    print(provinces, province_count)
+    # print(cities, city_count)
+    # print(provinces, province_count)
 
     page_title = "好友性别数据统计"
     bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
@@ -173,6 +175,16 @@ def wechat_friends_analysis():
         # .render("pie_province.html")
     )
     make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
+
+    province_geo = (
+                    Map(init_opts=InitOpts(page_title="微信好友分布"))
+                    .add("微信好友分布geo图", tuple_province_list, "china")
+                    .set_global_opts(
+                        title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
+                        visualmap_opts=VisualMapOpts(max_=tuple_province_list[0][1], is_piecewise=True))
+                    # .render("geo_province.html")
+                    )
+    make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
 
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
