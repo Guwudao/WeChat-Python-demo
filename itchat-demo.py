@@ -9,6 +9,7 @@ from pyecharts.render import make_snapshot
 # 使用 snapshot-selenium 渲染图片
 from snapshot_selenium import snapshot
 import re
+import jieba
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
@@ -60,10 +61,23 @@ class Person:
 
 
 itchat.auto_login(hotReload=True)
+friends = itchat.get_friends()
 
 
-def wechat_information_refine(key, filter_count) -> []:
-    friends = itchat.get_friends()
+def wechat_signature_words():
+    word_list = []
+    for friend in friends:
+        res = re.match(r"([\u4e00-\u9fa5]+)", friend["Signature"])
+        if res:
+            word = jieba.cut(res.groups(1))
+            print(list(word))
+            # for w in list(word):
+            #     word_list.append(w)
+
+    print(word_list)
+
+
+def wechat_information_refine(key, filter_count, reverse) -> []:
     information, count = [], []
 
     for friend in friends:
@@ -81,7 +95,7 @@ def wechat_information_refine(key, filter_count) -> []:
                 count[i] += 1
 
     temp_list = [(i, j) for i, j in zip(information, count) if j >= filter_count]
-    temp_list.sort(key=lambda x: x[1], reverse=True)
+    temp_list.sort(key=lambda x: x[1], reverse=reverse)
 
     # print(temp_list)
     return temp_list
@@ -92,10 +106,9 @@ def wechat_friends_analysis():
 
     provinces, province_count, cities, city_count = [], [], [], []
 
-    tuple_city_list = wechat_information_refine("City", 3)
-    tuple_province_list = wechat_information_refine("Province", 3)
+    tuple_city_list = wechat_information_refine("City", 3, True)
+    tuple_province_list = wechat_information_refine("Province", 3, True)
 
-    friends = itchat.get_friends()
     sex_title = ["未知", "男", "女"]
     remark_sex_count = [0, 0, 0]
     no_remark_sex_count = [0, 0, 0]
@@ -106,8 +119,6 @@ def wechat_friends_analysis():
             remark_sex_count[sex] += 1
         else:
             no_remark_sex_count[sex] += 1
-
-    print([item[0] for item in tuple_city_list])
 
     for i, j in tuple_province_list:
         if not len(i):
@@ -140,40 +151,40 @@ def wechat_friends_analysis():
 
     city_data_list = [(i, j) for i, j in zip(cities, city_count)]
     pie_city = (
-        Pie(init_opts=InitOpts(
-                               page_title="微信好友城市分析",
-                               width="1400px",
-                               height="800px",
-                               ))
-        .add(
-             data_pair=city_data_list,
-             series_name="微信好友分布",
-             # radius=["25%", "75%"],
-             # rosetype="radius"
-             )
-        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
-                         title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
-        # .render("pie_city.html")
-    )
+                Pie(init_opts=InitOpts(
+                                       page_title="微信好友城市分析",
+                                       width="1400px",
+                                       height="800px",
+                                       ))
+                .add(
+                     data_pair=city_data_list,
+                     series_name="微信好友分布",
+                     # radius=["25%", "75%"],
+                     # rosetype="radius"
+                     )
+                .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
+                                 title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
+                # .render("pie_city.html")
+                )
     make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
 
     province_data_list = [(i, j) for i, j in zip(provinces, province_count)]
     pie_province = (
-        Pie(init_opts=InitOpts(
-            page_title="微信好友省份分析",
-            width="1200px",
-            height="800px",
-        ))
-        .add(
-            data_pair=province_data_list,
-            series_name="微信好友分布",
-            radius=["25%", "75%"],
-            rosetype="Mapping"
-        )
-        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
-                         title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
-        # .render("pie_province.html")
-    )
+                    Pie(init_opts=InitOpts(
+                        page_title="微信好友省份分析",
+                        width="1200px",
+                        height="800px",
+                    ))
+                    .add(
+                        data_pair=province_data_list,
+                        series_name="微信好友分布",
+                        radius=["25%", "75%"],
+                        rosetype="Mapping"
+                    )
+                    .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
+                                     title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
+                    # .render("pie_province.html")
+                    )
     make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
 
     province_geo = (
@@ -181,7 +192,7 @@ def wechat_friends_analysis():
                     .add("微信好友分布geo图", tuple_province_list, "china")
                     .set_global_opts(
                         title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
-                        visualmap_opts=VisualMapOpts(max_=tuple_province_list[0][1], is_piecewise=True))
+                        visualmap_opts=VisualMapOpts(max_=200, is_piecewise=True))
                     # .render("geo_province.html")
                     )
     make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
@@ -204,13 +215,14 @@ def download_files(msg):
         type_symbol = {
             PICTURE: 'img',
             VIDEO: 'vid', }.get(msg.type, 'fil')
-        itchat.send_msg("看我反弹大法！！！", toUserName=msg["FromUserName"])
+        itchat.send_msg("看我图片反弹大法！！！", toUserName=msg["FromUserName"])
         return '@%s@%s' % (type_symbol, msg.fileName)
 
 
 @itchat.msg_register(itchat.content.TEXT)
 def text_reply(msg):
 
+    # 根据昵称过滤需要屏蔽的对象
     if msg.user["NickName"] == "CTT" or msg.user["NickName"] == "JJ1" or msg.user["NickName"] == "fat fish":
         # print("自己人，别乱来")
         print("{} ---> {}".format(msg["User"]["NickName"], msg.text))
@@ -244,6 +256,7 @@ def text_reply(msg):
 
         elif msg.type == "Picture":
 
+            # 处理收到的图片和表情
             print(msg["Content"])
             print("--"*40)
             html_lxml = etree.HTML(msg["Content"])
@@ -283,5 +296,6 @@ class TuringBot:
         return response.json()["results"][0]["values"]["text"]
 
 
-wechat_friends_analysis()
+wechat_signature_words()
+# wechat_friends_analysis()
 # itchat.run()
