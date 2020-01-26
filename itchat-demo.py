@@ -2,9 +2,10 @@ import itchat
 from itchat.content import *
 import requests
 from lxml import etree
-from pyecharts.charts import Bar, Pie, Geo, Map
+from pyecharts.charts import Bar, Pie, Map, WordCloud
 from pyecharts.options import InitOpts, TitleOpts, ToolboxOpts, VisualMapOpts
 from pyecharts.render import make_snapshot
+from pyecharts.globals import SymbolType
 
 # 使用 snapshot-selenium 渲染图片
 from snapshot_selenium import snapshot
@@ -65,16 +66,33 @@ friends = itchat.get_friends()
 
 
 def wechat_signature_words():
-    word_list = []
+    all_word_list = []
+    final_words = {}
     for friend in friends:
-        res = re.match(r"([\u4e00-\u9fa5]+)", friend["Signature"])
-        if res:
-            word = jieba.cut(res.groups(1))
-            print(list(word))
-            # for w in list(word):
-            #     word_list.append(w)
+        words = jieba.cut(friend["Signature"])
+        for w in list(words):
+            res = re.match(r"([\u4e00-\u9fa5]+)", w)
+            if res:
+                all_word_list.append(w)
 
-    print(word_list)
+    # print(all_word_list)
+
+    for w in all_word_list:
+        if w not in final_words.keys():
+            final_words[w] = 0
+
+        final_words[w] += 1
+
+    sort_words = sorted(final_words.items(), key=lambda x: x[1], reverse=True)
+    # print(words)
+
+    wc = (
+        WordCloud(init_opts=InitOpts(page_title="微信签名词云"))
+        .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
+        .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"), toolbox_opts=ToolboxOpts(is_show=True))
+        # .render("signature.html")
+    )
+    make_snapshot(snapshot, wc.render("signature.html"), "signature.png")
 
 
 def wechat_information_refine(key, filter_count, reverse) -> []:
@@ -107,7 +125,7 @@ def wechat_friends_analysis():
     provinces, province_count, cities, city_count = [], [], [], []
 
     tuple_city_list = wechat_information_refine("City", 3, True)
-    tuple_province_list = wechat_information_refine("Province", 3, True)
+    tuple_province_list = wechat_information_refine("Province", 4, True)
 
     sex_title = ["未知", "男", "女"]
     remark_sex_count = [0, 0, 0]
@@ -133,7 +151,7 @@ def wechat_friends_analysis():
         city_count.append(j)
 
     # print(cities, city_count)
-    # print(provinces, province_count)
+    print(provinces, province_count)
 
     page_title = "好友性别数据统计"
     bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
@@ -148,6 +166,14 @@ def wechat_friends_analysis():
     bar_city.add_yaxis("微信好友地区数据统计", city_count)
     bar_city.set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
     bar_city.render("city.html")
+
+    bar_province = (
+                        Bar()
+                        .add_xaxis(provinces)
+                        .add_yaxis("微信好友省份统计", province_count)
+                        .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
+                   )
+    make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
 
     city_data_list = [(i, j) for i, j in zip(cities, city_count)]
     pie_city = (
@@ -296,6 +322,6 @@ class TuringBot:
         return response.json()["results"][0]["values"]["text"]
 
 
-wechat_signature_words()
-# wechat_friends_analysis()
+# wechat_signature_words()
+wechat_friends_analysis()
 # itchat.run()
