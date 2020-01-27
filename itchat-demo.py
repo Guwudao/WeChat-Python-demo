@@ -11,6 +11,7 @@ from snapshot_selenium import snapshot
 import re
 import jieba
 import os
+import shutil
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
@@ -324,14 +325,25 @@ class TuringBot:
 
 def file_classify():
     # print(os.listdir())
-    html_list, png_list =\
-        98[], []
+    html_list, png_list = [], []
     for file in os.listdir():
         suffix = file.split(".")[-1]
         if suffix == "html":
             html_list.append(file)
         elif suffix == "png":
             png_list.append(file)
+
+    if not os.path.exists("./html"):
+        os.mkdir("./html")
+
+    for f in html_list:
+        shutil.move(f, "./html")
+
+    if not os.path.exists("./png"):
+        os.mkdir("./png")
+
+    for f in png_list:
+        shutil.move(f, "./png")
 
     print(html_list, png_list)
 
