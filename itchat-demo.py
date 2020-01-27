@@ -5,12 +5,12 @@ from lxml import etree
 from pyecharts.charts import Bar, Pie, Map, WordCloud
 from pyecharts.options import InitOpts, TitleOpts, ToolboxOpts, VisualMapOpts
 from pyecharts.render import make_snapshot
-from pyecharts.globals import SymbolType
 
 # 使用 snapshot-selenium 渲染图片
 from snapshot_selenium import snapshot
 import re
 import jieba
+import os
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
@@ -322,6 +322,21 @@ class TuringBot:
         return response.json()["results"][0]["values"]["text"]
 
 
+def file_classify():
+    # print(os.listdir())
+    html_list, png_list =\
+        98[], []
+    for file in os.listdir():
+        suffix = file.split(".")[-1]
+        if suffix == "html":
+            html_list.append(file)
+        elif suffix == "png":
+            png_list.append(file)
+
+    print(html_list, png_list)
+
+
 # wechat_signature_words()
-wechat_friends_analysis()
+# wechat_friends_analysis()
+file_classify()
 # itchat.run()

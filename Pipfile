@@ -1,6 +1,6 @@
 [[source]]
 name = "pypi"
-url = "https://pypi.org/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 verify_ssl = true
 
 [dev-packages]
@@ -12,6 +12,8 @@ lxml = "*"
 requests = "*"
 snapshot-selenium = "*"
 jieba = "*"
+wordcloud = "*"
+selenium = "==4.0.0a3"
 
 [requires]
 python_version = "3.7"
