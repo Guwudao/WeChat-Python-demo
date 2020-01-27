@@ -1,7 +1,6 @@
 import itchat
 from itchat.content import *
-import requests
-from lxml import etree
+
 from pyecharts.charts import Bar, Pie, Map, WordCloud
 from pyecharts.options import InitOpts, TitleOpts, ToolboxOpts, VisualMapOpts
 from pyecharts.render import make_snapshot
@@ -12,55 +11,13 @@ import re
 import jieba
 import os
 import shutil
+from lxml import etree
+
+from TuringBot import TuringBot
+from PersonBodyFat import Person
+import wordcloud
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
-
-
-class Person:
-
-    def __init__(self, name, age, height, weight, gender):
-        self.name = name
-        self.age = age
-        self.height = height
-        self.weight = weight
-        self.gender = gender
-
-        try:
-            if isinstance(age, str):
-                self.age = int(age)
-
-            if isinstance(height, str):
-                self.height = float(height)
-                if self.height > 10:
-                    self.height = self.height / 100
-
-            if isinstance(weight, str):
-                self.weight = float(weight)
-
-            if gender in ("男", "女"):
-                self.gender = 1 if gender == "男" else 0
-
-        except Exception:
-            raise Exception("请输入正确格式")
-
-    @property
-    def get_body_fat(self):
-        bmi = self.weight / (self.height * self.height)
-        body_fat = (1.2 * bmi + 0.23 * self.age - 0.54 - 10.8 * self.gender) / 100
-
-        body_fat_scop = ((0.25, 0.28), (0.15, 0.18))
-        min_fat, max_fat = body_fat_scop[self.gender]
-
-        result = "正常"
-        if body_fat < min_fat:
-            result = "偏瘦"
-        elif body_fat > max_fat:
-            result = "偏胖"
-        print("BMI = %f" % bmi, "体脂率 = %f" % body_fat)
-
-        result_str = "{} 您好，您的体脂率是{}, 正常体脂率的范围是{} - {}, 您的体型属于{}".format(self.name, body_fat, min_fat, max_fat, result)
-        return result_str
-
 
 itchat.auto_login(hotReload=True)
 friends = itchat.get_friends()
@@ -87,13 +44,15 @@ def wechat_signature_words():
     sort_words = sorted(final_words.items(), key=lambda x: x[1], reverse=True)
     # print(words)
 
-    wc = (
+    echart_wc = (
         WordCloud(init_opts=InitOpts(page_title="微信签名词云"))
         .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
         .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"), toolbox_opts=ToolboxOpts(is_show=True))
         # .render("signature.html")
     )
-    make_snapshot(snapshot, wc.render("signature.html"), "signature.png")
+    make_snapshot(snapshot, echart_wc.render("signature.html"), "signature.png")
+
+    wc = WordCloud()
 
 
 def wechat_information_refine(key, filter_count, reverse) -> []:
@@ -268,18 +227,18 @@ def text_reply(msg):
 
             # print(msg["User"]["NickName"] == "JJ")
             #
-            # result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
-            #
-            # if result:
-            #     try:
-            #         p = Person(*result.groups())
-            #     except Exception:
-            #         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
-            #     # print(p.get_body_fat)
-            #     itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
-            # else:
-            #     print(msg)
-            #     return "我是个么得感情的复读机:\n {}".format(msg.text)
+            result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
+
+            if result:
+                try:
+                    p = Person(*result.groups())
+                except Exception:
+                    return "我是个么得感情的复读机 -- 但我并不打算复读这个"
+                # print(p.get_body_fat)
+                itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
+            else:
+                print(msg)
+                return "我是个么得感情的复读机:\n {}".format(msg.text)
 
         elif msg.type == "Picture":
 
@@ -296,59 +255,26 @@ def text_reply(msg):
             return "我是个么得感情的复读机:\n {}".format(msg)
 
 
-class TuringBot:
-
-    url = "http://openapi.tuling123.com/openapi/api/v2"
-
-    signal_thread = "0e4dc4f3608b4da38dbbac4c746b6428"
-    not_robot_key = "7714085bddd24e7aa77b071d8eaec5db"
-
-    @classmethod
-    def automatic_reply(cls, text):
-
-        parameter_json = {
-                            "reqType": 0,
-                            "perception": {
-                                "inputText": {
-                                    "text": text
-                                }
-                            },
-                            "userInfo": {
-                                "apiKey": cls.not_robot_key,
-                                "userId": "single"
-                            }
-                        }
-
-        response = requests.post(cls.url, json=parameter_json)
-        return response.json()["results"][0]["values"]["text"]
-
-
-def file_classify():
+def file_classify(file_type, des_path):
     # print(os.listdir())
-    html_list, png_list = [], []
+    file_list = []
     for file in os.listdir():
         suffix = file.split(".")[-1]
-        if suffix == "html":
-            html_list.append(file)
-        elif suffix == "png":
-            png_list.append(file)
+        if suffix == file_type:
+            file_list.append(file)
 
-    if not os.path.exists("./html"):
-        os.mkdir("./html")
+    if not os.path.exists(des_path):
+        os.mkdir(des_path)
 
-    for f in html_list:
-        shutil.move(f, "./html")
+    for f in file_list:
+        shutil.move(f, des_path)
+        print("move %s to %s success" % f, des_path)
 
-    if not os.path.exists("./png"):
-        os.mkdir("./png")
-
-    for f in png_list:
-        shutil.move(f, "./png")
-
-    print(html_list, png_list)
+    # print(html_list, png_list)
 
 
 # wechat_signature_words()
 # wechat_friends_analysis()
-file_classify()
+file_classify("png", "./PNG")
+file_classify("html", "./HTML")
 # itchat.run()
