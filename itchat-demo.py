@@ -15,7 +15,10 @@ from lxml import etree
 
 from TuringBot import TuringBot
 from PersonBodyFat import Person
+from PIL import Image
 import wordcloud
+import numpy as np
+
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
@@ -42,17 +45,27 @@ def wechat_signature_words():
         final_words[w] += 1
 
     sort_words = sorted(final_words.items(), key=lambda x: x[1], reverse=True)
-    # print(words)
+    print(words)
 
-    echart_wc = (
+    chart_wc = (
         WordCloud(init_opts=InitOpts(page_title="微信签名词云"))
         .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
-        .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"), toolbox_opts=ToolboxOpts(is_show=True))
+        .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"),
+                         toolbox_opts=ToolboxOpts(is_show=True))
         # .render("signature.html")
     )
-    make_snapshot(snapshot, echart_wc.render("signature.html"), "signature.png")
+    make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
 
-    wc = WordCloud()
+    img = Image.open("IMG_7946.JPG")
+    mask = np.array(img)
+    wc = wordcloud.WordCloud(font_path="simsun.ttc",
+                             background_color="white",
+                             stopwords={"自己", "一个"},
+                             # max_words=100,
+                             mask=mask)
+    wc.generate(" ".join(all_word_list))
+    wc.recolor(color_func=wordcloud.ImageColorGenerator(mask))
+    wc.to_file("word_cloud.png")
 
 
 def wechat_information_refine(key, filter_count, reverse) -> []:
@@ -111,7 +124,7 @@ def wechat_friends_analysis():
         city_count.append(j)
 
     # print(cities, city_count)
-    print(provinces, province_count)
+    # print(provinces, province_count)
 
     page_title = "好友性别数据统计"
     bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
@@ -256,7 +269,7 @@ def text_reply(msg):
 
 
 def file_classify(file_type, des_path):
-    # print(os.listdir())
+
     file_list = []
     for file in os.listdir():
         suffix = file.split(".")[-1]
@@ -265,16 +278,25 @@ def file_classify(file_type, des_path):
 
     if not os.path.exists(des_path):
         os.mkdir(des_path)
+        print("create dir success")
+    else:
+        cur_path = os.path.join(os.getcwd(), des_path)
+        # print(cur_path)
+        os.chdir(cur_path)
+        for f in file_list:
+            if os.path.exists(f):
+                os.remove(f)
 
+    # print("file list: %s" % file_list)
+    os.chdir(os.path.pardir)
     for f in file_list:
         shutil.move(f, des_path)
-        print("move %s to %s success" % f, des_path)
-
-    # print(html_list, png_list)
 
 
-# wechat_signature_words()
-# wechat_friends_analysis()
-file_classify("png", "./PNG")
-file_classify("html", "./HTML")
+
+
+wechat_signature_words()
+wechat_friends_analysis()
+file_classify("png", "PNG")
+file_classify("html", "HTML")
 # itchat.run()
