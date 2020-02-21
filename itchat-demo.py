@@ -15,6 +15,7 @@ from lxml import etree
 
 from TuringBot import TuringBot
 from PersonBodyFat import Person
+import TeamClockIn
 from PIL import Image
 import wordcloud
 import numpy as np
@@ -205,8 +206,6 @@ def download_files(msg):
         print("{} ---> {}".format(msg["User"]["NickName"], msg))
         return
 
-    print(msg)
-
     if not msg["Content"]:
         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
     else:
@@ -230,39 +229,46 @@ def text_reply(msg):
     myself = itchat.get_friends()[0]["UserName"]
     if myself == msg["ToUserName"]:
         if isinstance(msg.text, str):
-            content = TuringBot.automatic_reply(msg.text)
-            print("{} ---> {}".format(msg["User"]["NickName"], msg.text))
-            print("机器人：%s" % content)
-            if content == "请求次数超限制!":
-                return "我变成个么得感情的复读机了:\n {}".format(msg.text)
-            else:
-                itchat.send_msg(content, toUserName=msg["FromUserName"])
+            print("{} ---------> {}".format(msg["User"]["NickName"], msg.text))
 
-            # print(msg["User"]["NickName"] == "JJ")
-            #
-            result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
-
-            if result:
-                try:
-                    p = Person(*result.groups())
-                except Exception:
-                    return "我是个么得感情的复读机 -- 但我并不打算复读这个"
-                # print(p.get_body_fat)
-                itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
+            if "#接龙" in msg.text:
+                team_list, amount = TeamClockIn.unclock_list(msg.text)
+                if len(team_list) > 0:
+                    return "未打卡：{}, 打卡总人数为{}".format(team_list, str(amount))
+                else:
+                    return "打卡已全部完成，打卡人数为{}".format(str(amount))
             else:
-                print(msg)
-                return "我是个么得感情的复读机:\n {}".format(msg.text)
+                content = TuringBot.automatic_reply(msg.text)
+                print("机器人：%s" % content)
+                if content == "请求次数超限制!":
+                    return "我变成个么得感情的复读机了:\n {}".format(msg.text)
+                else:
+                    itchat.send_msg(content, toUserName=msg["FromUserName"])
+                    return
+                # print(msg["User"]["NickName"] == "JJ")
+
+                    result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
+
+                    if result:
+                        try:
+                            p = Person(*result.groups())
+                        except Exception:
+                            return "我是个么得感情的复读机 -- 但我并不打算复读这个"
+                        # print(p.get_body_fat)
+                        itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
+                    else:
+                        return "我是个么得感情的复读机111:\n {}".format(msg.text)
 
         elif msg.type == "Picture":
 
             # 处理收到的图片和表情
-            print(msg["Content"])
-            print("--"*40)
-            html_lxml = etree.HTML(msg["Content"])
-            cdnurl = html_lxml.xpath("//emoji/@cdnurl")
-            print(cdnurl)
-
-            itchat.send_msg(cdnurl[0], toUserName=msg["FromUserName"])
+            # print(msg["Content"])
+            # print("--"*40)
+            # html_lxml = etree.HTML(msg["Content"])
+            # cdnurl = html_lxml.xpath("//emoji/@cdnurl")
+            # print(cdnurl)
+            #
+            # itchat.send_msg(cdnurl[0], toUserName=msg["FromUserName"])
             return "我是个么得感情的复读机 -- 但我并不打算复读这个"
         else:
             return "我是个么得感情的复读机:\n {}".format(msg)
@@ -295,8 +301,8 @@ def file_classify(file_type, des_path):
 
 
 
-wechat_signature_words()
-wechat_friends_analysis()
-file_classify("png", "PNG")
-file_classify("html", "HTML")
-# itchat.run()
+# wechat_signature_words()
+# wechat_friends_analysis()
+# file_classify("png", "PNG")
+# file_classify("html", "HTML")
+itchat.run()
