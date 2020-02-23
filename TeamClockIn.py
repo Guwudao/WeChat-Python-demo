@@ -13,19 +13,19 @@ def unclock_list(today):
         if leader not in today:
             unclock = team + " " + leader
             result_list.append(unclock)
-            print(unclock)
+            # print(unclock)
 
     index = today.index("1.")
     new_today = today[index:]
     today_list = new_today.split("\n")
     sum = 0
     for t in today_list:
-        team_separate = t.split(".")[1]
-        num = re.findall(r"\d+\.?\d*", team_separate)
-
-        if len(num) > 1:
-            sum += int(num[1])
-        sum += int(num[0])
+        start_index = t.index(".")
+        team_sp = t[start_index+1:]
+        # print(team_sp)
+        num = re.findall(r"\d+\.?\d*", team_sp)
+        sum += int(num[len(num)-1])
+        # print(num[len(num)-1])
 
     print(sum)
     print(result_list)

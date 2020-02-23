@@ -237,27 +237,27 @@ def text_reply(msg):
                     return "未打卡：{}, 打卡总人数为{}".format(team_list, str(amount))
                 else:
                     return "打卡已全部完成，打卡人数为{}".format(str(amount))
-            else:
-                content = TuringBot.automatic_reply(msg.text)
-                print("机器人：%s" % content)
-                if content == "请求次数超限制!":
-                    return "我变成个么得感情的复读机了:\n {}".format(msg.text)
-                else:
-                    itchat.send_msg(content, toUserName=msg["FromUserName"])
-                    return
-                # print(msg["User"]["NickName"] == "JJ")
-
-                    result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
-
-                    if result:
-                        try:
-                            p = Person(*result.groups())
-                        except Exception:
-                            return "我是个么得感情的复读机 -- 但我并不打算复读这个"
-                        # print(p.get_body_fat)
-                        itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
-                    else:
-                        return "我是个么得感情的复读机111:\n {}".format(msg.text)
+            # else:
+            #     content = TuringBot.automatic_reply(msg.text)
+            #     print("机器人：%s" % content)
+            #     if content == "请求次数超限制!":
+            #         return "我变成个么得感情的复读机了:\n {}".format(msg.text)
+            #     else:
+            #         itchat.send_msg(content, toUserName=msg["FromUserName"])
+            #         return
+            #     # print(msg["User"]["NickName"] == "JJ")
+            #
+            #         result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
+            #
+            #         if result:
+            #             try:
+            #                 p = Person(*result.groups())
+            #             except Exception:
+            #                 return "我是个么得感情的复读机 -- 但我并不打算复读这个"
+            #             # print(p.get_body_fat)
+            #             itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
+            #         else:
+            #             return "我是个么得感情的复读机111:\n {}".format(msg.text)
 
         elif msg.type == "Picture":
 
