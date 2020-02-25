@@ -9,7 +9,6 @@ def unclock_list(today):
 
     result_list = []
     for team, leader in zip(team_list, leader_list):
-        # for today in today_list:
         if leader not in today:
             unclock = team + " " + leader
             result_list.append(unclock)
@@ -27,6 +26,6 @@ def unclock_list(today):
         sum += int(num[len(num)-1])
         # print(num[len(num)-1])
 
-    print(sum)
+    print("打卡总人数：" + str(sum))
     print(result_list)
     return (result_list, sum)
