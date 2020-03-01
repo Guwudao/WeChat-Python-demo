@@ -209,7 +209,7 @@ def download_files(msg):
     if not msg["Content"]:
         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
     else:
-        # msg.download(msg.fileName)
+        msg.download(msg.fileName)
         type_symbol = {
             PICTURE: 'img',
             VIDEO: 'vid', }.get(msg.type, 'fil')
@@ -297,8 +297,6 @@ def file_classify(file_type, des_path):
     os.chdir(os.path.pardir)
     for f in file_list:
         shutil.move(f, des_path)
-
-
 
 
 # wechat_signature_words()
