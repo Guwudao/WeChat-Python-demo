@@ -118,6 +118,7 @@ class Analytics:
             # .render("geo_province.html")
         )
         make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
+        print("============================= wechat friends analysis success =============================")
 
     @classmethod
     def wechat_information_refine(cls, key, friends, filter_count, reverse) -> []:

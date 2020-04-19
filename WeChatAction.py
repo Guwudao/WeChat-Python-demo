@@ -8,9 +8,8 @@ class WeChatAction:
 
         if "#接龙" in content:
             return WeChatAction.solitaire(content)
-
-        else:
-            return WeChatAction.bot_auto_reply(content)
+        # else:
+        #     return WeChatAction.bot_auto_reply(content)
 
     @staticmethod
     def solitaire(content) -> str:
