@@ -70,7 +70,7 @@ class Analytics:
                 .add_yaxis("微信好友省份统计", province_count)
                 .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
         )
-        # make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
+        make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
 
         city_data_list = [(i, j) for i, j in zip(cities, city_count)]
         pie_city = (
@@ -87,9 +87,9 @@ class Analytics:
             )
                 .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
                                  title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
-            .render("pie_city.html")
+            # .render("pie_city.html")
         )
-        # make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
+        make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
 
         province_data_list = [(i, j) for i, j in zip(provinces, province_count)]
         pie_province = (
@@ -106,9 +106,9 @@ class Analytics:
             )
                 .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
                                  title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
-            .render("pie_province.html")
+            # .render("pie_province.html")
         )
-        # make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
+        make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
 
         province_geo = (
             Map(init_opts=InitOpts(page_title="微信好友分布"))
@@ -116,9 +116,9 @@ class Analytics:
                 .set_global_opts(
                 title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
                 visualmap_opts=VisualMapOpts(max_=200, is_piecewise=True))
-            .render("geo_province.html")
+            # .render("geo_province.html")
         )
-        # make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
+        make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
 
     @classmethod
     def wechat_information_refine(cls, key, friends, filter_count, reverse) -> []:
@@ -174,18 +174,20 @@ class Analytics:
                                  toolbox_opts=ToolboxOpts(is_show=True))
             # .render("signature.html")
         )
-        # make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
+        make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
 
         img = Image.open("IMG_7946.JPG")
         mask = np.array(img)
         wc = wordcloud.WordCloud(font_path="simsun.ttc",
                                  background_color="white",
-                                 stopwords={"自己", "一个"},
+                                 # stopwords=wordcloud.STOPWORDS.add("的"),
+                                 stopwords={"自己", "一个", "的"},
                                  # max_words=100,
                                  mask=mask)
         wc.generate(" ".join(all_word_list))
         wc.recolor(color_func=wordcloud.ImageColorGenerator(mask))
         wc.to_file("word_cloud.png")
+        print("============================= Wchat signature words success =============================")
 
 
     @classmethod
