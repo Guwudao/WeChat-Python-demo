@@ -9,7 +9,6 @@ import wordcloud
 import numpy as np
 import jieba
 import re
-
 import os
 import shutil
 

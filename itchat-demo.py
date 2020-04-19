@@ -3,8 +3,8 @@ from itchat.content import *
 from lxml import etree
 from TuringBot import TuringBot
 from PersonBodyFat import Person
-import TeamClockIn
 from WeChatAnalytics import Analytics
+from WeChatAction import WeChatAction
 import json
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
@@ -24,6 +24,9 @@ print(len(chat_room))
 # Analytics.wechat_friends_analysis(friends)
 # Analytics.wechat_signature_words(friends)
 
+# Analytics.file_classify("png", "PNG")
+# Analytics.file_classify("html", "HTML")
+
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 def download_files(msg):
@@ -32,8 +35,8 @@ def download_files(msg):
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
-    block_list = ["CTT", "JJ", "fat fish"]
-    block = message_block(msg['ToUserName'], msg.user["NickName"], msg.text, *block_list)
+    block_list = ["CTT", "JJ", "小槡", "CTT"]
+    block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
     if block: return
 
     if not msg["Content"]:
@@ -54,8 +57,9 @@ def text_reply(msg):
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
-    block_list = ["CTT", "JJ", "fat fish"]
+    block_list = ["CTT", "JJ1", "小槡", "CTT"]
     block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
+    print("block :", block)
     if block: return
 
     myself = itchat.get_friends()[0]["UserName"]
@@ -63,20 +67,23 @@ def text_reply(msg):
         if isinstance(msg.text, str):
             print("{} ---------> {}".format(msg["User"]["NickName"], msg.text))
 
-            if "#接龙" in msg.text:
-                team_list, amount = TeamClockIn.unclock_list(msg.text)
-                if len(team_list) > 0:
-                    return "未打卡：{}, 打卡总人数为{}".format(team_list, str(amount))
-                else:
-                    return "打卡已全部完成，打卡人数为{}".format(str(amount))
-            else:
-                content = TuringBot.automatic_reply(msg.text)
-                print("机器人：%s" % content)
-                if content == "请求次数超限制!":
-                    return "我变成个么得感情的复读机了:\n {}".format(msg.text)
-                else:
-                    itchat.send_msg(content, toUserName=msg["FromUserName"])
-                    return
+            return WeChatAction.command_action(msg.text)
+
+            # if "#接龙" in msg.text:
+            #     pass
+                # team_list, amount = TeamClockIn.unclock_list(msg.text)
+                # if len(team_list) > 0:
+                #     return "未打卡：{}, 打卡总人数为{}".format(team_list, str(amount))
+                # else:
+                #     return "打卡已全部完成，打卡人数为{}".format(str(amount))
+            # else:
+            #     content = TuringBot.automatic_reply(msg.text)
+            #     print("机器人：%s" % content)
+            #     if content == "请求次数超限制!":
+            #         return "我变成个么得感情的复读机了:\n {}".format(msg.text)
+            #     else:
+            #         itchat.send_msg(content, toUserName=msg["FromUserName"])
+                    # return
             #     # print(msg["User"]["NickName"] == "JJ")
             #
             #         result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", content)
@@ -91,17 +98,6 @@ def text_reply(msg):
             #         else:
             #             return "我是个么得感情的复读机111:\n {}".format(msg.text)
 
-        elif msg.type == "Picture":
-
-            # 处理收到的图片和表情
-            # print(msg["Content"])
-            # print("--"*40)
-            # html_lxml = etree.HTML(msg["Content"])
-            # cdnurl = html_lxml.xpath("//emoji/@cdnurl")
-            # print(cdnurl)
-            #
-            # itchat.send_msg(cdnurl[0], toUserName=msg["FromUserName"])
-            return "我是个么得感情的复读机 -- 但我并不打算复读这个"
         else:
             return "我是个么得感情的复读机:\n {}".format(msg)
 
@@ -112,7 +108,7 @@ def text_reply(msg):
     print("群聊【{}】 : {} : {}".format(msg["User"]["NickName"], msg["ActualNickName"], msg.text))
     # print(msg.user["NickName"])
 
-    allow_reply_list = ["吃，都可以吃", "【兄弟姐妹】"]
+    allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】"]
     allow = is_nickname_available(msg.user["NickName"], msg.text, True, *allow_reply_list)
     if allow:
         content = TuringBot.automatic_reply(msg.text)
@@ -135,6 +131,5 @@ def is_nickname_available(nickName, text, isGroup=False, *args) -> bool:
     return block
 
 
-# file_classify("png", "PNG")
-# file_classify("html", "HTML")
+
 itchat.run()
