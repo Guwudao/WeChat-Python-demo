@@ -1,8 +1,6 @@
 import itchat
 from itchat.content import *
 from lxml import etree
-from TuringBot import TuringBot
-from PersonBodyFat import Person
 from WeChatAnalytics import Analytics
 from WeChatAction import WeChatAction
 import json
@@ -12,25 +10,19 @@ import json
 itchat.auto_login(hotReload=True)
 friends = itchat.get_friends()
 chat_rooms = itchat.get_chatrooms(update=True)
-
+# print(chat_rooms)
 
 def chatRoomAnalytics():
     for room in chat_rooms:
         print(room["NickName"])
-        for member in room["MemberList"]:
-            print(room["NickName"] + " - " + member["NickName"])
+        # print(room["MemberList"])
+        #
+        #
+        #
+        # for member in room["MemberList"]:
+        #     print(room["NickName"] + " - " + member["NickName"])
 
-    # print(chat_rooms[0])
-    # print("-" * 100)
-    # print(chat_rooms[1]["NickName"])
-    # print(len(chat_rooms))
-    # print("-" * 100)
-    #
-    # result = json.dumps(chat_rooms, ensure_ascii=False)
-    # print(result)
-    # demo = json.load(chat_room)
-    # print(demo)
-
+# 获取微信所有群
 # chatRoomAnalytics()
 
 # 好友分析+词云图
@@ -103,15 +95,24 @@ def text_reply(msg):
     print("群聊【{}】 : {} : {}".format(msg["User"]["NickName"], msg["ActualNickName"], msg.text))
     # print(msg.user["NickName"])
 
-    allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】"]
+    allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade"]
     allow = is_nickname_available(msg.user["NickName"], msg.text, True, *allow_reply_list)
     if allow:
-        content = TuringBot.automatic_reply(msg.text)
-        print("机器人：%s" % content)
-        if content == "请求次数超限制!":
-            return "我变成个么得感情的复读机了:\n {}".format(msg.text)
-        else:
-            itchat.send_msg(content, toUserName=msg["FromUserName"])
+
+        jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特"]
+        wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', 'L', 'JJ']
+
+        chat_room_members = msg["User"]["MemberList"]
+        # print(chat_room_members)
+        remind_str = ""
+        if msg["User"]["NickName"] == "Jade":
+            remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
+        elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
+            remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+
+        print("测试提醒名单：{}".format(remind_str))
+
+        itchat.send_msg(remind_str, toUserName=msg["FromUserName"])
 
 
 def is_nickname_available(nickName, text, isGroup=False, *args) -> bool:
@@ -184,5 +185,5 @@ def get_friend(msg):
     friendStatus = get_friend_status(msg['RecommendInfo'])
     itchat.send(friendStatus, 'filehelper')
 
-itchat.send(HELP_MSG, 'filehelper')
+# itchat.send(HELP_MSG, 'filehelper')
 itchat.run()
