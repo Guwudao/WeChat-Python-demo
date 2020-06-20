@@ -26,8 +26,8 @@ class WeChatAction:
 
         if "#接龙" in content:
             return cls.solitaire(content)
-        # else:
-        #     return WeChatAction.bot_auto_reply(content)
+        else:
+            return WeChatAction.bot_auto_reply(content)
 
     @staticmethod
     def solitaire(content) -> str:
@@ -47,52 +47,45 @@ class WeChatAction:
             return content
 
     @staticmethod
-    def jade_auto_reminder(chat_room_members, expect_member_list, message, isTuringBotOn=True):
+    def jade_auto_reminder(chat_room_members, expect_member_list, message):
         print(message)
-        if "#接龙" in message:
-            try:
-                displayName_list, no_displayName_list = [], []
 
-                for member in chat_room_members:
-                    # print("nick name ---> ", member["NickName"])
-                    if len(member["DisplayName"]) > 0:
-                        print(member["DisplayName"])
-                        displayName_list.append(member["DisplayName"])
-                    else:
-                        no_displayName_list.append(member["NickName"])
+        try:
+            displayName_list, no_displayName_list = [], []
 
-                print(displayName_list, no_displayName_list)
-
-                reminder_list = []
-                for member in expect_member_list:
-                    if member not in message:
-                        reminder_list.append(member)
-
-                print("提醒名单数组：{}".format(reminder_list))
-
-                reminder_str = ""
-                for displayName in displayName_list:
-                    for reminder in reminder_list:
-                        if reminder in displayName:
-                            reminder_str = reminder_str + "@" + displayName + " "
-
-                for nickname in no_displayName_list:
-                    for reminder in reminder_list:
-                        if reminder in nickname:
-                            reminder_str = reminder_str + "@" + nickname + " "
-
-                if len(reminder_str) > 0:
-                    return reminder_str
+            for member in chat_room_members:
+                # print("nick name ---> ", member["NickName"])
+                if len(member["DisplayName"]) > 0:
+                    print(member["DisplayName"])
+                    displayName_list.append(member["DisplayName"])
                 else:
-                    return "恭喜老板们完成本次接龙！！！"
+                    no_displayName_list.append(member["NickName"])
 
-            except:
-                print("remind error occur")
-        else:
-            if isTuringBotOn:
-                content = TuringBot.automatic_reply(message)
-                print("机器人：%s" % content)
-                if content == "请求次数超限制!":
-                    return "我变成个么得感情的复读机了:\n {}".format(message)
-                else:
-                    return content
+            print(displayName_list, no_displayName_list)
+
+            reminder_list = []
+            for member in expect_member_list:
+                if member not in message:
+                    reminder_list.append(member)
+
+            print("提醒名单数组：{}".format(reminder_list))
+
+            reminder_str = ""
+            for displayName in displayName_list:
+                for reminder in reminder_list:
+                    if reminder in displayName:
+                        reminder_str = reminder_str + "@" + displayName + " "
+
+            for nickname in no_displayName_list:
+                for reminder in reminder_list:
+                    if reminder in nickname:
+                        reminder_str = reminder_str + "@" + nickname + " "
+
+            if len(reminder_str) > 0:
+                return reminder_str
+            else:
+                return "恭喜老板们完成本次接龙！！！"
+        except:
+            return "reminder error occur"
+
+
