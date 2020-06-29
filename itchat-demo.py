@@ -51,7 +51,7 @@ def download_files(msg):
         type_symbol = {
             PICTURE: 'img',
             VIDEO: 'vid', }.get(msg.type, 'fil')
-        itchat.send_msg("看我图片反弹大法！！！", toUserName=msg["FromUserName"])
+        itchat.send_msg("看我反弹大法！！！", toUserName=msg["FromUserName"])
         return '@%s@%s' % (type_symbol, msg.fileName)
 
 
@@ -114,9 +114,9 @@ def text_reply(msg):
             print("测试提醒名单：{}".format(remind_str))
 
             itchat.send_msg(remind_str, toUserName=msg["FromUserName"])
-        else:
-            content = WeChatAction.bot_auto_reply(msg.text)
-            itchat.send_msg(content, toUserName=msg["FromUserName"])
+        # else:
+        #     content = WeChatAction.bot_auto_reply(msg.text)
+        #     itchat.send_msg(content, toUserName=msg["FromUserName"])
 
 
 def is_nickname_available(nickName, text, isGroup=False, *args) -> bool:

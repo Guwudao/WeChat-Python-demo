@@ -26,8 +26,8 @@ class WeChatAction:
 
         if "#接龙" in content:
             return cls.solitaire(content)
-        else:
-            return WeChatAction.bot_auto_reply(content)
+        # else:
+        #     return WeChatAction.bot_auto_reply(content)
 
     @staticmethod
     def solitaire(content) -> str:
@@ -48,7 +48,7 @@ class WeChatAction:
 
     @staticmethod
     def jade_auto_reminder(chat_room_members, expect_member_list, message):
-        print(message)
+        # print(message)
 
         try:
             displayName_list, no_displayName_list = [], []
@@ -61,7 +61,7 @@ class WeChatAction:
                 else:
                     no_displayName_list.append(member["NickName"])
 
-            print(displayName_list, no_displayName_list)
+            # print(displayName_list, no_displayName_list)
 
             reminder_list = []
             for member in expect_member_list:
