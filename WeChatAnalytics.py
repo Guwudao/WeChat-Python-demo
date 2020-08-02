@@ -69,7 +69,12 @@ class Analytics:
                 .add_yaxis("微信好友省份统计", province_count)
                 .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
         )
-        make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
+        try:
+            make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
+        except Exception as e:
+            print("make snap shot error", e)
+        else:
+            bar_province.render("bar_province")
 
         city_data_list = [(i, j) for i, j in zip(cities, city_count)]
         pie_city = (
@@ -88,7 +93,12 @@ class Analytics:
                                  title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
             # .render("pie_city.html")
         )
-        make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
+        try:
+            make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
+        except Exception as e:
+            print("make snap shot error", e)
+        else:
+            pie_city.render("pie_city.html")
 
         province_data_list = [(i, j) for i, j in zip(provinces, province_count)]
         pie_province = (
@@ -107,7 +117,12 @@ class Analytics:
                                  title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
             # .render("pie_province.html")
         )
-        make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
+        try:
+            make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
+        except Exception as e:
+            print("make snap shot error", e)
+        else:
+            pie_province.render("pie_province.html")
 
         province_geo = (
             Map(init_opts=InitOpts(page_title="微信好友分布"))
@@ -117,7 +132,12 @@ class Analytics:
                 visualmap_opts=VisualMapOpts(max_=200, is_piecewise=True))
             # .render("geo_province.html")
         )
-        make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
+        try:
+            make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
+        except Exception as e:
+            print("make snap shot error", e)
+        else:
+            province_geo.render("province_geo.html")
         print("============================= wechat friends analysis success =============================")
 
     @classmethod
@@ -174,7 +194,12 @@ class Analytics:
                                  toolbox_opts=ToolboxOpts(is_show=True))
             # .render("signature.html")
         )
-        make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
+        try:
+            make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
+        except Exception as e:
+            print("make snap shot error", e)
+        else:
+            chart_wc.render("chart_wc.html")
 
         img = Image.open("IMG_7946.JPG")
         mask = np.array(img)
@@ -212,5 +237,9 @@ class Analytics:
 
         # print("file list: %s" % file_list)
         os.chdir(os.path.pardir)
-        for f in file_list:
-            shutil.move(f, des_path)
+        try:
+            for f in file_list:
+                shutil.move(f, des_path)
+            print("============================= file classify success =============================")
+        except Exception as e:
+            print("file move error: ", e)

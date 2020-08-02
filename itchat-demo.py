@@ -10,17 +10,13 @@ import json
 itchat.auto_login(hotReload=True)
 friends = itchat.get_friends()
 chat_rooms = itchat.get_chatrooms(update=True)
+start_time = 0
+send_msg, toUsrName = "", ""
 # print(chat_rooms)
 
 def chatRoomAnalytics():
     for room in chat_rooms:
         print(room["NickName"])
-        # print(room["MemberList"])
-        #
-        #
-        #
-        # for member in room["MemberList"]:
-        #     print(room["NickName"] + " - " + member["NickName"])
 
 # 获取微信所有群
 # chatRoomAnalytics()
@@ -40,7 +36,7 @@ def download_files(msg):
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
-    block_list = ["CTT", "JJ", "小槡", "CTT"]
+    block_list = ["CTT", "JJ", "小槡"]
     block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
     if block: return
 
@@ -62,10 +58,11 @@ def text_reply(msg):
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
-    block_list = ["CTT", "JJ1", "小槡", "CTT"]
-    block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
+    block_list = ["CTT", "JJ", "小槡"]
+    block = is_nickname_available(msg["User"]["NickName"], msg.text, *block_list)
     print("text block :", block)
-    if block: return
+    if block:
+        return
 
     myself = itchat.get_friends()[0]["UserName"]
     if myself == msg["ToUserName"]:
@@ -89,17 +86,42 @@ def text_reply(msg):
             return "我是个么得感情的复读机:\n {}".format(msg)
 
 
+
+import time
+from threading import Timer
+from datetime import datetime
+
+def time_reminder():
+    print("倒计时：{}".format(datetime.now().strftime("%H:%M:%S")))
+    print("start_time：{}".format(start_time))
+    print("--" * 30)
+
+    interval = time.time() - start_time
+
+    if interval > 20:
+        print("倒计时到了 {} {}".format(send_msg, toUsrName))
+        itchat.send_msg(send_msg, toUserName=toUsrName)
+        return
+
+    # if (interval // 60) >= 1:
+    #     print("倒计时一分钟到了")
+
+    timer = Timer(5, time_reminder)
+    timer.start()
+
+
 @itchat.msg_register(TEXT, isGroupChat=True)
-def text_reply(msg):
+def text_group_reply(msg):
 
-    print("群聊【{}】 : {} : {}".format(msg["User"]["NickName"], msg["ActualNickName"], msg.text))
-    # print(msg.user["NickName"])
+    # print(msg["User"])
+    print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
 
-    allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade"]
-    allow = is_nickname_available(msg.user["NickName"], msg.text, True, *allow_reply_list)
+    allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"]
+    allow = is_nickname_available(msg["User"]["NickName"], msg.text, True, *allow_reply_list)
     if allow:
 
         if "#接龙" in msg.text:
+            # print(msg)
             jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特"]
             wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
 
@@ -110,6 +132,7 @@ def text_reply(msg):
                 remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
             elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
                 remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+
 
             print("测试提醒名单：{}".format(remind_str))
 
