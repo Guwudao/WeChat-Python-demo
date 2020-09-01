@@ -1,6 +1,5 @@
 import itchat
 from itchat.content import *
-from lxml import etree
 from WeChatAnalytics import Analytics
 from WeChatAction import WeChatAction
 import json
@@ -54,60 +53,40 @@ def download_files(msg):
 @itchat.msg_register(itchat.content.TEXT)
 def text_reply(msg):
 
-    if msg['ToUserName'] == 'filehelper':
-        print("此消息发给文件助手: {}".format(msg.text))
-        return
+    try:
+        if msg['ToUserName'] == 'filehelper':
+            print("此消息发给文件助手: {}".format(msg.text))
+            return
 
-    block_list = ["CTT", "JJ", "小槡"]
-    block = is_nickname_available(msg["User"]["NickName"], msg.text, *block_list)
-    print("text block :", block)
-    if block:
-        return
+        block_list = ["CTT", "JJ", "小槡"]
+        block = is_nickname_available(msg["User"]["NickName"], msg.text, *block_list)
+        print("text block :", block, msg["User"]["NickName"])
+        if block:
+            return
 
-    myself = itchat.get_friends()[0]["UserName"]
-    if myself == msg["ToUserName"]:
-        if isinstance(msg.text, str):
-            print("{} ---------> {}".format(msg["User"]["NickName"], msg.text))
+        myself = itchat.get_friends()[0]["UserName"]
+        if myself == msg["ToUserName"]:
+            if isinstance(msg.text, str):
+                print("{} ---------> {}".format(msg["User"]["NickName"], msg.text))
 
-            return WeChatAction.command_action(msg.text)
+                return WeChatAction.command_action(msg.text)
 
-            # result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", msg.text)
-            #
-            # if result:
-            #     try:
-            #         p = Person(*result.groups())
-            #     except Exception:
-            #         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
-            #     # print(p.get_body_fat)
-            #     itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
-            # else:
-            #     return "我是个么得感情的复读机111:\n {}".format(msg.text)
-        else:
-            return "我是个么得感情的复读机:\n {}".format(msg)
+                # result = re.match(r"(.*)[，,](.*)[，,](.*)[，,](.*)[，,](.*)", msg.text)
+                #
+                # if result:
+                #     try:
+                #         p = Person(*result.groups())
+                #     except Exception:
+                #         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
+                #     # print(p.get_body_fat)
+                #     itchat.send_msg(p.get_body_fat, toUserName=msg["FromUserName"])
+                # else:
+                #     return "我是个么得感情的复读机111:\n {}".format(msg.text)
+            else:
+                return "我是个么得感情的复读机:\n {}".format(msg)
+    except Exception as e:
+        print("text_reply error: ", e)
 
-
-
-import time
-from threading import Timer
-from datetime import datetime
-
-def time_reminder():
-    print("倒计时：{}".format(datetime.now().strftime("%H:%M:%S")))
-    print("start_time：{}".format(start_time))
-    print("--" * 30)
-
-    interval = time.time() - start_time
-
-    if interval > 20:
-        print("倒计时到了 {} {}".format(send_msg, toUsrName))
-        itchat.send_msg(send_msg, toUserName=toUsrName)
-        return
-
-    # if (interval // 60) >= 1:
-    #     print("倒计时一分钟到了")
-
-    timer = Timer(5, time_reminder)
-    timer.start()
 
 
 @itchat.msg_register(TEXT, isGroupChat=True)
