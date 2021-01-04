@@ -2,7 +2,6 @@ import itchat
 from itchat.content import *
 from WeChatAnalytics import Analytics
 from WeChatAction import WeChatAction
-import json
 
 # itchat.send_msg("this is a test message", toUserName="filehelper")
 
@@ -12,6 +11,7 @@ chat_rooms = itchat.get_chatrooms(update=True)
 start_time = 0
 send_msg, toUsrName = "", ""
 # print(chat_rooms)
+
 
 def chatRoomAnalytics():
     for room in chat_rooms:
@@ -42,12 +42,12 @@ def download_files(msg):
     if not msg["Content"]:
         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
     else:
-        msg.download(msg.fileName)
+        # msg.download(msg.fileName)
         type_symbol = {
             PICTURE: 'img',
             VIDEO: 'vid', }.get(msg.type, 'fil')
-        itchat.send_msg("看我反弹大法！！！", toUserName=msg["FromUserName"])
-        return '@%s@%s' % (type_symbol, msg.fileName)
+        # itchat.send_msg("看我反弹大法！！！", toUserName=msg["FromUserName"])
+        # return '@%s@%s' % (type_symbol, msg.fileName)
 
 
 @itchat.msg_register(itchat.content.TEXT)
@@ -88,7 +88,6 @@ def text_reply(msg):
         print("text_reply error: ", e)
 
 
-
 @itchat.msg_register(TEXT, isGroupChat=True)
 def text_group_reply(msg):
 
@@ -101,7 +100,8 @@ def text_group_reply(msg):
 
         if "#接龙" in msg.text:
             # print(msg)
-            jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特"]
+            jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥"]
+            # jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于順燊", "凌俊杰", "江克非"]
             wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
 
             chat_room_members = msg["User"]["MemberList"]
@@ -111,7 +111,6 @@ def text_group_reply(msg):
                 remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
             elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
                 remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
-
 
             print("测试提醒名单：{}".format(remind_str))
 
@@ -165,6 +164,7 @@ def get_chatroom():
     else:
         return CHATROOM
 
+
 def get_friend_status(friend):
     ownAccount = itchat.get_friends(update=True)[0]
     if friend['UserName'] == ownAccount['UserName']:
@@ -179,10 +179,10 @@ def get_friend_status(friend):
             status = r['MemberList'][0]['MemberStatus']
             itchat.delete_member_from_chatroom(chatroom['UserName'], [friend])
             return { 3: u'该好友已经将你加入黑名单。',
-                4: u'该好友已经将你删除。', }.get(status,
-                u'该好友仍旧与你是好友关系。')
+                4: u'该好友已经将你删除。', }.get(status, u'该好友仍旧与你是好友关系。')
         else:
             return u'无法获取好友状态，预计已经达到接口调用限制。'
+
 
 @itchat.msg_register(itchat.content.CARD)
 def get_friend(msg):
@@ -190,6 +190,7 @@ def get_friend(msg):
     if msg['ToUserName'] != 'filehelper': return
     friendStatus = get_friend_status(msg['RecommendInfo'])
     itchat.send(friendStatus, 'filehelper')
+
 
 # itchat.send(HELP_MSG, 'filehelper')
 itchat.run()
