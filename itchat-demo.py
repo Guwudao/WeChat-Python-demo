@@ -91,33 +91,38 @@ def text_reply(msg):
 @itchat.msg_register(TEXT, isGroupChat=True)
 def text_group_reply(msg):
 
-    # print(msg["User"])
-    print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
+    try:
+        # print(msg["User"])
+        print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
 
-    allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"]
-    allow = is_nickname_available(msg["User"]["NickName"], msg.text, True, *allow_reply_list)
-    if allow:
+        if msg["User"]["NickName"] == "Jade":
+            itchat.send_msg((u'@%s\u2005' % "叶超-Charles"), toUserName=msg["FromUserName"])
 
-        if "#接龙" in msg.text:
-            # print(msg)
-            jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥"]
-            # jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于順燊", "凌俊杰", "江克非"]
-            wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
+        allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"]
+        allow = is_nickname_available(msg["User"]["NickName"], msg.text, True, *allow_reply_list)
+        if allow:
+            if "#接龙" in msg.text:
+                # print(msg)
+                # jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥"]
+                jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"]
+                wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
 
-            chat_room_members = msg["User"]["MemberList"]
-            # print(chat_room_members)
-            remind_str = ""
-            if msg["User"]["NickName"] == "Jade":
-                remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
-            elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
-                remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+                chat_room_members = msg["User"]["MemberList"]
+                # print(chat_room_members)
+                remind_str = ""
+                if msg["User"]["NickName"] == "Jade":
+                    remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
+                elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
+                    remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
 
-            print("测试提醒名单：{}".format(remind_str))
+                print("测试提醒名单：{}".format(remind_str))
 
-            itchat.send_msg(remind_str, toUserName=msg["FromUserName"])
-        # else:
-        #     content = WeChatAction.bot_auto_reply(msg.text)
-        #     itchat.send_msg(content, toUserName=msg["FromUserName"])
+                itchat.send_msg(remind_str, toUserName=msg["FromUserName"])
+            # else:
+            #     content = WeChatAction.bot_auto_reply(msg.text)
+            #     itchat.send_msg(content, toUserName=msg["FromUserName"])
+    except Exception as e:
+        print("group error: ", e)
 
 
 def is_nickname_available(nickName, text, isGroup=False, *args) -> bool:

@@ -7,11 +7,11 @@
 
 </head>
 <body>
-    <div id="4a235b5313974e48868a419fd55ab383" class="chart-container" style="width:900px; height:500px;"></div>
+    <div id="0e6eab9f455b4eb28892b29784aafd18" class="chart-container" style="width:900px; height:500px;"></div>
     <script>
-        var chart_4a235b5313974e48868a419fd55ab383 = echarts.init(
-            document.getElementById('4a235b5313974e48868a419fd55ab383'), 'white', {renderer: 'canvas'});
-        var option_4a235b5313974e48868a419fd55ab383 = {
+        var chart_0e6eab9f455b4eb28892b29784aafd18 = echarts.init(
+            document.getElementById('0e6eab9f455b4eb28892b29784aafd18'), 'white', {renderer: 'canvas'});
+        var option_0e6eab9f455b4eb28892b29784aafd18 = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -51,18 +51,19 @@
             "type": "bar",
             "name": "\u5fae\u4fe1\u597d\u53cb\u7701\u4efd\u7edf\u8ba1",
             "data": [
-                473,
-                134,
+                537,
+                164,
                 22,
-                19,
+                21,
                 15,
-                15,
+                14,
+                12,
                 12,
                 11,
                 10,
-                9,
-                9,
+                10,
                 6,
+                5,
                 4
             ],
             "barCategoryGap": "20%",
@@ -129,10 +130,11 @@
                 "\u5317\u4eac",
                 "\u6d59\u6c5f",
                 "\u6c5f\u82cf",
-                "\u6e56\u5317",
-                "\u4e0a\u6d77",
                 "\u56db\u5ddd",
+                "\u4e0a\u6d77",
+                "\u6e56\u5317",
                 "\u6cb3\u5317",
+                "\u5e7f\u897f",
                 "\u798f\u5efa"
             ]
         }
@@ -196,7 +198,7 @@
         }
     }
 };
-        chart_4a235b5313974e48868a419fd55ab383.setOption(option_4a235b5313974e48868a419fd55ab383);
+        chart_0e6eab9f455b4eb28892b29784aafd18.setOption(option_0e6eab9f455b4eb28892b29784aafd18);
     </script>
 </body>
 </html>

@@ -48,7 +48,7 @@ class WeChatAction:
 
     @staticmethod
     def jade_auto_reminder(chat_room_members, expect_member_list, message):
-        # print(chat_room_members)
+        print("expect_member_list: ", expect_member_list)
 
         try:
             displayName_list, no_displayName_list = [], []
@@ -61,7 +61,8 @@ class WeChatAction:
                 else:
                     no_displayName_list.append(member["NickName"])
 
-            # print(displayName_list, no_displayName_list)
+            print("displayName_list: ", displayName_list)
+            print("no_displayName_list:, ", no_displayName_list)
 
             reminder_list = []
             for member in expect_member_list:
@@ -71,21 +72,28 @@ class WeChatAction:
             print("提醒总名单数组：{}".format(reminder_list))
 
             reminder_str = ""
-            for displayName in displayName_list:
+            # for displayName in displayName_list:
+            #     for reminder in reminder_list:
+            #         if reminder in displayName:
+            #             reminder_str = reminder_str + "@" + displayName + "\n"
+            #             # u'@%s\u2005' % displayName
+            #
+            # for nickname in no_displayName_list:
+            #     for reminder in reminder_list:
+            #         if reminder in nickname:
+            #             reminder_str = reminder_str + "@" + nickname + "\n"
+
+            for display_name, nickname in zip(displayName_list, no_displayName_list):
                 for reminder in reminder_list:
                     if reminder in displayName:
-                        reminder_str = reminder_str + "@" + displayName + " "
-
-            for nickname in no_displayName_list:
-                for reminder in reminder_list:
+                        reminder_str = reminder_str + (u'@%s\u2005' % displayName) + " "
                     if reminder in nickname:
-                        reminder_str = reminder_str + "@" + nickname + " "
+                        reminder_str = reminder_str + (u'@%s\u2005' % nickname) + " "
 
-            # print("reminder_str: {}".format(reminder_str))
+            print("reminder_str: {}".format(reminder_str))
             if len(reminder_str) > 0:
                 return reminder_str
             else:
                 return "恭喜老板们完成本次接龙！！！"
-        except:
-            return "reminder error occur"
-
+        except Exception as e:
+            return "reminder error occur:, %s" % (e)
