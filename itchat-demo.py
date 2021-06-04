@@ -11,6 +11,7 @@ chat_rooms = itchat.get_chatrooms(update=True)
 start_time = 0
 send_msg, toUsrName = "", ""
 # print(chat_rooms)
+# return u'@%s\u2005%s' % (msg['ActualNickName'], reply_message)
 
 
 def chatRoomAnalytics():
@@ -27,27 +28,45 @@ def chatRoomAnalytics():
 # Analytics.file_classify("png", "PNG")
 # Analytics.file_classify("html", "HTML")
 
+@itchat.msg_register([MAP, CARD, NOTE, SHARING])
+def wechat_service(msg):
+    print("接收到了MAP, CARD, NOTE, SHARING类的信息")
+    # print(msg)
+
+    if msg.type == "Map":
+        print("接收到了MAP消息")
+        itchat.send_msg("识别到了地图类型消息，正在自动提取地址", toUserName=msg["FromUserName"])
+        address = msg["Content"].split(":")[0]
+        # print(address)
+        itchat.send_msg(address, toUserName=msg["FromUserName"])
+
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 def download_files(msg):
+    print(msg)
 
     if msg['ToUserName'] == 'filehelper':
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
-    block_list = ["CTT", "JJ", "小槡"]
-    block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
-    if block: return
+    # block_list = ["CTT", "JJ", "小槡"]
+    # block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
+    # if block: return
 
-    if not msg["Content"]:
+    print(msg["HasProductId"] != 0)
+
+    if msg["HasProductId"] != 0:
+        print("批量制作的表情")
         return "我是个么得感情的复读机 -- 但我并不打算复读这个"
-    else:
-        # msg.download(msg.fileName)
+    elif msg["MsgType"] == 47: #表情
+        msg.download(msg.fileName)
         type_symbol = {
             PICTURE: 'img',
             VIDEO: 'vid', }.get(msg.type, 'fil')
-        # itchat.send_msg("看我反弹大法！！！", toUserName=msg["FromUserName"])
-        # return '@%s@%s' % (type_symbol, msg.fileName)
+        itchat.send_msg("看我反弹大法！！！", toUserName=msg["FromUserName"])
+        return '@%s@%s' % (type_symbol, msg.fileName)
+    elif msg["MsgType"] == 3: #图片
+        print("收到一张图片")
 
 
 @itchat.msg_register(itchat.content.TEXT)
@@ -90,33 +109,31 @@ def text_reply(msg):
 
 @itchat.msg_register(TEXT, isGroupChat=True)
 def text_group_reply(msg):
+    jade_members = ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥",
+                    "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"]
+    wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
 
     try:
         # print(msg["User"])
         print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
 
-        if msg["User"]["NickName"] == "Jade":
-            itchat.send_msg((u'@%s\u2005' % "叶超-Charles"), toUserName=msg["FromUserName"])
-
         allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"]
         allow = is_nickname_available(msg["User"]["NickName"], msg.text, True, *allow_reply_list)
         if allow:
-            if "#接龙" in msg.text:
-                # print(msg)
-                # jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥"]
-                jade_members = ["林俊杰", "洋子", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "吴小广", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"]
-                wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
 
-                chat_room_members = msg["User"]["MemberList"]
-                # print(chat_room_members)
-                remind_str = ""
-                if msg["User"]["NickName"] == "Jade":
+            if msg["User"]["NickName"] == "Jade":
+                if "#接龙" in msg.text:
+                    chat_room_members = msg["User"]["MemberList"]
+                    # print("chat_room_members: " + chat_room_members)
+                    remind_str = ""
                     remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
-                elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
-                    remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+                    print("【Jade】测试提醒名单：{}".format(remind_str))
+                    itchat.send_msg(remind_str, toUserName=msg["FromUserName"])
 
-                print("测试提醒名单：{}".format(remind_str))
-
+            elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
+                chat_room_members = msg["User"]["MemberList"]
+                remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+                print("【骑洗衣机去地铁站】测试提醒名单：{}".format(remind_str))
                 itchat.send_msg(remind_str, toUserName=msg["FromUserName"])
             # else:
             #     content = WeChatAction.bot_auto_reply(msg.text)
@@ -178,13 +195,13 @@ def get_friend_status(friend):
         return u'该用户不在你的好友列表中。'
     else:
         chatroom = CHATROOM or get_chatroom()
-        if chatroom is None: return CHATROOM_MSG
+        if chatroom is None:
+            return CHATROOM_MSG
         r = itchat.add_member_into_chatroom(chatroom['UserName'], [friend])
         if r['BaseResponse']['ErrMsg'] == '请求成功':
             status = r['MemberList'][0]['MemberStatus']
             itchat.delete_member_from_chatroom(chatroom['UserName'], [friend])
-            return { 3: u'该好友已经将你加入黑名单。',
-                4: u'该好友已经将你删除。', }.get(status, u'该好友仍旧与你是好友关系。')
+            return { 3: u'该好友已经将你加入黑名单。', 4: u'该好友已经将你删除。', }.get(status, u'该好友仍旧与你是好友关系。')
         else:
             return u'无法获取好友状态，预计已经达到接口调用限制。'
 
@@ -192,7 +209,8 @@ def get_friend_status(friend):
 @itchat.msg_register(itchat.content.CARD)
 def get_friend(msg):
     print("itchat.content.CARD itchat.content.CARD itchat.content.CARD itchat.content.CARD itchat.content.CARD")
-    if msg['ToUserName'] != 'filehelper': return
+    if msg['ToUserName'] != 'filehelper':
+        return
     friendStatus = get_friend_status(msg['RecommendInfo'])
     itchat.send(friendStatus, 'filehelper')
 

@@ -129,7 +129,7 @@ class Analytics:
                 .add("微信好友分布geo图", tuple_province_list, "china")
                 .set_global_opts(
                 title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
-                visualmap_opts=VisualMapOpts(max_=600, is_piecewise=True))
+                visualmap_opts=VisualMapOpts(max_=600, split_number=5, is_piecewise=True))
             # .render("geo_province.html")
         )
         try:
