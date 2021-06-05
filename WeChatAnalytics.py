@@ -12,6 +12,7 @@ import re
 import os
 import shutil
 
+
 class Analytics:
 
     @classmethod
@@ -54,7 +55,7 @@ class Analytics:
         bar_sex.add_xaxis(sex_title)
         bar_sex.add_yaxis("有备注", remark_sex_count)
         bar_sex.add_yaxis("无备注", no_remark_sex_count)
-        bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left=60))
+        bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left="60"))
         bar_sex.render("sex.html")
 
         bar_city = Bar()
@@ -65,9 +66,9 @@ class Analytics:
 
         bar_province = (
             Bar()
-                .add_xaxis(provinces)
-                .add_yaxis("微信好友省份统计", province_count)
-                .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
+            .add_xaxis(provinces)
+            .add_yaxis("微信好友省份统计", province_count)
+            .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
         )
         try:
             make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
@@ -83,14 +84,14 @@ class Analytics:
                 width="1400px",
                 height="800px",
             ))
-                .add(
+            .add(
                 data_pair=city_data_list,
                 series_name="微信好友分布",
                 # radius=["25%", "75%"],
                 # rosetype="radius"
             )
-                .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
-                                 title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
+            .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
+                             title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
             # .render("pie_city.html")
         )
         try:
@@ -107,14 +108,14 @@ class Analytics:
                 width="1200px",
                 height="800px",
             ))
-                .add(
+            .add(
                 data_pair=province_data_list,
                 series_name="微信好友分布",
                 radius=["25%", "75%"],
                 rosetype="Mapping"
             )
-                .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
-                                 title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
+            .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
+                            title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
             # .render("pie_province.html")
         )
         try:
@@ -126,10 +127,11 @@ class Analytics:
 
         province_geo = (
             Map(init_opts=InitOpts(page_title="微信好友分布"))
-                .add("微信好友分布geo图", tuple_province_list, "china")
-                .set_global_opts(
+            .add("微信好友分布geo图", tuple_province_list, "china")
+            .set_global_opts(
                 title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
-                visualmap_opts=VisualMapOpts(max_=600, split_number=5, is_piecewise=True))
+                visualmap_opts=VisualMapOpts(max_=600, split_number=5, is_piecewise=True)
+            )
             # .render("geo_province.html")
         )
         try:
@@ -160,10 +162,8 @@ class Analytics:
 
         temp_list = [(i, j) for i, j in zip(information, count) if j >= filter_count]
         temp_list.sort(key=lambda x: x[1], reverse=reverse)
-
         # print(temp_list)
         return temp_list
-
 
     @classmethod
     def wechat_signature_words(cls, friends):
@@ -175,7 +175,6 @@ class Analytics:
                 res = re.match(r"([\u4e00-\u9fa5]+)", w)
                 if res:
                     all_word_list.append(w)
-
         # print(all_word_list)
 
         for w in all_word_list:
@@ -185,13 +184,14 @@ class Analytics:
             final_words[w] += 1
 
         sort_words = sorted(final_words.items(), key=lambda x: x[1], reverse=True)
-        print(words)
+        # print(sort_words)
 
         chart_wc = (
             WordCloud(init_opts=InitOpts(page_title="微信签名词云"))
-                .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
-                .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"),
-                                 toolbox_opts=ToolboxOpts(is_show=True))
+            .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
+            .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"),
+                             toolbox_opts=ToolboxOpts(is_show=True)
+                             )
             # .render("signature.html")
         )
         try:
@@ -206,14 +206,13 @@ class Analytics:
         wc = wordcloud.WordCloud(font_path="simsun.ttc",
                                  background_color="white",
                                  # stopwords=wordcloud.STOPWORDS.add("的"),
-                                 stopwords={"自己", "一个", "的"},
+                                 stopwords={"在", "你", "的", "我", "不", "有", "了", "人"},
                                  # max_words=100,
                                  mask=mask)
         wc.generate(" ".join(all_word_list))
         wc.recolor(color_func=wordcloud.ImageColorGenerator(mask))
         wc.to_file("word_cloud.png")
         print("============================= Wchat signature words success =============================")
-
 
     @classmethod
     def file_classify(cls, file_type, des_path):
