@@ -35,9 +35,15 @@ class Personal():
 
 class WeChatFeatureToggle:
 
-    def __init__(self, group: Group, personal: Personal):
-        self.group = group
-        self.personal = personal
+    def __init__(self):
+        with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
+            content = f.read()
+
+            result = json.loads(content, object_hook=object_hook)
+            feature_dic = result["feature"]
+
+            self.group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
+            self.personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
 
 
 def object_hook(dic):
@@ -56,45 +62,39 @@ def object_hook(dic):
         jj = CommonPerson(dic["jj"])
         return {"common": common, "jj": jj}
 
-    if "feature" in keys:
-        print(dic)
-        feature_dic = dic["feature"]
-        group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
-        personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
-        feature = WeChatFeatureToggle(group, personal)
-        return feature
+    # if "feature" in keys:
+    #     print(dic)
+    #     feature_dic = dic["feature"]
+    #     group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
+    #     personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
+    #     feature = WeChatFeatureToggle(group, personal)
+    #     return feature
 
     return dic
 
 
 if __name__ == '__main__':
-    with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
-        content = f.read()
-
-        result = json.loads(content, object_hook=object_hook)
-        print("-" * 100)
-        print(result)
-
-        print(result.group.jade.expectList)
-        print(result.group.jade.queue)
-        print(result.group.jade.imageReturn)
-        print(result.group.jade.mapAnalysis)
-        print(result.group.jade.envelope)
-        print(result.group.jade.autoReply)
-        print("-" * 50)
-        print(result.group.washer.expectList)
-        print(result.group.washer.queue)
-        print(result.group.washer.imageReturn)
-        print(result.group.washer.mapAnalysis)
-        print(result.group.washer.envelope)
-        print(result.group.washer.autoReply)
-        print("-" * 50)
-        print(result.personal.common.imageReturn)
-        print(result.personal.common.mapAnalysis)
-        print(result.personal.common.envelope)
-        print(result.personal.common.autoReply)
-        print("-" * 50)
-        print(result.personal.jj.imageReturn)
-        print(result.personal.jj.mapAnalysis)
-        print(result.personal.jj.envelope)
-        print(result.personal.jj.autoReply)
+    result = WeChatFeatureToggle()
+    print(result.group.jade.expectList)
+    print(result.group.jade.queue)
+    print(result.group.jade.imageReturn)
+    print(result.group.jade.mapAnalysis)
+    print(result.group.jade.envelope)
+    print(result.group.jade.autoReply)
+    print("-" * 50)
+    print(result.group.washer.expectList)
+    print(result.group.washer.queue)
+    print(result.group.washer.imageReturn)
+    print(result.group.washer.mapAnalysis)
+    print(result.group.washer.envelope)
+    print(result.group.washer.autoReply)
+    print("-" * 50)
+    print(result.personal.common.imageReturn)
+    print(result.personal.common.mapAnalysis)
+    print(result.personal.common.envelope)
+    print(result.personal.common.autoReply)
+    print("-" * 50)
+    print(result.personal.jj.imageReturn)
+    print(result.personal.jj.mapAnalysis)
+    print(result.personal.jj.envelope)
+    print(result.personal.jj.autoReply)

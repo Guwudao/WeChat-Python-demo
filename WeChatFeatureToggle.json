@@ -2,7 +2,7 @@
 	"feature": {
 		"group": {
 			"jade": {
-				"expectList": ["jade"],
+				"expectList": ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"],
 				"queue": true,
 				"imageReturn": true,
 				"mapAnalysis": true,
@@ -10,7 +10,7 @@
 				"autoReply": true
 			},
 			"washer": {
-				"expectList": ["washer"],
+				"expectList": ["离婚分一半", "@@@", "吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了", "军佬屌仔三米长，仲识分叉", "霸王别鸽", "罗平滢", "JJ"],
 				"queue": true,
 				"imageReturn": false,
 				"mapAnalysis": true,
