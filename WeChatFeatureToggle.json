@@ -1,0 +1,36 @@
+{
+	"feature": {
+		"group": {
+			"jade": {
+				"expectList": ["jade"],
+				"queue": true,
+				"imageReturn": true,
+				"mapAnalysis": true,
+				"envelope": true,
+				"autoReply": true
+			},
+			"washer": {
+				"expectList": ["washer"],
+				"queue": true,
+				"imageReturn": false,
+				"mapAnalysis": true,
+				"envelope": true,
+				"autoReply": false
+			}
+		},
+		"personal": {
+			"common": {
+				"imageReturn": false,
+				"mapAnalysis": false,
+				"envelope": false,
+				"autoReply": false
+			},
+			"jj": {
+				"imageReturn": false,
+				"mapAnalysis": true,
+				"envelope": true,
+				"autoReply": false
+			}
+		}
+	}
+}
