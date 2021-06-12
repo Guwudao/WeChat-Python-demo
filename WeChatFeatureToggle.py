@@ -1,23 +1,34 @@
 import json
 
 
-class CommonGroup:
+class Common:
+    pass
+    # def __init__(self, *args):
+        # self.imageReturn = args[0]["imageReturn"]
+        # self.mapAnalysis = args[0]["mapAnalysis"]
+        # self.envelope = args[0]["envelope"]
+        # self.autoReply = args[0]["autoReply"]
 
-    def __init__(self, expectList, queue, img, mapAnalysis, envelope, auto):
-        self.expectList = expectList
-        self.queue = queue
-        self.imageReturn = img
-        self.mapAnalysis = mapAnalysis
-        self.envelope = envelope
-        self.autoReply = auto
+
+class CommonGroup(Common):
+
+    def __init__(self, *args):
+        self.expectList = args[0]["expectList"]
+        self.queue = args[0]["queue"]
+        self.imageReturn = args[0]["imageReturn"]
+        self.mapAnalysis = args[0]["mapAnalysis"]
+        self.envelope = args[0]["envelope"]
+        self.autoReply = args[0]["autoReply"]
+        # super().__init__(args)
 
 
 class CommonPerson:
-    def __init__(self, img, mapAnalysis, envelope, auto):
-        self.imageReturn = img
-        self.mapAnalysis = mapAnalysis
-        self.envelope = envelope
-        self.autoReply = auto
+
+    def __init__(self, *args):
+        self.imageReturn = args[0]["imageReturn"]
+        self.mapAnalysis = args[0]["mapAnalysis"]
+        self.envelope = args[0]["envelope"]
+        self.autoReply = args[0]["autoReply"]
 
 
 class Group:
@@ -45,23 +56,14 @@ def object_hook(dic):
 
 
     if "jade" and "washer" in keys:
-        jade_dic = dic["jade"]
-        jade = CommonGroup(jade_dic["expectList"], jade_dic["queue"], jade_dic["imageReturn"],
-                     jade_dic["mapAnalysis"], jade_dic["envelope"], jade_dic["autoReply"])
-
-        washer_dic = dic["washer"]
-        washer = CommonGroup(washer_dic["expectList"], washer_dic["queue"], washer_dic["imageReturn"],
-                       washer_dic["mapAnalysis"], washer_dic["envelope"], washer_dic["autoReply"])
-
+        jade = CommonGroup(dic["jade"])
+        washer = CommonGroup(dic["washer"])
         return {"jade": jade, "washer": washer}
 
 
     if "common" and "jj" in keys:
-        common_dic = dic["common"]
-        common = CommonPerson(common_dic["imageReturn"], common_dic["mapAnalysis"], common_dic["envelope"], common_dic["autoReply"])
-
-        jj_dic = dic["jj"]
-        jj = CommonPerson(jj_dic["imageReturn"], jj_dic["mapAnalysis"], jj_dic["envelope"], jj_dic["autoReply"])
+        common = CommonPerson(dic["common"])
+        jj = CommonPerson(dic["jj"])
         return {"common": common, "jj": jj}
 
     if "feature" in keys:
@@ -83,12 +85,14 @@ if __name__ == '__main__':
         print("-" * 100)
         print(result)
 
+        print(result.group.jade.expectList)
         print(result.group.jade.queue)
         print(result.group.jade.imageReturn)
         print(result.group.jade.mapAnalysis)
         print(result.group.jade.envelope)
         print(result.group.jade.autoReply)
         print("-" * 50)
+        print(result.group.washer.expectList)
         print(result.group.washer.queue)
         print(result.group.washer.imageReturn)
         print(result.group.washer.mapAnalysis)
