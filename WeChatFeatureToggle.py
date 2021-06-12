@@ -2,33 +2,23 @@ import json
 
 
 class Common:
-    pass
-    # def __init__(self, *args):
-        # self.imageReturn = args[0]["imageReturn"]
-        # self.mapAnalysis = args[0]["mapAnalysis"]
-        # self.envelope = args[0]["envelope"]
-        # self.autoReply = args[0]["autoReply"]
+    def __init__(self, *args):
+        self.imageReturn = args[0]["imageReturn"]
+        self.mapAnalysis = args[0]["mapAnalysis"]
+        self.envelope = args[0]["envelope"]
+        self.autoReply = args[0]["autoReply"]
 
 
 class CommonGroup(Common):
-
     def __init__(self, *args):
         self.expectList = args[0]["expectList"]
         self.queue = args[0]["queue"]
-        self.imageReturn = args[0]["imageReturn"]
-        self.mapAnalysis = args[0]["mapAnalysis"]
-        self.envelope = args[0]["envelope"]
-        self.autoReply = args[0]["autoReply"]
-        # super().__init__(args)
+        super().__init__(*args)
 
 
-class CommonPerson:
-
+class CommonPerson(Common):
     def __init__(self, *args):
-        self.imageReturn = args[0]["imageReturn"]
-        self.mapAnalysis = args[0]["mapAnalysis"]
-        self.envelope = args[0]["envelope"]
-        self.autoReply = args[0]["autoReply"]
+        super().__init__(*args)
 
 
 class Group:
