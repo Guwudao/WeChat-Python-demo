@@ -1,5 +1,16 @@
 {
 	"feature": {
+		"analysis": {
+			"isAllEnabled": false,
+			"sexAnalysis": false,
+			"barCity": false,
+			"barProvince": false,
+			"pieCity": false,
+			"pieProvince": false,
+			"geoProvince": false,
+			"pyechartsWordCloud": false,
+			"pilWordCloud": false
+		},
 		"group": {
 			"jade": {
 				"expectedList": ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"],
