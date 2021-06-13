@@ -11,7 +11,7 @@ class Common:
 
 class CommonGroup(Common):
     def __init__(self, *args):
-        self.expectList = args[0]["expectList"]
+        self.expectedList = args[0]["expectedList"]
         self.queue = args[0]["queue"]
         super().__init__(*args)
 
@@ -49,27 +49,28 @@ def object_hook(dic):
         jj = CommonPerson(dic["jj"])
         return {"common": common, "jj": jj}
 
-    # if "feature" in keys:
-    #     print(dic)
-    #     feature_dic = dic["feature"]
-    #     group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
-    #     personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
-    #     feature = WeChatFeatureToggle(group, personal)
-    #     return feature
+    if "feature" in keys:
+        feature_dic = dic["feature"]
+        group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
+        personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
+        feature = WeChatFeatureToggle(group, personal)
+        return feature
 
     return dic
 
 
 class WeChatFeatureToggle:
 
-    def __init__(self):
-        with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
-            content = f.read()
+    @classmethod
+    def instance(cls):
+        if not hasattr(WeChatFeatureToggle, "_instance"):
+            with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
+                content = f.read()
 
-            result = json.loads(content, object_hook=object_hook)
-            feature_dic = result["feature"]
-
-            self.group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
-            self.personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
+                WeChatFeatureToggle._instance = json.loads(content, object_hook=object_hook)
+        return WeChatFeatureToggle._instance
 
 
+    def __init__(self, group: Group, personal: Personal):
+        self.group = group
+        self.personal = personal
