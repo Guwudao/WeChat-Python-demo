@@ -1,4 +1,5 @@
 import itchat
+import sys
 from itchat.content import *
 from WeChatAnalytics import Analytics
 from WeChatAction import WeChatAction
@@ -45,7 +46,6 @@ def wechat_service(msg):
             item_list = dom.documentElement.getElementsByTagName("location")
             longitude = item_list[0].getAttribute("y")
             latitude = item_list[0].getAttribute("x")
-
             address_info = f"地址：{address}，经度：{longitude}，维度：{latitude}"
 
             if len(address) > 0:
@@ -60,7 +60,7 @@ def wechat_service(msg):
         if msg["MsgType"] == 10000 and "红包" in msg["Content"]:
             itchat.send_msg("谢谢老板的红包[玫瑰]", toUserName=msg.fromUserName)
         if msg["MsgType"] == 10000 and "拍了拍" in msg["Content"]:
-            itchat.send_msg("小心的拍，拍伤了要赔钱的[炸弹]", toUserName=msg.fromUserName)
+            itchat.send_msg("小心的拍，拍伤了要赔钱的[旺柴]", toUserName=msg.fromUserName)
 
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
@@ -71,9 +71,10 @@ def download_files(msg):
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
-    # block_list = ["CTT", "JJ", "小槡"]
-    # block = is_nickname_available(msg.user["NickName"], msg.text, *block_list)
-    # if block: return
+    print(msg["User"]["NickName"])
+    block_list = ["小槡", "CTT", "JJ"]
+    block = shouldBeBlockedMessage(msg.user["NickName"], msg.text, *block_list)
+    if block: return
 
     if msg["HasProductId"] != 0:
         return "我是个么得感情的复读机器人 -- 但我并不打算复读微信商店提供的表情，不信你可以换一个"
@@ -92,16 +93,16 @@ def download_files(msg):
 
 @itchat.msg_register(itchat.content.TEXT)
 def text_reply(msg):
-    print(msg)
+    # print(msg)
 
     try:
         if msg['ToUserName'] == 'filehelper':
             print("此消息发给文件助手: {}".format(msg.text))
             return
 
-        block_list = ["CTT", "JJ", "小槡", "估唔到"]
-        block = is_nickname_available(msg["User"]["NickName"], msg.text, *block_list)
-        print("text block :", block, msg["User"]["NickName"])
+        block_list = ["小槡", "CTT", "JJ", "估唔到"]
+        block = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *block_list)
+        # print("text block :", block, msg["User"]["NickName"])
         if block:
             return
 
@@ -126,6 +127,8 @@ def text_reply(msg):
             else:
                 return "我是个么得感情的复读机:\n {}".format(msg)
     except Exception as e:
+        s = sys.exc_info()
+        print("Text reply error '%s' happened on line %d" % (s[1], s[2].tb_lineno))
         print("text_reply error: ", e)
 
 
@@ -137,38 +140,45 @@ def text_group_reply(msg):
     # print(msg)
 
     # @我消息
-    if msg.isAt:
-        msg.user.send("假装已收到@我的消息，本条为自动回复")
+    # if msg.isAt:
+    #     msg.user.send("假装已收到@我的消息，本条为自动回复")
 
     try:
         # print(msg["User"])
         print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
 
+        chat_room_members = msg["User"]["MemberList"]
         allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"]
-        allow = is_nickname_available(msg["User"]["NickName"], msg.text, True, *allow_reply_list)
+        allow = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *allow_reply_list, isGroup=True)
         if allow:
 
             if msg["User"]["NickName"] == "Jade":
+                # print("chat_room_members: ", chat_room_members)
                 if "#接龙" in msg.text:
-                    chat_room_members = msg["User"]["MemberList"]
-                    # print("chat_room_members: " + chat_room_members)
                     remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
                     print("【Jade】测试提醒名单：{}".format(remind_str))
                     itchat.send_msg(remind_str, toUserName=msg.fromUserName)
 
             elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
-                chat_room_members = msg["User"]["MemberList"]
-                remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
-                print("【骑洗衣机去地铁站】测试提醒名单：{}".format(remind_str))
-                itchat.send_msg(remind_str, toUserName=msg.fromUserName)
+                # print("chat_room_members: ", chat_room_members)
+                if "#接龙" in msg.text:
+                    remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+                    print("【骑洗衣机去地铁站】测试提醒名单：{}".format(remind_str))
+                    itchat.send_msg(remind_str, toUserName=msg.fromUserName)
+
+            elif msg["User"]["NickName"] == "测试群":
+                pass
+
             # else:
             #     content = WeChatAction.bot_auto_reply(msg.text)
             #     itchat.send_msg(content, toUserName=msg.fromUserName)
     except Exception as e:
+        s = sys.exc_info()
+        print("Group error '%s' happened on line %d" % (s[1], s[2].tb_lineno))
         print("group error: ", e)
 
 
-def is_nickname_available(nickname, text, isGroup=False, *args) -> bool:
+def shouldBeBlockedMessage(nickname, text, *args, isGroup=False) -> bool:
     block = False
     for arg in args:
         block = block or (nickname == arg)
@@ -180,5 +190,4 @@ def is_nickname_available(nickname, text, isGroup=False, *args) -> bool:
     return block
 
 
-# itchat.send(HELP_MSG, 'filehelper')
 itchat.run()
