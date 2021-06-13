@@ -33,19 +33,6 @@ class Personal():
         self.jj = jj
 
 
-class WeChatFeatureToggle:
-
-    def __init__(self):
-        with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
-            content = f.read()
-
-            result = json.loads(content, object_hook=object_hook)
-            feature_dic = result["feature"]
-
-            self.group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
-            self.personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
-
-
 def object_hook(dic):
     # print(dic)
     keys = dic.keys()
@@ -73,28 +60,16 @@ def object_hook(dic):
     return dic
 
 
-if __name__ == '__main__':
-    result = WeChatFeatureToggle()
-    print(result.group.jade.expectList)
-    print(result.group.jade.queue)
-    print(result.group.jade.imageReturn)
-    print(result.group.jade.mapAnalysis)
-    print(result.group.jade.envelope)
-    print(result.group.jade.autoReply)
-    print("-" * 50)
-    print(result.group.washer.expectList)
-    print(result.group.washer.queue)
-    print(result.group.washer.imageReturn)
-    print(result.group.washer.mapAnalysis)
-    print(result.group.washer.envelope)
-    print(result.group.washer.autoReply)
-    print("-" * 50)
-    print(result.personal.common.imageReturn)
-    print(result.personal.common.mapAnalysis)
-    print(result.personal.common.envelope)
-    print(result.personal.common.autoReply)
-    print("-" * 50)
-    print(result.personal.jj.imageReturn)
-    print(result.personal.jj.mapAnalysis)
-    print(result.personal.jj.envelope)
-    print(result.personal.jj.autoReply)
+class WeChatFeatureToggle:
+
+    def __init__(self):
+        with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
+            content = f.read()
+
+            result = json.loads(content, object_hook=object_hook)
+            feature_dic = result["feature"]
+
+            self.group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
+            self.personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
+
+
