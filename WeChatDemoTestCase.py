@@ -329,6 +329,18 @@ class WeChatDemoTestCase(TestCase):
         self.assertFalse(analysis.pyechartsWordCloud)
         self.assertFalse(analysis.pilWordCloud)
 
+    def test_wechatCommonGroupFeatureToggle(self):
+        toggle = WeChatFeatureToggle.instance()
+
+        common = toggle.group.common
+        self.assertEqual(common.expectedList, ["摸铃校友群", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"])
+        self.assertTrue(common.queue)
+        self.assertFalse(common.imageReturn)
+        self.assertTrue(common.mapAnalysis)
+        self.assertTrue(common.envelope)
+        self.assertFalse(common.autoReply)
+        self.assertFalse(common.atMeReply)
+
     def test_wechatJadeFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
 
@@ -341,6 +353,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertTrue(jade.mapAnalysis)
         self.assertTrue(jade.envelope)
         self.assertFalse(jade.autoReply)
+        self.assertFalse(jade.atMeReply)
 
     def test_wechatWasherFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
@@ -354,6 +367,20 @@ class WeChatDemoTestCase(TestCase):
         self.assertTrue(washer.mapAnalysis)
         self.assertFalse(washer.envelope)
         self.assertFalse(washer.autoReply)
+        self.assertFalse(washer.atMeReply)
+
+    def test_brotherAndSisterFeatureToggle(self):
+        toggle = WeChatFeatureToggle.instance()
+
+        bns = toggle.group.brotherAndSister
+        self.assertEqual(bns.expectedList, [], "expect list should be equal")
+        self.assertFalse(bns.queue)
+        self.assertFalse(bns.imageReturn)
+        self.assertTrue(bns.mapAnalysis)
+        self.assertTrue(bns.envelope)
+        self.assertFalse(bns.autoReply)
+        self.assertTrue(bns.atMeReply)
+
 
     def test_wechatCommonPersonalFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
@@ -411,8 +438,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertEqual(result, reminder)
 
     def test_WechatActionGetTitle(self):
-        msg = """
-                #接龙
+        msg = """#接龙
                 6月12日welink健康打卡
 
                 1. 林俊杰 - Jackie

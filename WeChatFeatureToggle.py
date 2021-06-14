@@ -13,6 +13,7 @@ class CommonGroup(Common):
     def __init__(self, *args):
         self.expectedList = args[0]["expectedList"]
         self.queue = args[0]["queue"]
+        self.atMeReply = args[0]["atMeReply"]
         super().__init__(*args)
 
 
@@ -22,9 +23,11 @@ class CommonPerson(Common):
 
 
 class Group:
-    def __init__(self, jade: CommonGroup, washer: CommonGroup):
+    def __init__(self, common: CommonGroup, jade: CommonGroup, washer: CommonGroup, brotherAndSister: CommonGroup):
+        self.common = common
         self.jade = jade
         self.washer = washer
+        self.brotherAndSister = brotherAndSister
 
 
 class Personal():
@@ -51,9 +54,11 @@ def object_hook(dic):
     keys = dic.keys()
 
     if "jade" and "washer" in keys:
+        common = CommonGroup(dic["common"])
         jade = CommonGroup(dic["jade"])
         washer = CommonGroup(dic["washer"])
-        return {"jade": jade, "washer": washer}
+        brotherAndSister = CommonGroup(dic["brotherAndSister"])
+        return {"common": common, "jade": jade, "washer": washer, "brotherAndSister": brotherAndSister}
 
     if "common" and "jj" in keys:
         common = CommonPerson(dic["common"])
@@ -65,7 +70,12 @@ def object_hook(dic):
 
     if "feature" in keys:
         feature_dic = dic["feature"]
-        group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
+        group = Group(
+            feature_dic["group"]["common"],
+            feature_dic["group"]["jade"],
+            feature_dic["group"]["washer"],
+            feature_dic["group"]["brotherAndSister"]
+        )
         personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
         feature = WeChatFeatureToggle(group, personal, feature_dic["analysis"])
         return feature
@@ -91,4 +101,4 @@ class WeChatFeatureToggle:
 
 if __name__ == '__main__':
     toggle = WeChatFeatureToggle.instance()
-    print(toggle.analysis.__dict__)
+    print(toggle.group.common.__dict__)

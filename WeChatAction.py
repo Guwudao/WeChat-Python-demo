@@ -2,6 +2,7 @@ import TeamClockIn
 import sys
 import re
 from TuringBot import TuringBot
+from xml.dom.minidom import parseString
 
 
 class WeChatAction:
@@ -30,6 +31,31 @@ class WeChatAction:
             return "我变成个么得感情的复读机了:\n {}".format(content)
         else:
             return content
+
+    @staticmethod
+    def map_analysis(msg):
+        try:
+            address = msg["Content"].split(":")[0]
+            # print(address)
+
+            dom = parseString(msg["OriContent"])
+            print(type(dom))
+            item_list = dom.documentElement.getElementsByTagName("location")
+            longitude = item_list[0].getAttribute("y")
+            latitude = item_list[0].getAttribute("x")
+            address_info = f"地址：{address}，经度：{longitude}，维度：{latitude}"
+
+            if len(address):
+                return address_info
+                # itchat.send_msg(address_info, toUserName=msg.fromUserName)
+            else:
+                return 地址提取失败
+                # itchat.send_msg("地址提取失败", toUserName=msg.fromUserName)
+        except Exception as map_error:
+            error_msg = "地图解析错误：", map_error
+            print(error_msg)
+            return error_msg
+
 
     @staticmethod
     def jade_auto_reminder(chat_room_members, expect_member_list, message):

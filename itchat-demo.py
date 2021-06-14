@@ -3,15 +3,7 @@ import sys
 from itchat.content import *
 from WeChatAnalytics import Analytics
 from WeChatAction import WeChatAction
-from xml.dom.minidom import parseString
-
-# itchat.send_msg("this is a test message", toUserName="filehelper")
-
-itchat.auto_login(hotReload=True)
-friends = itchat.get_friends()
-chat_rooms = itchat.get_chatrooms(update=True)
-# print(chat_rooms)
-# return u'@%s\u2005%s' % (msg['ActualNickName'], reply_message)
+from WeChatFeatureToggle import WeChatFeatureToggle as wx
 
 
 def chatRoomAnalytics():
@@ -21,12 +13,27 @@ def chatRoomAnalytics():
 # 获取微信所有群
 # chatRoomAnalytics()
 
-# 好友分析+词云图
-# Analytics.wechat_friends_analysis(friends)
-# Analytics.wechat_signature_words(friends)
-#
-# Analytics.file_classify("png", "PNG")
-# Analytics.file_classify("html", "HTML")
+@itchat.msg_register([MAP, CARD, NOTE, SHARING], isGroupChat=True)
+def wechat_service(msg):
+    print("接收到了群聊 MAP, CARD, NOTE, SHARING类的信息")
+    print(msg)
+
+    allow_reply_list = toggle.group.common.expectedList
+    allow = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *allow_reply_list, isGroup=True)
+    if allow:
+
+        if msg.type == "Map" and toggle.group.common.mapAnalysis:
+            print("检测到了MAP消息")
+            itchat.send_msg("识别到了地图类型消息，正在自动提取地址", toUserName=msg.fromUserName)
+
+            result = WeChatAction.map_analysis(msg)
+            itchat.send_msg(result, toUserName=msg.fromUserName)
+
+        elif msg.type == "Note":
+            if msg["MsgType"] == 10000 and "红包" in msg["Content"]:
+                itchat.send_msg("卧槽！红包！检测到了红包！[旺柴]", toUserName=msg.fromUserName)
+            if msg["MsgType"] == 10000 and "拍了拍" in msg["Content"]:
+                itchat.send_msg("小心的拍，拍伤了要赔钱的[旺柴]", toUserName=msg.fromUserName)
 
 
 @itchat.msg_register([MAP, CARD, NOTE, SHARING])
@@ -35,27 +42,12 @@ def wechat_service(msg):
     print(msg)
 
     if msg.type == "Map":
-        try:
-            print("接收到了MAP消息")
-            itchat.send_msg("识别到了地图类型消息，正在自动提取地址", toUserName=msg.fromUserName)
-            address = msg["Content"].split(":")[0]
-            # print(address)
+        print("接收到了MAP消息")
+        itchat.send_msg("识别到了地图类型消息，正在自动提取地址", toUserName=msg.fromUserName)
 
-            dom = parseString(msg["OriContent"])
-            print(type(dom))
-            item_list = dom.documentElement.getElementsByTagName("location")
-            longitude = item_list[0].getAttribute("y")
-            latitude = item_list[0].getAttribute("x")
-            address_info = f"地址：{address}，经度：{longitude}，维度：{latitude}"
+        result = WeChatAction.map_analysis(msg)
+        itchat.send_msg(result, toUserName=msg.fromUserName)
 
-            if len(address) > 0:
-                itchat.send_msg(address_info, toUserName=msg.fromUserName)
-            else:
-                itchat.send_msg("地址提取失败", toUserName=msg.fromUserName)
-        except Exception as map_error:
-            error_msg = "地图解析错误：", map_error
-            print(error_msg)
-            itchat.send_msg(error_msg, toUserName=msg.fromUserName)
     elif msg.type == "Note":
         if msg["MsgType"] == 10000 and "红包" in msg["Content"]:
             itchat.send_msg("谢谢老板的红包[玫瑰]", toUserName=msg.fromUserName)
@@ -134,40 +126,41 @@ def text_reply(msg):
 
 @itchat.msg_register(TEXT, isGroupChat=True)
 def text_group_reply(msg):
-    jade_members = ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"]
-    wash_members = ['离婚分一半', '@@@', '吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了', '军佬屌仔三米长，仲识分叉', '霸王别鸽', '罗平滢', 'JJ']
-
     # print(msg)
-
-    # @我消息
-    # if msg.isAt:
-    #     msg.user.send("假装已收到@我的消息，本条为自动回复")
 
     try:
         # print(msg["User"])
         print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
 
         chat_room_members = msg["User"]["MemberList"]
-        allow_reply_list = ["吃，都可以吃", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"]
+        allow_reply_list = toggle.group.common.expectedList
         allow = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *allow_reply_list, isGroup=True)
         if allow:
 
             if msg["User"]["NickName"] == "Jade":
                 # print("chat_room_members: ", chat_room_members)
-                if "#接龙" in msg.text:
+                if "#接龙" in msg.text and toggle.group.jade.queue:
+                    jade_members = toggle.group.jade.expectedList
                     remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
                     print("【Jade】测试提醒名单：{}".format(remind_str))
                     itchat.send_msg(remind_str, toUserName=msg.fromUserName)
 
             elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
                 # print("chat_room_members: ", chat_room_members)
-                if "#接龙" in msg.text:
+                if "#接龙" in msg.text and toggle.group.washer.queue:
+                    wash_members = toggle.group.washer.expectedList
                     remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
                     print("【骑洗衣机去地铁站】测试提醒名单：{}".format(remind_str))
                     itchat.send_msg(remind_str, toUserName=msg.fromUserName)
 
+            elif msg["User"]["NickName"] == "【兄弟姐妹】":
+                # @我消息
+                if msg.isAt and toggle.group.common.brotherAndSister.atMeReply:
+                    msg.user.send("假装已收到@我的消息，本条为自动回复[玫瑰]")
+
             elif msg["User"]["NickName"] == "测试群":
-                pass
+                if msg.isAt:
+                    msg.user.send("假装已收到@我的消息，本条为自动回复[玫瑰]")
 
             # else:
             #     content = WeChatAction.bot_auto_reply(msg.text)
@@ -190,4 +183,19 @@ def shouldBeBlockedMessage(nickname, text, *args, isGroup=False) -> bool:
     return block
 
 
-itchat.run()
+if __name__ == '__main__':
+
+    itchat.auto_login(hotReload=True)
+    friends = itchat.get_friends()
+    chat_rooms = itchat.get_chatrooms(update=True)
+
+    # 好友分析 + 词云图
+    toggle = wx.instance()
+    if toggle.analysis.isAllEnabled:
+        Analytics.wechat_friends_analysis(friends)
+        Analytics.wechat_signature_words(friends)
+
+        Analytics.file_classify("png", "PNG")
+        Analytics.file_classify("html", "HTML")
+
+    itchat.run()

@@ -11,136 +11,151 @@ import jieba
 import re
 import os
 import shutil
+from WeChatFeatureToggle import WeChatFeatureToggle
 
 
 class Analytics:
+    toggle = WeChatFeatureToggle.instance()
 
     @classmethod
     def wechat_friends_analysis(cls, friends):
         # print(itchat.get_friends()[1])
+
+        analysis = cls.toggle.analysis
+        if not analysis.isAllEnabled:
+            print("================= analysis not allow friends analysis skip ================")
+            return
 
         provinces, province_count, cities, city_count = [], [], [], []
 
         tuple_city_list = cls.wechat_information_refine("City", friends, 3, True)
         tuple_province_list = cls.wechat_information_refine("Province", friends, 4, True)
 
-        sex_title = ["未知", "男", "女"]
-        remark_sex_count = [0, 0, 0]
-        no_remark_sex_count = [0, 0, 0]
+        if analysis.sexAnalysis:
+            sex_title = ["未知", "男", "女"]
+            remark_sex_count = [0, 0, 0]
+            no_remark_sex_count = [0, 0, 0]
 
-        for friend in friends:
-            sex = friend["Sex"]
-            if len(friend["RemarkName"]):
-                remark_sex_count[sex] += 1
+            for friend in friends:
+                sex = friend["Sex"]
+                if len(friend["RemarkName"]):
+                    remark_sex_count[sex] += 1
+                else:
+                    no_remark_sex_count[sex] += 1
+
+            for i, j in tuple_province_list:
+                if not len(i):
+                    i = "未知"
+                provinces.append(i)
+                province_count.append(j)
+
+            for i, j in tuple_city_list:
+                if not len(i):
+                    i = "未知"
+                cities.append(i)
+                city_count.append(j)
+
+            # print(cities, city_count)
+            # print(provinces, province_count)
+
+            page_title = "好友性别数据统计"
+            bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
+            bar_sex.add_xaxis(sex_title)
+            bar_sex.add_yaxis("有备注", remark_sex_count)
+            bar_sex.add_yaxis("无备注", no_remark_sex_count)
+            bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left="60"))
+            bar_sex.render("sex.html")
+
+        if analysis.barCity:
+            bar_city = Bar()
+            bar_city.add_xaxis(cities)
+            bar_city.add_yaxis("微信好友地区数据统计", city_count)
+            bar_city.set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
+            bar_city.render("city.html")
+
+        if analysis.barProvince:
+            bar_province = (
+                Bar()
+                .add_xaxis(provinces)
+                .add_yaxis("微信好友省份统计", province_count)
+                .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
+            )
+            try:
+                make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
+            except Exception as e:
+                print("make snap shot error", e)
             else:
-                no_remark_sex_count[sex] += 1
+                bar_province.render("bar_province")
 
-        for i, j in tuple_province_list:
-            if not len(i):
-                i = "未知"
-            provinces.append(i)
-            province_count.append(j)
-
-        for i, j in tuple_city_list:
-            if not len(i):
-                i = "未知"
-            cities.append(i)
-            city_count.append(j)
-
-        # print(cities, city_count)
-        # print(provinces, province_count)
-
-        page_title = "好友性别数据统计"
-        bar_sex = Bar(init_opts=InitOpts(page_title=page_title))
-        bar_sex.add_xaxis(sex_title)
-        bar_sex.add_yaxis("有备注", remark_sex_count)
-        bar_sex.add_yaxis("无备注", no_remark_sex_count)
-        bar_sex.set_global_opts(title_opts=TitleOpts(title="微信好友性别数据统计", pos_left="60"))
-        bar_sex.render("sex.html")
-
-        bar_city = Bar()
-        bar_city.add_xaxis(cities)
-        bar_city.add_yaxis("微信好友地区数据统计", city_count)
-        bar_city.set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
-        bar_city.render("city.html")
-
-        bar_province = (
-            Bar()
-            .add_xaxis(provinces)
-            .add_yaxis("微信好友省份统计", province_count)
-            .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True))
-        )
-        try:
-            make_snapshot(snapshot, bar_province.render("bar_province.html"), "bar_province.png")
-        except Exception as e:
-            print("make snap shot error", e)
-        else:
-            bar_province.render("bar_province")
-
-        city_data_list = [(i, j) for i, j in zip(cities, city_count)]
-        pie_city = (
-            Pie(init_opts=InitOpts(
-                page_title="微信好友城市分析",
-                width="1400px",
-                height="800px",
-            ))
-            .add(
-                data_pair=city_data_list,
-                series_name="微信好友分布",
-                # radius=["25%", "75%"],
-                # rosetype="radius"
+        if analysis.pieCity:
+            city_data_list = [(i, j) for i, j in zip(cities, city_count)]
+            pie_city = (
+                Pie(init_opts=InitOpts(
+                    page_title="微信好友城市分析",
+                    width="1400px",
+                    height="800px",
+                ))
+                .add(
+                    data_pair=city_data_list,
+                    series_name="微信好友分布",
+                    # radius=["25%", "75%"],
+                    # rosetype="radius"
+                )
+                .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
+                                 title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
+                # .render("pie_city.html")
             )
-            .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="50px"),
-                             title_opts=TitleOpts(title="微信好友城市分析", pos_top="80px", pos_left="10px"))
-            # .render("pie_city.html")
-        )
-        try:
-            make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
-        except Exception as e:
-            print("make snap shot error", e)
-        else:
-            pie_city.render("pie_city.html")
+            try:
+                make_snapshot(snapshot, pie_city.render("pie_city.html"), "pie_city.png")
+            except Exception as e:
+                print("make snap shot error", e)
+            else:
+                pie_city.render("pie_city.html")
 
-        province_data_list = [(i, j) for i, j in zip(provinces, province_count)]
-        pie_province = (
-            Pie(init_opts=InitOpts(
-                page_title="微信好友省份分析",
-                width="1200px",
-                height="800px",
-            ))
-            .add(
-                data_pair=province_data_list,
-                series_name="微信好友分布",
-                radius=["25%", "75%"],
-                rosetype="Mapping"
+        if analysis.pieProvince:
+            province_data_list = [(i, j) for i, j in zip(provinces, province_count)]
+            pie_province = (
+                Pie(init_opts=InitOpts(
+                    page_title="微信好友省份分析",
+                    width="1200px",
+                    height="800px",
+                ))
+                .add(
+                    data_pair=province_data_list,
+                    series_name="微信好友分布",
+                    radius=["25%", "75%"],
+                    rosetype="Mapping"
+                )
+                .set_global_opts(
+                    toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
+                    title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px")
+                )
+                # .render("pie_province.html")
             )
-            .set_global_opts(toolbox_opts=ToolboxOpts(is_show=True, pos_top="60px"),
-                            title_opts=TitleOpts(title="微信好友省份分析", pos_top="60px", pos_left="50px"))
-            # .render("pie_province.html")
-        )
-        try:
-            make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
-        except Exception as e:
-            print("make snap shot error", e)
-        else:
-            pie_province.render("pie_province.html")
+            try:
+                make_snapshot(snapshot, pie_province.render("pie_province.html"), "pie_province.png")
+            except Exception as e:
+                print("make snap shot error", e)
+            else:
+                pie_province.render("pie_province.html")
 
-        province_geo = (
-            Map(init_opts=InitOpts(page_title="微信好友分布"))
-            .add("微信好友分布geo图", tuple_province_list, "china")
-            .set_global_opts(
-                title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
-                visualmap_opts=VisualMapOpts(max_=600, split_number=5, is_piecewise=True)
+        if analysis.geoProvince:
+            province_geo = (
+                Map(init_opts=InitOpts(page_title="微信好友分布"))
+                .add("微信好友分布geo图", tuple_province_list, "china")
+                .set_global_opts(
+                    title_opts=TitleOpts(title="微信好友分布分布", pos_left="30px"),
+                    visualmap_opts=VisualMapOpts(max_=600, split_number=5, is_piecewise=True)
+                )
+                # .render("geo_province.html")
             )
-            # .render("geo_province.html")
-        )
-        try:
-            make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
-        except Exception as e:
-            print("make snap shot error", e)
-        else:
-            province_geo.render("province_geo.html")
-        print("============================= wechat friends analysis success =============================")
+            try:
+                make_snapshot(snapshot, province_geo.render("geo_province.html"), "geo_province.png")
+            except Exception as e:
+                print("make snap shot error", e)
+            else:
+                province_geo.render("province_geo.html")
+            print("============================= wechat friends analysis success =============================")
 
     @classmethod
     def wechat_information_refine(cls, key, friends, filter_count, reverse) -> []:
@@ -167,6 +182,11 @@ class Analytics:
 
     @classmethod
     def wechat_signature_words(cls, friends):
+        analysis = cls.toggle.analysis
+        if not analysis.isAllEnabled:
+            print("================ analysis not allow signature word skip ==============")
+            return
+
         all_word_list = []
         final_words = {}
         for friend in friends:
@@ -186,39 +206,45 @@ class Analytics:
         sort_words = sorted(final_words.items(), key=lambda x: x[1], reverse=True)
         # print(sort_words)
 
-        chart_wc = (
-            WordCloud(init_opts=InitOpts(page_title="微信签名词云"))
-            .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
-            .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"),
-                             toolbox_opts=ToolboxOpts(is_show=True)
-                             )
-            # .render("signature.html")
-        )
-        try:
-            make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
-        except Exception as e:
-            print("make snap shot error", e)
-        else:
-            chart_wc.render("chart_wc.html")
+        if analysis.pyechartsWordCloud:
+            chart_wc = (
+                WordCloud(init_opts=InitOpts(page_title="微信签名词云"))
+                .add("签名词云", sort_words, word_size_range=[20, 100], shape="triangle")
+                .set_global_opts(title_opts=TitleOpts(title="微信签名词云", pos_left="140px"),
+                                 toolbox_opts=ToolboxOpts(is_show=True)
+                                 )
+                # .render("signature.html")
+            )
+            try:
+                make_snapshot(snapshot, chart_wc.render("signature.html"), "signature.png")
+            except Exception as e:
+                print("make snap shot error", e)
+            else:
+                chart_wc.render("chart_wc.html")
 
-        img = Image.open("IMG_7946.JPG")
-        mask = np.array(img)
-        wc = wordcloud.WordCloud(font_path="simsun.ttc",
-                                 background_color="white",
-                                 # stopwords=wordcloud.STOPWORDS.add("的"),
-                                 stopwords={"在", "你", "的", "我", "不", "有", "了", "人"},
-                                 # max_words=100,
-                                 mask=mask)
-        wc.generate(" ".join(all_word_list))
-        wc.recolor(color_func=wordcloud.ImageColorGenerator(mask))
-        wc.to_file("word_cloud.png")
-        print("============================= Wchat signature words success =============================")
+        if analysis.pilWordCloud:
+            img = Image.open("IMG_7946.JPG")
+            mask = np.array(img)
+            wc = wordcloud.WordCloud(font_path="simsun.ttc",
+                                     background_color="white",
+                                     # stopwords=wordcloud.STOPWORDS.add("的"),
+                                     stopwords={"在", "你", "的", "我", "不", "有", "了", "人"},
+                                     # max_words=100,
+                                     mask=mask)
+            wc.generate(" ".join(all_word_list))
+            wc.recolor(color_func=wordcloud.ImageColorGenerator(mask))
+            wc.to_file("word_cloud.png")
+            print("============================= Wchat signature words success =============================")
 
     @classmethod
     def file_classify(cls, file_type, des_path):
+        analysis = cls.toggle.analysis
+        if not analysis.isAllEnabled:
+            print("==================== analysis not allow file classify skip =====================")
+            return
 
         file_list = []
-        for file in os.listdir():
+        for file in os.listdir(os.getcwd()):
             suffix = file.split(".")[-1]
             if suffix == file_type:
                 file_list.append(file)
