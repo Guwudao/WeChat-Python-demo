@@ -33,27 +33,41 @@ class Personal():
         self.jj = jj
 
 
+class Analysis():
+    def __init__(self, *args):
+        self.isAllEnabled = args[0]["isAllEnabled"]
+        self.sexAnalysis = args[0]["sexAnalysis"]
+        self.barCity = args[0]["barCity"]
+        self.barProvince = args[0]["barProvince"]
+        self.pieCity = args[0]["pieCity"]
+        self.pieProvince = args[0]["pieProvince"]
+        self.geoProvince = args[0]["geoProvince"]
+        self.pyechartsWordCloud = args[0]["pyechartsWordCloud"]
+        self.pilWordCloud = args[0]["pilWordCloud"]
+
+
 def object_hook(dic):
     # print(dic)
     keys = dic.keys()
-
 
     if "jade" and "washer" in keys:
         jade = CommonGroup(dic["jade"])
         washer = CommonGroup(dic["washer"])
         return {"jade": jade, "washer": washer}
 
-
     if "common" and "jj" in keys:
         common = CommonPerson(dic["common"])
         jj = CommonPerson(dic["jj"])
         return {"common": common, "jj": jj}
 
+    if "isAllEnabled" in keys:
+        return Analysis(dic)
+
     if "feature" in keys:
         feature_dic = dic["feature"]
         group = Group(feature_dic["group"]["jade"], feature_dic["group"]["washer"])
         personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
-        feature = WeChatFeatureToggle(group, personal)
+        feature = WeChatFeatureToggle(group, personal, feature_dic["analysis"])
         return feature
 
     return dic
@@ -66,11 +80,15 @@ class WeChatFeatureToggle:
         if not hasattr(WeChatFeatureToggle, "_instance"):
             with open("WeChatFeatureToggle.json", "r", encoding="utf-8") as f:
                 content = f.read()
-
                 WeChatFeatureToggle._instance = json.loads(content, object_hook=object_hook)
         return WeChatFeatureToggle._instance
 
-
-    def __init__(self, group: Group, personal: Personal):
+    def __init__(self, group: Group, personal: Personal, analysis: Analysis):
         self.group = group
         self.personal = personal
+        self.analysis = analysis
+
+
+if __name__ == '__main__':
+    toggle = WeChatFeatureToggle.instance()
+    print(toggle.analysis.__dict__)
