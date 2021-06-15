@@ -1,22 +1,98 @@
 import itchat
 import sys
+import time
+import re
+import os
 from itchat.content import *
 from WeChatAnalytics import Analytics
 from WeChatAction import WeChatAction
 from WeChatFeatureToggle import WeChatFeatureToggle as wx
 
 
-def chatRoomAnalytics():
-    for room in chat_rooms:
-        print(room["NickName"])
+# @itchat.msg_register([TEXT, PICTURE, RECORDING, ATTACHMENT, VIDEO, FRIENDS],
+#                      isFriendChat = True, isMpChat = True, isGroupChat=True)
+def recall_message_handle(msg):
+    # print(msg)
+    msg_rev_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    # 消息发送人
+    try:
+        msg_from = itchat.search_friends(userName=msg["FromUserName"])["NickName"]
+    except:
+        group_name = msg.user["NickName"]
+        # print(group_name)
+        if group_name:
+            msg_from =  msg.user["NickName"] + " : " + msg["ActualNickName"]
+        else:
+            msg_from = "微信官方账号"
 
-# 获取微信所有群
-# chatRoomAnalytics()
+    # 消息id
+    msg_id = msg["MsgId"]
+    # 发送消息的时间
+    msg_send_time = msg["CreateTime"]
+    # 消息内容
+    msg_content = None
+    # 消息链接
+    msg_url = None
+
+    # 文本或者好友邀请
+    if msg["Type"] in ["Text", "Friends"]:
+        msg_content = msg["Text"]
+        # print("[文本/好友邀请]: %s" % msg_content)
+
+    # 语言,附件，视频，图片
+    elif msg["Type"] in ["Recording", "Attachment", "Video", "Picture"]:
+        msg_content = msg["FileName"]
+        # 保存文件
+        msg["Text"](str(msg_content))
+        print("[语言/附件/视频/图片]: %s" % msg_content)
+
+    # 名片
+    elif msg["Type"] == "Card":
+        msg_content = msg["RecommendInfo"]["NickName"] + "的名片，"
+        if msg["RecommendInfo"]["Sex"] == 1:
+            msg_content += "性别男。"
+        else:
+            msg_content += "性别女。"
+        print("[推荐名片]:%s" % msg_content)
+
+    # 位置
+    elif msg["Type"] == "Map":
+        x, y, location = re.search \
+            ("<location x=\"(.*?)\" y=\"(.*?)\".*label=\"(.*?)\".*", msg["OriContent"]).group(1, 2, 3)
+        if location is None:
+            msg_content = r"纬度:" + x.__str__() + ", 经度:" + y.__str__()
+        else:
+            msg_content = r"" + location
+        print("[位置]：%s" % msg_content)
+
+    # 分享的
+    elif msg["Type"] == "Sharing":
+        msg_content = msg["Text"]
+        msg_url = msg["Url"]
+        print("[分享]: %s" % msg_content)
+
+    face_package = msg_content
+
+    # 更新msg_info字典
+    msg_info.update(
+        {
+            msg_id: {
+                "msg_from": msg_from,
+                "msg_send_time": msg_send_time,
+                "msg_rev_time": msg_rev_time,
+                "msg_type": msg["Type"],
+                "msg_content": msg_content,
+                "msg_url": msg_url
+            }
+        }
+    )
+
 
 @itchat.msg_register([MAP, CARD, NOTE, SHARING], isGroupChat=True)
 def wechat_service(msg):
+    recall_message_handle(msg)
     print("接收到了群聊 MAP, CARD, NOTE, SHARING类的信息")
-    print(msg)
+    # print(msg)
 
     allow_reply_list = toggle.group.common.expectedList
     allow = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *allow_reply_list, isGroup=True)
@@ -38,8 +114,9 @@ def wechat_service(msg):
 
 @itchat.msg_register([MAP, CARD, NOTE, SHARING])
 def wechat_service(msg):
+    recall_message_handle(msg)
     print("接收到了MAP, CARD, NOTE, SHARING类的信息")
-    print(msg)
+    # print(msg)
 
     if msg.type == "Map":
         print("接收到了MAP消息")
@@ -57,9 +134,10 @@ def wechat_service(msg):
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 def download_files(msg):
-    print(msg)
+    recall_message_handle(msg)
+    # print(msg)
 
-    if msg['ToUserName'] == 'filehelper':
+    if msg["ToUserName"] == "filehelper":
         print("此消息发给文件助手: {}".format(msg.text))
         return
 
@@ -74,10 +152,10 @@ def download_files(msg):
         # 表情
         msg.download(msg.fileName)
         type_symbol = {
-            PICTURE: 'img',
-            VIDEO: 'vid', }.get(msg.type, 'fil')
+            PICTURE: "img",
+            VIDEO: "vid", }.get(msg.type, "fil")
         itchat.send_msg("看我反弹大法！！！", toUserName=msg.fromUserName)
-        return '@%s@%s' % (type_symbol, msg.fileName)
+        return "@%s@%s" % (type_symbol, msg.fileName)
     elif msg["MsgType"] == 3:
         # 图片
         print("收到一张图片")
@@ -85,10 +163,11 @@ def download_files(msg):
 
 @itchat.msg_register(itchat.content.TEXT)
 def text_reply(msg):
+    recall_message_handle(msg)
     # print(msg)
 
     try:
-        if msg['ToUserName'] == 'filehelper':
+        if msg["ToUserName"] == "filehelper":
             print("此消息发给文件助手: {}".format(msg.text))
             return
 
@@ -98,7 +177,6 @@ def text_reply(msg):
         if block:
             return
 
-        myself = itchat.get_friends()[0]["UserName"]
         if myself == msg["ToUserName"]:
             if isinstance(msg.text, str):
                 print("{} ---------> {}".format(msg["User"]["NickName"], msg.text))
@@ -124,12 +202,12 @@ def text_reply(msg):
         print("text_reply error: ", e)
 
 
-@itchat.msg_register(TEXT, isGroupChat=True)
+@itchat.msg_register([TEXT, PICTURE, RECORDING, ATTACHMENT, VIDEO], isGroupChat=True)
 def text_group_reply(msg):
+    recall_message_handle(msg)
     # print(msg)
 
     try:
-        # print(msg["User"])
         print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
 
         chat_room_members = msg["User"]["MemberList"]
@@ -142,7 +220,7 @@ def text_group_reply(msg):
                 if "#接龙" in msg.text and toggle.group.jade.queue:
                     jade_members = toggle.group.jade.expectedList
                     remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
-                    print("【Jade】测试提醒名单：{}".format(remind_str))
+                    print("【Jade】接龙提醒名单：{}".format(remind_str))
                     itchat.send_msg(remind_str, toUserName=msg.fromUserName)
 
             elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
@@ -171,6 +249,45 @@ def text_group_reply(msg):
         print("group error: ", e)
 
 
+#监听是否有消息撤回(NOTE)并进行相应操作
+@itchat.msg_register([NOTE], isFriendChat=True, isGroupChat=True, isMpChat=True)
+def send_msg_(msg):
+    print("拦截到撤回了一条消息")
+    # print(msg)
+
+    global face_package
+
+    if "撤回了一条消息" in msg["Content"]:
+        # re匹配最后一次撤回消息的id
+        recall_msg_id = re.search(r"<msgid>(.*?)</msgid>", msg["Content"]).group(1)
+        # 读取msg_info中该id对应的消息
+        recall_msg = msg_info.get(recall_msg_id)
+        print("[撤回]: %s" % recall_msg)
+
+        # 撤回的是表情包
+        if len(recall_msg_id) < 11:
+            itchat.send_file(face_package, toUserName=myself)
+            os.remove(face_package)
+        else:
+            msg_body = "——拦截到一条消息撤回——：\n\n[" + recall_msg.get(
+                "msg_from") + "] 撤回了一条" + recall_msg.get("msg_type") + \
+                       "消息\n" + recall_msg.get("msg_rev_time") + "\n内容为：\n" + recall_msg.get("msg_content")
+            if recall_msg["msg_type"] == "Sharing":
+                msg_body = msg_body + "\n就是这个链接：" + recall_msg.get("msg_url")
+
+            # 将撤回的消息(msg_body)发送给自己
+            itchat.send(msg_body, toUserName=myself)
+
+            # 有文件的话也要将文件发送
+            if recall_msg["msg_type"] in ["Recording", "Attachment", "Video", "Picture"]:
+                file = "@fil@%s" % (recall_msg["msg_content"])
+                itchat.send(msg=file, toUserName=myself)
+                os.remove(recall_msg["msg_content"])
+
+            # 一次撤回信息查看后删除msg_info字典中的信息
+            msg_info.pop(recall_msg_id)
+
+
 def shouldBeBlockedMessage(nickname, text, *args, isGroup=False) -> bool:
     block = False
     for arg in args:
@@ -182,12 +299,16 @@ def shouldBeBlockedMessage(nickname, text, *args, isGroup=False) -> bool:
 
     return block
 
-
 if __name__ == '__main__':
 
     itchat.auto_login(hotReload=True)
+    itchat.show_mobile_login()
     friends = itchat.get_friends()
-    chat_rooms = itchat.get_chatrooms(update=True)
+    myself = itchat.get_friends()[0]["UserName"]
+    # chat_rooms = itchat.get_chatrooms(update=True)
+
+    # 存放接受消息的信息
+    msg_info = {}
 
     # 好友分析 + 词云图
     toggle = wx.instance()

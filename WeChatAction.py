@@ -47,10 +47,8 @@ class WeChatAction:
 
             if len(address):
                 return address_info
-                # itchat.send_msg(address_info, toUserName=msg.fromUserName)
             else:
-                return 地址提取失败
-                # itchat.send_msg("地址提取失败", toUserName=msg.fromUserName)
+                return "地址提取失败"
         except Exception as map_error:
             error_msg = "地图解析错误：", map_error
             print(error_msg)
@@ -72,8 +70,8 @@ class WeChatAction:
                 else:
                     nickName_list.append(member["NickName"])
 
-            print("displayName_list: ", displayName_list)
-            print("nickName_list:, ", nickName_list)
+            # print("displayName_list: ", displayName_list)
+            # print("nickName_list:, ", nickName_list)
 
             reminder_list = []
             for member in expect_member_list:

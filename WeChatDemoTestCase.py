@@ -391,7 +391,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertFalse(common.envelope)
         self.assertFalse(common.autoReply)
 
-    def test_wechatJJFeatureToggle(self):
+    def test_weChatJJFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
 
         jj = toggle.personal.jj
@@ -400,7 +400,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertTrue(jj.envelope)
         self.assertFalse(jj.autoReply)
 
-    def test_getChatRoomList(self):
+    def test_weChatReminder(self):
 
         toggle = WeChatFeatureToggle.instance()
         jade_members = toggle.group.jade.expectedList
@@ -433,11 +433,41 @@ class WeChatDemoTestCase(TestCase):
 未打卡人数还剩 11 人"""
 
         result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, new_msg)
-        print("-" * 100)
-        print(result)
         self.assertEqual(result, reminder)
 
-    def test_WechatActionGetTitle(self):
+    def test_weChatReminderComplete(self):
+        toggle = WeChatFeatureToggle.instance()
+        jade_members = toggle.group.jade.expectedList
+        msg = """
+            #接龙
+            6月15日welink健康打卡
+
+                1. 林俊杰 - Jackie
+                2. 凌俊杰-Jason
+                3. 黄文斌_Harvey
+                4. 何志伟Daniel
+                5. 文逸俊 - Caesar
+                6. 叶超-Charles
+                7. 张广洋-Ternence
+                8. 于顺燊-Justin
+                9. 曾昊 Anson
+                10. 刘旭斌Daniel
+                11. 戴国明-MING
+                12. 杨元生-Yeson
+                13. 郑永祥-Michael
+                14. 郑绵毅-Manny
+                15. 江克非-Leslie
+                16. 谢毅滦–Sheldon
+                17. 李彬特 winter
+                18. 陈洋平-Carl
+                19. 唐小兵-Leo
+                20. 梁敏瑜-Lanmon
+        """
+        reminder = "恭喜大家完成本次接龙！！！"
+        result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, msg)
+        self.assertEqual(result, reminder)
+
+    def test_weChatActionGetTitle(self):
         msg = """#接龙
                 6月12日welink健康打卡
 
@@ -454,3 +484,33 @@ class WeChatDemoTestCase(TestCase):
         title = " 6月12日welink健康打卡 " + "\n"
         result = WeChatAction.get_title(msg)
         self.assertEqual(result, title)
+
+    def test_reminder(self):
+        toggle = WeChatFeatureToggle.instance()
+        jade_members = toggle.group.jade.expectedList
+        msg = """
+                #接龙
+                6月15日welink健康打卡
+
+                1. 林俊杰 - Jackie
+                2. 凌俊杰-Jason
+                3. 黄文斌_Harvey
+                4. 何志伟Daniel
+                5. 文逸俊 - Caesar
+                6. 叶超-Charles
+                7. 张广洋-Ternence
+                8. 于顺燊-Justin
+                9. 曾昊 Anson
+                10. 刘旭斌Daniel
+                11. 戴国明-MING
+                12. 杨元生-Yeson
+                13. 郑永祥-Michael
+                14. 郑绵毅-Manny
+                15. 江克非-Leslie
+                16. 谢毅滦–Sheldon
+                17. 李彬特 winter
+                18. 陈洋平-Carl
+                """
+
+        result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, msg)
+        print(result)
