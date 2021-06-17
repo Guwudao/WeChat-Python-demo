@@ -9,21 +9,20 @@ from WeChatAction import WeChatAction
 from WeChatFeatureToggle import WeChatFeatureToggle as wx
 
 
-# @itchat.msg_register([TEXT, PICTURE, RECORDING, ATTACHMENT, VIDEO, FRIENDS],
-#                      isFriendChat = True, isMpChat = True, isGroupChat=True)
-def recall_message_handle(msg):
+def recall_message_handle(msg, is_group, group_name=""):
     # print(msg)
     msg_rev_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     # 消息发送人
     try:
-        msg_from = itchat.search_friends(userName=msg["FromUserName"])["NickName"]
-    except:
-        group_name = msg.user["NickName"]
-        # print(group_name)
-        if group_name:
-            msg_from =  msg.user["NickName"] + " : " + msg["ActualNickName"]
+        friends = itchat.search_friends(userName=msg["FromUserName"])
+
+        if friends:
+            msg_from = itchat.search_friends(userName=msg["FromUserName"])["NickName"]
         else:
-            msg_from = "微信官方账号"
+            msg_from = msg["ActualNickName"]
+    except Exception as e:
+        print("search friend error: ", e)
+        msg_from = "微信官方账号"
 
     # 消息id
     msg_id = msg["MsgId"]
@@ -33,6 +32,10 @@ def recall_message_handle(msg):
     msg_content = None
     # 消息链接
     msg_url = None
+    # 是否群消息
+    msg_is_group = is_group
+    # 群名称
+    msg_group_name = group_name
 
     # 文本或者好友邀请
     if msg["Type"] in ["Text", "Friends"]:
@@ -44,7 +47,7 @@ def recall_message_handle(msg):
         msg_content = msg["FileName"]
         # 保存文件
         msg["Text"](str(msg_content))
-        print("[语言/附件/视频/图片]: %s" % msg_content)
+        # print("[语言/附件/视频/图片]: %s" % msg_content)
 
     # 名片
     elif msg["Type"] == "Card":
@@ -53,7 +56,7 @@ def recall_message_handle(msg):
             msg_content += "性别男。"
         else:
             msg_content += "性别女。"
-        print("[推荐名片]:%s" % msg_content)
+        # print("[推荐名片]:%s" % msg_content)
 
     # 位置
     elif msg["Type"] == "Map":
@@ -63,13 +66,13 @@ def recall_message_handle(msg):
             msg_content = r"纬度:" + x.__str__() + ", 经度:" + y.__str__()
         else:
             msg_content = r"" + location
-        print("[位置]：%s" % msg_content)
+        # print("[位置]：%s" % msg_content)
 
     # 分享的
     elif msg["Type"] == "Sharing":
         msg_content = msg["Text"]
         msg_url = msg["Url"]
-        print("[分享]: %s" % msg_content)
+        # print("[分享]: %s" % msg_content)
 
     face_package = msg_content
 
@@ -82,15 +85,19 @@ def recall_message_handle(msg):
                 "msg_rev_time": msg_rev_time,
                 "msg_type": msg["Type"],
                 "msg_content": msg_content,
-                "msg_url": msg_url
+                "msg_url": msg_url,
+                "msg_is_group": msg_is_group,
+                "msg_group_name": msg_group_name
             }
         }
     )
+    # print("&" * 100)
+    # print(msg_info)
 
 
 @itchat.msg_register([MAP, CARD, NOTE, SHARING], isGroupChat=True)
 def wechat_service(msg):
-    recall_message_handle(msg)
+    recall_message_handle(msg, is_group=True, group_name=msg.user["NickName"])
     print("接收到了群聊 MAP, CARD, NOTE, SHARING类的信息")
     # print(msg)
 
@@ -114,7 +121,7 @@ def wechat_service(msg):
 
 @itchat.msg_register([MAP, CARD, NOTE, SHARING])
 def wechat_service(msg):
-    recall_message_handle(msg)
+    recall_message_handle(msg, is_group=False)
     print("接收到了MAP, CARD, NOTE, SHARING类的信息")
     # print(msg)
 
@@ -134,7 +141,7 @@ def wechat_service(msg):
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 def download_files(msg):
-    recall_message_handle(msg)
+    recall_message_handle(msg, is_group=False)
     # print(msg)
 
     if msg["ToUserName"] == "filehelper":
@@ -163,7 +170,7 @@ def download_files(msg):
 
 @itchat.msg_register(itchat.content.TEXT)
 def text_reply(msg):
-    recall_message_handle(msg)
+    recall_message_handle(msg, is_group=False)
     # print(msg)
 
     try:
@@ -204,7 +211,7 @@ def text_reply(msg):
 
 @itchat.msg_register([TEXT, PICTURE, RECORDING, ATTACHMENT, VIDEO], isGroupChat=True)
 def text_group_reply(msg):
-    recall_message_handle(msg)
+    recall_message_handle(msg, is_group=True, group_name=msg.user["NickName"])
     # print(msg)
 
     try:
@@ -249,7 +256,7 @@ def text_group_reply(msg):
         print("group error: ", e)
 
 
-#监听是否有消息撤回(NOTE)并进行相应操作
+# 监听是否有消息撤回(NOTE)并进行相应操作
 @itchat.msg_register([NOTE], isFriendChat=True, isGroupChat=True, isMpChat=True)
 def send_msg_(msg):
     print("拦截到撤回了一条消息")
@@ -257,35 +264,45 @@ def send_msg_(msg):
 
     global face_package
 
-    if "撤回了一条消息" in msg["Content"]:
-        # re匹配最后一次撤回消息的id
-        recall_msg_id = re.search(r"<msgid>(.*?)</msgid>", msg["Content"]).group(1)
-        # 读取msg_info中该id对应的消息
-        recall_msg = msg_info.get(recall_msg_id)
-        print("[撤回]: %s" % recall_msg)
+    try:
+        if "撤回了一条消息" in msg["Content"]:
+            # re匹配最后一次撤回消息的id
+            recall_msg_id = re.search(r"<msgid>(.*?)</msgid>", msg["Content"]).group(1)
+            # 读取msg_info中该id对应的消息
+            recall_msg = msg_info.get(recall_msg_id)
+            print("[撤回]: %s" % recall_msg)
 
-        # 撤回的是表情包
-        if len(recall_msg_id) < 11:
-            itchat.send_file(face_package, toUserName=myself)
-            os.remove(face_package)
-        else:
-            msg_body = "——拦截到一条消息撤回——：\n\n[" + recall_msg.get(
-                "msg_from") + "] 撤回了一条" + recall_msg.get("msg_type") + \
-                       "消息\n" + recall_msg.get("msg_rev_time") + "\n内容为：\n" + recall_msg.get("msg_content")
-            if recall_msg["msg_type"] == "Sharing":
-                msg_body = msg_body + "\n就是这个链接：" + recall_msg.get("msg_url")
+            # 撤回的是表情包
+            if len(recall_msg_id) < 11:
+                itchat.send_file(face_package, toUserName=myself)
+                os.remove(face_package)
+            else:
+                if recall_msg.get("msg_is_group"):
+                    msg_body = "——拦截到一条群消息撤回——\n群名称：" + recall_msg.get("msg_group_name") + \
+                               "\n撤回人：" + recall_msg.get("msg_from") + \
+                               "\n内容为：" + recall_msg.get("msg_content")
+                else:
+                    msg_body = "——拦截到一条个人消息撤回——\n[" + recall_msg.get(
+                        "msg_from") + "] 撤回了一条" + recall_msg.get("msg_type") + \
+                               "消息\n" + recall_msg.get("msg_rev_time") + "\n内容为：" + recall_msg.get("msg_content")
 
-            # 将撤回的消息(msg_body)发送给自己
-            itchat.send(msg_body, toUserName=myself)
+                if recall_msg["msg_type"] == "Sharing":
+                    msg_body = msg_body + "\n就是这个链接：" + recall_msg.get("msg_url")
 
-            # 有文件的话也要将文件发送
-            if recall_msg["msg_type"] in ["Recording", "Attachment", "Video", "Picture"]:
-                file = "@fil@%s" % (recall_msg["msg_content"])
-                itchat.send(msg=file, toUserName=myself)
-                os.remove(recall_msg["msg_content"])
+                # 将撤回的消息(msg_body)发送给自己
+                itchat.send(msg_body, toUserName=myself)
 
-            # 一次撤回信息查看后删除msg_info字典中的信息
-            msg_info.pop(recall_msg_id)
+                # 有文件的话也要将文件发送
+                if recall_msg["msg_type"] in ["Recording", "Attachment", "Video", "Picture"]:
+                    file = "@fil@%s" % (recall_msg["msg_content"])
+                    itchat.send(msg=file, toUserName=myself)
+                    os.remove(recall_msg["msg_content"])
+
+                # 一次撤回信息查看后删除msg_info字典中的信息
+                msg_info.pop(recall_msg_id)
+    except Exception as e:
+        s = sys.exc_info()
+        print("[ERROR] recall message block error '%s' happened on line %d" % (e, s[2].tb_lineno))
 
 
 def shouldBeBlockedMessage(nickname, text, *args, isGroup=False) -> bool:
@@ -298,6 +315,7 @@ def shouldBeBlockedMessage(nickname, text, *args, isGroup=False) -> bool:
         print("自己人，别乱来: {} ---> {}".format(nickname, text))
 
     return block
+
 
 if __name__ == '__main__':
 

@@ -78,7 +78,7 @@ class WeChatAction:
                 if member not in message:
                     reminder_list.append(member)
 
-            print("提醒总名单数组：{}".format(reminder_list))
+            # print("提醒总名单数组：{}".format(reminder_list))
 
             reminder_str = WeChatAction.get_title(message)
             counter = 0
