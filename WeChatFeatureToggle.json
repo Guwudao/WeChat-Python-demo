@@ -13,16 +13,25 @@
 		},
 		"group": {
 			"common": {
-				"expectedList": ["摸铃校友群", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"],
+				"expectedList": ["摸铃校友群", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群", "Our Group"],
 				"queue": true,
 				"imageReturn": false,
 				"mapAnalysis": true,
 				"envelope": true,
 				"autoReply": false,
-				"atMeReply": false
+				"atMeReply": true
+			},
+			"test": {
+				"expectedList": [],
+				"queue": true,
+				"imageReturn": true,
+				"mapAnalysis": true,
+				"envelope": true,
+				"autoReply": false,
+				"atMeReply": true
 			},
 			"jade": {
-				"expectedList": ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"],
+				"expectedList": ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生", "文逸俊", "黄文斌", "李彬特", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "凌俊杰", "江克非", "郑绵毅"],
 				"queue": true,
 				"imageReturn": false,
 				"mapAnalysis": true,
@@ -42,7 +51,7 @@
 			"brotherAndSister": {
 				"expectedList": [],
 				"queue": false,
-				"imageReturn": false,
+				"imageReturn": true,
 				"mapAnalysis": true,
 				"envelope": true,
 				"autoReply": false,

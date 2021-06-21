@@ -23,8 +23,9 @@ class CommonPerson(Common):
 
 
 class Group:
-    def __init__(self, common: CommonGroup, jade: CommonGroup, washer: CommonGroup, brotherAndSister: CommonGroup):
+    def __init__(self, common: CommonGroup, test: CommonGroup, jade: CommonGroup, washer: CommonGroup, brotherAndSister: CommonGroup):
         self.common = common
+        self.test = test
         self.jade = jade
         self.washer = washer
         self.brotherAndSister = brotherAndSister
@@ -55,10 +56,11 @@ def object_hook(dic):
 
     if "jade" and "washer" in keys:
         common = CommonGroup(dic["common"])
+        test = CommonGroup(dic["test"])
         jade = CommonGroup(dic["jade"])
         washer = CommonGroup(dic["washer"])
         brotherAndSister = CommonGroup(dic["brotherAndSister"])
-        return {"common": common, "jade": jade, "washer": washer, "brotherAndSister": brotherAndSister}
+        return {"common": common, "test": test, "jade": jade, "washer": washer, "brotherAndSister": brotherAndSister}
 
     if "common" and "jj" in keys:
         common = CommonPerson(dic["common"])
@@ -72,6 +74,7 @@ def object_hook(dic):
         feature_dic = dic["feature"]
         group = Group(
             feature_dic["group"]["common"],
+            feature_dic["group"]["test"],
             feature_dic["group"]["jade"],
             feature_dic["group"]["washer"],
             feature_dic["group"]["brotherAndSister"]

@@ -333,20 +333,32 @@ class WeChatDemoTestCase(TestCase):
         toggle = WeChatFeatureToggle.instance()
 
         common = toggle.group.common
-        self.assertEqual(common.expectedList, ["摸铃校友群", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群"])
+        self.assertEqual(common.expectedList, ["摸铃校友群", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群", "Our Group"])
         self.assertTrue(common.queue)
         self.assertFalse(common.imageReturn)
         self.assertTrue(common.mapAnalysis)
         self.assertTrue(common.envelope)
         self.assertFalse(common.autoReply)
-        self.assertFalse(common.atMeReply)
+        self.assertTrue(common.atMeReply)
+
+    def test_wechatTestGroupFeatureToggle(self):
+        toggle = WeChatFeatureToggle.instance()
+
+        test = toggle.group.test
+        self.assertEqual(test.expectedList, [])
+        self.assertTrue(test.queue)
+        self.assertTrue(test.imageReturn)
+        self.assertTrue(test.mapAnalysis)
+        self.assertTrue(test.envelope)
+        self.assertFalse(test.autoReply)
+        self.assertTrue(test.atMeReply)
 
     def test_wechatJadeFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
 
         jade = toggle.group.jade
         self.assertEqual(jade.expectedList, ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟",
-                                             "杨元生", "文逸俊", "黄文斌", "李彬特", "叶超", "郑永祥", "梁敏瑜", "曾昊",
+                                             "杨元生", "文逸俊", "黄文斌", "李彬特", "郑永祥", "梁敏瑜", "曾昊",
                                              "于顺燊", "凌俊杰", "江克非", "郑绵毅"], "expect list should be equal")
         self.assertTrue(jade.queue)
         self.assertFalse(jade.imageReturn)
@@ -375,7 +387,7 @@ class WeChatDemoTestCase(TestCase):
         bns = toggle.group.brotherAndSister
         self.assertEqual(bns.expectedList, [], "expect list should be equal")
         self.assertFalse(bns.queue)
-        self.assertFalse(bns.imageReturn)
+        self.assertTrue(bns.imageReturn)
         self.assertTrue(bns.mapAnalysis)
         self.assertTrue(bns.envelope)
         self.assertFalse(bns.autoReply)
@@ -425,12 +437,11 @@ class WeChatDemoTestCase(TestCase):
 @唐小兵 Leo 
 @郑永祥-Michael 
 @梁敏瑜 lanmon 
-@叶超-Charles 
 @凌俊杰-Jason 
 @曾昊 Anson 
 @于顺燊-Justin 
 @郑绵毅Manny 
-未打卡人数还剩 11 人"""
+未打卡人数还剩 10 人"""
 
         result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, new_msg)
         self.assertEqual(result, reminder)
@@ -489,28 +500,34 @@ class WeChatDemoTestCase(TestCase):
         toggle = WeChatFeatureToggle.instance()
         jade_members = toggle.group.jade.expectedList
         msg = """
-                #接龙
-                6月15日welink健康打卡
+#接龙
+6月21日welink健康打卡
 
-                1. 林俊杰 - Jackie
-                2. 凌俊杰-Jason
-                3. 黄文斌_Harvey
-                4. 何志伟Daniel
-                5. 文逸俊 - Caesar
-                6. 叶超-Charles
-                7. 张广洋-Ternence
-                8. 于顺燊-Justin
-                9. 曾昊 Anson
-                10. 刘旭斌Daniel
-                11. 戴国明-MING
-                12. 杨元生-Yeson
-                13. 郑永祥-Michael
-                14. 郑绵毅-Manny
-                15. 江克非-Leslie
-                16. 谢毅滦–Sheldon
-                17. 李彬特 winter
-                18. 陈洋平-Carl
+1. 林俊杰 - Jackie
+2. 于顺燊-Justin
+3. 何志伟Daniel
+4. 李彬特 winter
+5. 郑永祥-Michael
+6. 陈洋平-Carl
+7. 文逸俊 - Caesar
+8. 凌俊杰-Jason
+9. 刘旭斌Daniel
+10. 唐小兵 Leo
+11. 谢毅滦–Sheldon
+12. 黄文斌_Harvey
+13. 郑绵毅-Manny
+14. 戴国明-MING
+15. 张广洋-Ternence
+16. 凌俊杰-Jason
                 """
 
         result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, msg)
         print(result)
+
+    def test_our_group(self):
+        group_nickname_list = ['Jackie 林俊杰', 'Wave严其龙', 'Phoenix', 'Kevin 梁思羽', '郑永祥Michael', 'Sheldon 谢毅滦', 'Ternence张广洋', 'Harvey', 'Adrian', 'Felix Fang', 'Sheldon曾超龙', '彭伟涛', 'Kolor 陈家乐', 'JackCode ', 'Kyle 余翼', '覃淇韩', 'Charles YE', '蔡日雄', 'Jason- 凌俊杰', 'JKF Leslie', '苏倩怡Daisy', 'Avater', 'Gami', 'Driven-卢平清', '王权斌', 'jack谢祎龙', 'Hamy', 'Cloud李易承', '阮焯城', '杨成业', '郭明健_iOS', 'Rosh', '黄江胜', 'JIM曾俊杰', 'Lynn 林聪', '蔡淑珍']
+
+        group_display_name_list = ['Kyle.C', '一碌蔗', 'mobius', 'Sandy志杰', '易风', 'KNOX', 'F.H²⁰²¹', 'Draven', 'jan', 'Socus', 'ZW', '麦田', '陈红洋', 'lanmon', '斌', 'Caesar', '星夜', 'Vico Ye', 'Edwin', 'Frank_Zhong', '夏锐东', '金鱼', '方方方。。。方颖欢', 'xx', 'Kid', 'Juyee·zzy', '傍晚吃酒看花', 'zion¹⁹⁹¹', 'Sun', '曾慶龍', 'Boris', '唐', 'Manny', 'oldfish燊', 'Anson', 'ViAnNa', 'WB', '猫君2.0', 'Housem Mark', '雪花', '俏如来', '詹前力 LIVEN', '奕', 'seanhuang', '梓帆', '火炉烫小铁匠', '樊朵', 'blingbling', '小欣', '夜风奇', 'nineSean']
+
+        print(len(group_nickname_list))
+        print(len(group_display_name_list))
