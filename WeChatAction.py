@@ -54,7 +54,6 @@ class WeChatAction:
             print(error_msg)
             return error_msg
 
-
     @staticmethod
     def jade_auto_reminder(chat_room_members, expect_member_list, message):
         # print("expect_member_list: ", expect_member_list)
@@ -63,9 +62,7 @@ class WeChatAction:
             displayName_list, nickName_list = [], []
 
             for member in chat_room_members:
-                # print("nick name ---> ", member["NickName"])
                 if len(member["DisplayName"]):
-                    # print(member["DisplayName"])
                     displayName_list.append(member["DisplayName"])
                 else:
                     nickName_list.append(member["NickName"])
@@ -98,7 +95,7 @@ class WeChatAction:
             print("reminder_str: {}".format(reminder_str))
             if counter == 0:
                 return "恭喜大家完成本次接龙！！！"
-            else:
+            elif counter < 10:
                 left = ("未打卡人数还剩 %s 人" % counter)
                 reminder_str += left
                 return reminder_str

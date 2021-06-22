@@ -387,7 +387,7 @@ class WeChatDemoTestCase(TestCase):
         bns = toggle.group.brotherAndSister
         self.assertEqual(bns.expectedList, [], "expect list should be equal")
         self.assertFalse(bns.queue)
-        self.assertTrue(bns.imageReturn)
+        self.assertFalse(bns.imageReturn)
         self.assertTrue(bns.mapAnalysis)
         self.assertTrue(bns.envelope)
         self.assertFalse(bns.autoReply)
@@ -412,7 +412,40 @@ class WeChatDemoTestCase(TestCase):
         self.assertTrue(jj.envelope)
         self.assertFalse(jj.autoReply)
 
-    def test_weChatReminder(self):
+    def test_weChatReminderLessThanTen(self):
+        toggle = WeChatFeatureToggle.instance()
+        jade_members = toggle.group.jade.expectedList
+        new_msg = """
+                    #接龙
+                    6月12日welink健康打卡
+
+                    1. 林俊杰 - Jackie
+                    2. 江克非-Leslie
+                    3. 戴国明-MING
+                    4. 张广洋-Ternence
+                    5. 何志伟Daniel
+                    6. 黄文斌_Harvey
+                    7. 刘旭斌Daniel
+                    8. 杨元生-Yeson
+                    9. 谢毅滦–Sheldon
+                    10. 李彬特 winter
+                    """
+        reminder = """ 6月12日welink健康打卡 
+@陈洋平-Carl 
+@文逸俊 - Caesar 
+@唐小兵 Leo 
+@郑永祥-Michael 
+@梁敏瑜 lanmon 
+@凌俊杰-Jason 
+@曾昊 Anson 
+@于顺燊-Justin 
+@郑绵毅Manny 
+未打卡人数还剩 9 人"""
+
+        result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, new_msg)
+        self.assertEqual(result, reminder)
+
+    def test_weChatReminderMoreThanTen(self):
 
         toggle = WeChatFeatureToggle.instance()
         jade_members = toggle.group.jade.expectedList
@@ -428,20 +461,8 @@ class WeChatDemoTestCase(TestCase):
                     6. 黄文斌_Harvey
                     7. 刘旭斌Daniel
                     8. 杨元生-Yeson
-                    9. 谢毅滦–Sheldon
                     """
-        reminder = """ 6月12日welink健康打卡 
-@李彬特 winter 
-@陈洋平-Carl 
-@文逸俊 - Caesar 
-@唐小兵 Leo 
-@郑永祥-Michael 
-@梁敏瑜 lanmon 
-@凌俊杰-Jason 
-@曾昊 Anson 
-@于顺燊-Justin 
-@郑绵毅Manny 
-未打卡人数还剩 10 人"""
+        reminder = None
 
         result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, new_msg)
         self.assertEqual(result, reminder)
@@ -511,14 +532,6 @@ class WeChatDemoTestCase(TestCase):
 6. 陈洋平-Carl
 7. 文逸俊 - Caesar
 8. 凌俊杰-Jason
-9. 刘旭斌Daniel
-10. 唐小兵 Leo
-11. 谢毅滦–Sheldon
-12. 黄文斌_Harvey
-13. 郑绵毅-Manny
-14. 戴国明-MING
-15. 张广洋-Ternence
-16. 凌俊杰-Jason
                 """
 
         result = WeChatAction.jade_auto_reminder(self.chat_room_member, jade_members, msg)

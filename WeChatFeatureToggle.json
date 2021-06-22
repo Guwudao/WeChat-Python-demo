@@ -51,7 +51,7 @@
 			"brotherAndSister": {
 				"expectedList": [],
 				"queue": false,
-				"imageReturn": true,
+				"imageReturn": false,
 				"mapAnalysis": true,
 				"envelope": true,
 				"autoReply": false,
