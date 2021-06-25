@@ -102,12 +102,11 @@ def wechat_service(msg):
     print("接收到了群聊 MAP, CARD, SHARING类的信息")
     # print(msg)
 
-    allow_reply_list = toggle.group.common.expectedList
-    allow = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *allow_reply_list, isGroup=True)
-    if not allow: return
+    is_available = msg.user["NickName"] in toggle.group.common.expectedList
 
     if msg.type == "Map" and toggle.group.common.mapAnalysis:
         print("检测到群MAP消息【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
+        if not is_available: return
         itchat.send_msg("识别到了地图类型消息，正在自动提取地址", toUserName=msg.fromUserName)
 
         result = WeChatAction.map_analysis(msg)
@@ -115,6 +114,7 @@ def wechat_service(msg):
 
     elif msg.type == "Sharing":
         print("群分享消息【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
+        if not is_available: return
 
 
 @itchat.msg_register([MAP, CARD, NOTE, SHARING])
@@ -212,18 +212,17 @@ def text_group_reply(msg):
     # print(msg)
 
     chat_room_members = msg["User"]["MemberList"]
-    allow_reply_list = toggle.group.common.expectedList
-    allow = shouldBeBlockedMessage(msg["User"]["NickName"], msg.text, *allow_reply_list, isGroup=True)
+    is_available = msg.user["NickName"] in toggle.group.common.expectedList
 
     if msg.type == "Text":
         print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
-        if not allow: return
+        if not is_available: return
 
         try:
             if msg["User"]["NickName"] == "Jade":
                 if "#接龙" in msg.text and toggle.group.jade.queue:
                     jade_members = toggle.group.jade.expectedList
-                    remind_str = WeChatAction.jade_auto_reminder(chat_room_members, jade_members, msg.text)
+                    remind_str = WeChatAction.auto_reminder(chat_room_members, jade_members, msg.text)
                     print("【Jade】接龙提醒名单：{}".format(remind_str))
                     if remind_str:
                         itchat.send_msg(remind_str, toUserName=msg.fromUserName)
@@ -235,7 +234,7 @@ def text_group_reply(msg):
             elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
                 if "#接龙" in msg.text and toggle.group.washer.queue:
                     wash_members = toggle.group.washer.expectedList
-                    remind_str = WeChatAction.jade_auto_reminder(chat_room_members, wash_members, msg.text)
+                    remind_str = WeChatAction.auto_reminder(chat_room_members, wash_members, msg.text)
                     print("【骑洗衣机去地铁站】测试提醒名单：{}".format(remind_str))
                     if len(remind_str):
                         itchat.send_msg(remind_str, toUserName=msg.fromUserName)
@@ -250,19 +249,17 @@ def text_group_reply(msg):
                     msg.user.send("假装已收到@我的消息，本条为自动回复[玫瑰]")
 
             elif msg["User"]["NickName"] == "Our Group":
-                displayName_list, nickName_list = [], []
-                for member in chat_room_members:
-                    # print("nick name ---> ", member["NickName"])
-                    if len(member["DisplayName"]):
-                        # print(member["DisplayName"])
-                        displayName_list.append(member["DisplayName"])
-                    else:
-                        nickName_list.append(member["NickName"])
+                if "#接龙" in msg.text and toggle.group.ourGroup.queue:
+                    group_members = toggle.group.ourGroup.expectedList
+                    remind_str = WeChatAction.auto_reminder(chat_room_members, group_members, msg.text, 30)
+                    if remind_str:
+                        if len(remind_str):
+                            itchat.send_msg(remind_str, toUserName=msg.fromUserName)
 
-                print(displayName_list)
                 print("-" * 100)
-                print(nickName_list)
-
+                print(json.dumps(chat_room_members, indent=4, ensure_ascii=False))
+                print("-" * 100)
+                
             # else:
             #     content = WeChatAction.bot_auto_reply(msg.text)
             #     itchat.send_msg(content, toUserName=msg.fromUserName)
@@ -272,9 +269,9 @@ def text_group_reply(msg):
             print("Group error '%s' happened on line %d" % (e, s[2].tb_lineno))
 
     elif msg.type == "Picture":
-        if not allow: return
-
         print("收到群图片【{}】 : {}".format(msg.user["NickName"], msg["ActualNickName"]))
+        if not is_available: return
+
         if msg["User"]["NickName"] == "【兄弟姐妹】":
             if toggle.group.brotherAndSister.imageReturn:
                 group_image_return(msg)
@@ -282,6 +279,19 @@ def text_group_reply(msg):
         elif msg["User"]["NickName"] == "测试群":
             if toggle.group.test.imageReturn:
                 group_image_return(msg)
+
+        elif msg["User"]["NickName"] == "Our Group":
+            displayName_list, nickName_list = [], []
+            for member in chat_room_members:
+                if len(member["DisplayName"]):
+                    displayName_list.append(member["DisplayName"])
+                else:
+                    nickName_list.append(member["NickName"])
+
+            print(displayName_list)
+            print("-" * 100)
+            print(nickName_list)
+            print("-" * 100)
 
     elif msg.type == "Video":
         print("收到群视频【{}】 : {}".format(msg.user["NickName"], msg["ActualNickName"]))
@@ -294,7 +304,7 @@ def group_image_return(msg):
     elif msg["MsgType"] == 47:
         # 表情
         msg.download(msg.fileName)
-        itchat.send_msg("检测到图片表情，看我反弹大法[旺柴]", toUserName=msg.fromUserName)
+        itchat.send_msg("检测到图片表情\n看我反弹大法[旺柴]", toUserName=msg.fromUserName)
         itchat.send_image(msg.fileName, toUserName=msg.fromUserName)
     elif msg["MsgType"] == 3:
         # 图片
@@ -306,6 +316,7 @@ def group_image_return(msg):
 def send_msg_(msg):
     # print(msg)
     global face_package
+    is_available = msg.user["NickName"] in toggle.group.common.expectedList
 
     try:
         if "撤回了一条消息" in msg["Content"]:
@@ -345,11 +356,11 @@ def send_msg_(msg):
                 # 一次撤回信息查看后删除msg_info字典中的信息
                 msg_info.pop(recall_msg_id)
 
-        if msg["MsgType"] == 10000 and "红包" in msg["Content"]:
+        if msg["MsgType"] == 10000 and "红包" in msg["Content"] and is_available:
             print("群红包消息【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
             itchat.send_msg("卧槽！红包！检测到了红包！[旺柴]", toUserName=msg.fromUserName)
 
-        if msg["MsgType"] == 10000 and "拍了拍" in msg["Content"]:
+        if msg["MsgType"] == 10000 and "拍了拍我" in msg["Content"] and is_available:
             print("群拍一拍消息【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
             itchat.send_msg("小心的拍，拍伤了要赔钱的[旺柴]", toUserName=msg.fromUserName)
 

@@ -55,7 +55,7 @@ class WeChatAction:
             return error_msg
 
     @staticmethod
-    def jade_auto_reminder(chat_room_members, expect_member_list, message):
+    def auto_reminder(chat_room_members, expect_member_list, message, remind_num=10):
         # print("expect_member_list: ", expect_member_list)
 
         try:
@@ -76,29 +76,44 @@ class WeChatAction:
                     reminder_list.append(member)
 
             # print("提醒总名单数组：{}".format(reminder_list))
+            # print(len(reminder_list))
 
             reminder_str = WeChatAction.get_title(message)
             counter = 0
+            rest_display, rest_nick = [], []
+
             for displayName in displayName_list:
                 for reminder in reminder_list:
                     if reminder in displayName:
                         counter += 1
                         reminder_str = reminder_str + (u'@%s\u2005' % displayName) + "\n"
+                        reminder_list.remove(reminder)
+                        rest_display.append(displayName)
 
             for nickname in nickName_list:
-                # print(nickname)
                 for reminder in reminder_list:
                     if reminder in nickname:
                         counter += 1
                         reminder_str = reminder_str + (u'@%s\u2005' % nickname) + "\n"
+                        reminder_list.remove(reminder)
+                        rest_nick.append(nickname)
 
-            print("reminder_str: {}".format(reminder_str))
+            print(reminder_list)
+            print(counter)
+
             if counter == 0:
                 return "恭喜大家完成本次接龙！！！"
-            elif counter < 10:
-                left = ("未打卡人数还剩 %s 人" % counter)
-                reminder_str += left
-                return reminder_str
+            elif counter < remind_num:
+                if counter % 4 == 0:
+                    remaining = ("\n未打卡人数还剩 %s 人" % counter)
+                    reminder_str += remaining
+
+                    # if len(reminder_list):
+                    #     not_match = "\n\n以下同事名字未能匹配成功，请检查是否修改群备注：%s" % reminder_list
+                    #     reminder_str += not_match
+
+                    print("reminder_str: {}".format(reminder_str))
+                    return reminder_str
 
         except Exception as e:
             s = sys.exc_info()
