@@ -1,6 +1,7 @@
 from unittest import TestCase
 from WeChatFeatureToggle import WeChatFeatureToggle
 from WeChatAction import WeChatAction
+from datetime import datetime
 
 
 class WeChatDemoTestCase(TestCase):
@@ -316,1211 +317,1169 @@ class WeChatDemoTestCase(TestCase):
     ]
 
     our_group_chat_room_member = [
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@15dc02d81d38de278f47447f296597a0",
-            "NickName": "Kyle.C",
-            "AttrStatus": 67903,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Kyle 程珺",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@1b4195e9cdaa2814dad24c30f1a85138",
-            "NickName": "估唔到",
-            "AttrStatus": 121957,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "林俊杰 Jackie",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@597031bec88f8e4246aad695c41043ef",
-            "NickName": "Wave",
-            "AttrStatus": 231525,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "严其龙Wave",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@204b28e25e4bc9b3bc832074a319799a68d99ee78db683b7bcdde20294d3cbb0",
-            "NickName": "一碌蔗",
-            "AttrStatus": 50565221,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "罗文轩 Hins W X Luo",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@d819bb0541d34a3ea99e47da5bfe3dcdd081f1ae653b0140b92ed68e24af23bb",
-            "NickName": "我是婷婷🐾",
-            "AttrStatus": 50430309,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "伍楚婷＋Phoenix",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@ba911bc2b5a167b9a692d28bd6119f7d",
-            "NickName": "mobius",
-            "AttrStatus": 102783,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "秦宗健 Ajian",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@42b1d60737c9a85a09bcddf04ad91e236ede4b69f70eace8e36e48c28af7fc73",
-            "NickName": "Sandy志杰",
-            "AttrStatus": 102757,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "志杰+Sandy",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@77629b52941d2203c4eb082e00fc6b3b65e230269fa077a1bc4267a119dc2f4f",
-            "NickName": "易风",
-            "AttrStatus": 107751,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "刘远明 Nicky",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@0214a3d9f3c28333867bdca826e5a300",
-            "NickName": "KNOX",
-            "AttrStatus": 50563007,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "曹伟江-KNOX",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@5b1c5717a4e99bb7a019b6e895f7836a",
-            "NickName": "F.H²⁰²¹",
-            "AttrStatus": 233573,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "樊华Leon",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@9701f7d11738387481471a53798c38d59745c2a6b6c9e089f7f4959f41c50cd1",
-            "NickName": "花丶蛤西",
-            "AttrStatus": 4285,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Kevin 梁思羽",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@3e2b81fefec13f4b6173b67d96e33e12",
-            "NickName": "Draven",
-            "AttrStatus": 33661031,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "梁斌文Draven",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@7a00ff127d2454098be329c67a91face",
-            "NickName": "jan",
-            "AttrStatus": 99175,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "冼静 Jane",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@9688872d749c2a6a69fd79b844a786f1",
-            "NickName": "Socus",
-            "AttrStatus": 16980071,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "戴国明-Ming",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@e1a157de2900024a01d54af3e8728798d22e97944c3f07efeef61ea8082b15bf",
-            "NickName": "阿祥",
-            "AttrStatus": 33788773,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "郑永祥Michael",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@98c83b6b6cf12712ce875ed9b27d70943e6f24ac2c43e442c1c84e48d9f82f1c",
-            "NickName": "Sheldon Xie",
-            "AttrStatus": 4427877,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Sheldon 谢毅滦",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@c29002b42a70783188a569fc82e70f62c7c0a5d39fb1d895575815894a6a0a32",
-            "NickName": "ZW",
-            "AttrStatus": 17007357,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "何志伟Daniel",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@73791a5db7265f97a507a23ea410f1e1",
-            "NickName": "麦田",
-            "AttrStatus": 16882495,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "李彬特 winter",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@60323638bfd0bfb94e38d508b1df923a9044f3d169b871ac5d9c44d1b93d9ed3",
-            "NickName": "洋子",
-            "AttrStatus": 233575,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Ternence张广洋",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@a93004be49a017773c60d0d9f12c435dc92c5d06f574c26afffcf54f80c8f045",
-            "NickName": "陈红洋",
-            "AttrStatus": 233829,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "陈洋平—Carl",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@6042d2d339c4700f9f50df4056ca0b5d5801f33250e97134108352b271909e16",
-            "NickName": "lanmon",
-            "AttrStatus": 98407,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "lanmon梁敏瑜",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@590aa920143e512962eef1aff0577b1eb174dc95546a14ade527a5bc7fa0a337",
-            "NickName": "H",
-            "AttrStatus": 17012669,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "黄文斌-Harvey",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@0f0715296c832971ed05511e01fbd86f",
-            "NickName": "斌",
-            "AttrStatus": 100391,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "刘旭斌Daniel",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@cf9baf3321da45032f144fc611545217",
-            "NickName": "Caesar",
-            "AttrStatus": 33657383,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "文逸俊 Caesar",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@796ff3cbd45452ab1b4932a1459600cca24123f34a070c4e1f9dba1ced6b0b84",
-            "NickName": "星夜",
-            "AttrStatus": 102501,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Leo 唐小兵",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@2e311ee000a43f4153dbba949b10348e",
-            "NickName": "Vico Ye",
-            "AttrStatus": 202855,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@a18e2ba8165e8b4d1890d360aeb96a5e",
-            "NickName": "Eightree Wei",
-            "AttrStatus": 234623,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "韦溢泉Adrian",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@e234969d6282ac1153d8cfd1bb40caf44541ca94f3eb3a0c30b29d00b91da121",
-            "NickName": "😊🎉",
-            "AttrStatus": 102781,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "方向 Felix",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@c448ff9a34046838910843b8aef6de203480f3e57ae19c5b032eeaf4f674afbf",
-            "NickName": "Edwin",
-            "AttrStatus": 200767,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "朱雄伟 Edwin",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@9ff3f9e39a9f0ec96bbab2204ebbffb0",
-            "NickName": "Frank_Zhong",
-            "AttrStatus": 33665127,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Frank 钟灵",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@09b4c79e0a0cb8d7253debd1aa91af651610d596e8e0c71abdfc4435ecad98a6",
-            "NickName": "小凳子",
-            "AttrStatus": 103525,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "曾超龙_Sheldon",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@2a67b3fd15d6180dae15190cba8631b291d843a5c3f551dbbdb7a5eb133b6d26",
-            "NickName": "Stefan",
-            "AttrStatus": 109735,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "彭伟涛-Stefan",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@cd02bbe1914c4f4334d2104506012178",
-            "NickName": "夏锐东",
-            "AttrStatus": 234471,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@f3a3ee8dd1a6d3f06e25d26ca2c9db0eaa7f71879e75120ba86eabd3f9479b5d",
-            "NickName": "🐮",
-            "AttrStatus": 242559,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Kolor 陈家乐",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@fceaf666753be84098407f5d47fda1846ff48efed057c462d95a4106c2eabd99",
-            "NickName": "刘洪威",
-            "AttrStatus": 100677,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "刘洪威 JackCode ",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@91f5e198927ac3030d6d5499d1060a6e1bd7d6ec18841e12205f698da37cf7dc",
-            "NickName": "金鱼",
-            "AttrStatus": 167975,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "李锦宇-joke",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@ccad6bd815ccdd868fd5992c2fb53db8b0543a1bb80f7d4ec6ba5a6fe449b5df",
-            "NickName": "方方方。。。方颖欢",
-            "AttrStatus": 33653061,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "方颖欢 Huan",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@e3082649f6f9275e8d14ef16c5b51b666ae3e906bc8af7e82da9db9b985e0f3f",
-            "NickName": "xx",
-            "AttrStatus": 33790269,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Alison",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@dc2af4c827b69d4d9caeac643dfc4605",
-            "NickName": "😂😂😂😂😂",
-            "AttrStatus": 104549,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Kyle 余翼",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@c590c732d1ef88b358f4d1998a43817f5af367a903d41dda3044ef45e9911c84",
-            "NickName": "Ā白玫瑰,依旧是床前明🌙 光",
-            "AttrStatus": 16879741,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "覃淇韩",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@29c625ad92843e309a793de30cec0c0f",
-            "NickName": "Kid",
-            "AttrStatus": 75047,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "刘嘉奇Kid",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@692ea3f3d326e6144b594be8b359c357",
-            "NickName": "Juyee·zzy",
-            "AttrStatus": 98751,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Juyee 朱宇",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@b10bffb4fc4e7d263821c67194472807694529f0f0594ab1164f3624b0e36757",
-            "NickName": "傍晚吃酒看花",
-            "AttrStatus": 236325,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "叶庭强-jack",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@6fac387f93fa198cd47b2ce6f6327b34",
-            "NickName": "zion¹⁹⁹¹",
-            "AttrStatus": 200831,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "zion 徐治安",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@198088b3bed3e6105ce1b0d3b26571d1b6177726ddd43a073e092c56720fd16b",
-            "NickName": "Sun",
-            "AttrStatus": 2147582053,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "孙健强-Joey",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@b2301bead9bc34edbc90c3212b6f3dcb",
-            "NickName": "曾慶龍",
-            "AttrStatus": 4280615,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "曾慶龍max",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@0a9f4a9b953edbfd0f1ff6a5ff7ef449b9e7697bbf9d73f081d352e77e012b20",
-            "NickName": "Boris",
-            "AttrStatus": 102501,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "黄波-Boris",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@b804260ce41d9ecb7aac5f16bf80605e",
-            "NickName": "唐",
-            "AttrStatus": 102439,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "唐友华-tom",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@db305cc4363b7866a9de1341308261d0462e8f8398de80add315124c488d6c49",
-            "NickName": "子厘车",
-            "AttrStatus": 72741,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "蔡日雄Symbol",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@2cb1f92a4e58930b36d86ab26da15133",
-            "NickName": "Manny",
-            "AttrStatus": 37847935,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "郑绵毅-Manny",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@d626a6e47cf9884fd5c0fcaf3e2c6dbc",
-            "NickName": "凌傑",
-            "AttrStatus": 114791,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Jason- 凌俊杰",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@60413fc4a47965ea5f14f867b410ed8f",
-            "NickName": "JKF",
-            "AttrStatus": 33786303,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "江克非 Leslie",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@de0938b1075ab1e6770a2b939bf21fb4fbef43f86aeca05d033e5dbc271ef064",
-            "NickName": "oldfish燊",
-            "AttrStatus": 102437,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "于顺燊-Justin",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@ed83c253cb74a53c3437ee3ec4da3db90aab1b51e3980af6792656cc1d7e9af5",
-            "NickName": "Anson",
-            "AttrStatus": 111869,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "曾昊Anson",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@3b425e856f0be59673b84e8df9e3887d",
-            "NickName": "Daisy.🍒",
-            "AttrStatus": 231527,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "苏倩怡Daisy",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@4c5eedd1bc0420eca1677e249a0e49b7",
-            "NickName": "ViAnNa",
-            "AttrStatus": 122983,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@f5a427105f8a293e2f6eeceeee7d91a0",
-            "NickName": "WB",
-            "AttrStatus": 110631,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "徐鹏_Westbrook",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@11024c4f1c590459acbbdc4c32bdb7369977a7406cf96df55088435b943d3b68",
-            "NickName": "Excetion",
-            "AttrStatus": 33796581,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "王伟达-Avater",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@257bf4631830ff276bb51da3c440cbc61b1915716d50bc97d80dadca6bdafd05",
-            "NickName": "Sharon❇",
-            "AttrStatus": 233509,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "胡嘉敏-gami",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@6a2091ec354ab249cce90bf417ee084f22fb8f3a50acc816656f7fa6912d7680",
-            "NickName": "猫君2.0",
-            "AttrStatus": 104549,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "龚定显captain",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@566384ae78090485012f1eb6cee9b35809668182741f4768ff69b6882d79f750",
-            "NickName": "Two steps from hell",
-            "AttrStatus": 231717,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Driven-卢平清",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@fbf8494744c2b97ff280f7649eabaac3bf23acc513d3b925248bff264691f892",
-            "NickName": "Housem Mark",
-            "AttrStatus": 135205,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "马仲豪 Housem Mark",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@f457f4103dacbb55d78b5655362777fba9d5e18487c8e4fcbd0be1ee9bb9847e",
-            "NickName": "Kyunban.Wong",
-            "AttrStatus": 233887,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "王权斌-Sam",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@e68e94a12c59a623b9e7cbef9127a4dd7ace65ec285c3cdecd45f4507fc603bd",
-            "NickName": "yilong",
-            "AttrStatus": 233509,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "jack谢祎龙",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@a9e2f9bec6cf2df5c09c01c26c4a8ee59a2a4808655fb00ccc065532a8689aa1",
-            "NickName": "雪花",
-            "AttrStatus": 102501,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "杨元生",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@2767041250619316f7c7a10549b1cf727839d1cb1c0b5dc47af5f9e4155c4a2e",
-            "NickName": "HAMY",
-            "AttrStatus": 104485,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "高海梅 Hamy",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@cb83c9f1a502ff1d47d1c648ecbdbd49",
-            "NickName": "半藏",
-            "AttrStatus": 50565223,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Cloud李易承",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@b042ab2b28a2a068e6b33a3e4d59039f0dee1a6798a062a82bd6a41b9c5d1e85",
-            "NickName": "俏如来",
-            "AttrStatus": 102757,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "刘建军-Thnaos",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@efb1707788cc8faa3f7d7525088f5340000d7cc585c7837e8c8782293ce9204c",
-            "NickName": "詹前力 LIVEN",
-            "AttrStatus": 33657189,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@23203729d064db16c27e9550885209bd86a43d4934369d8930af3429496c50e4",
-            "NickName": "吴织咩嘢城",
-            "AttrStatus": 100773,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "阮焯城",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@4f3cd73b3cd1a1088ba4a51ce08bd7921e0e3eb74011ee77b2356df4f3ea8a63",
-            "NickName": "杨小过",
-            "AttrStatus": 229669,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "杨成业－Curry",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@4094a9032879063489aab4c225a4542d",
-            "NickName": "Joy",
-            "AttrStatus": 4315239,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "Joy_郭明健",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@24cab2173484ebc32c613f6223a78752bdfd998c1be185c82735b67790e5dfc0",
-            "NickName": "Done.🦁🦁",
-            "AttrStatus": 102845,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "丁小双 Rosh",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@372df83b8ec85e9ce42260d01be546b7",
-            "NickName": "胜哥",
-            "AttrStatus": 232871,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "黄江胜",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@502c4914b960accdca77edf20aa11f67001a9543e5128198f1dc37a45a444e72",
-            "NickName": "奕",
-            "AttrStatus": 4301925,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "陈奕Yee",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@d26fdcd1a2956d88dd16fb9d44782bd2",
-            "NickName": "seanhuang",
-            "AttrStatus": 33753277,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "黄少强-seanhuang",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@8fcfdbcc6e0cf7f2d6612aaa162d08fd",
-            "NickName": "JIM俊",
-            "AttrStatus": 233575,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "JIM曾俊杰",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@167687b808a596c86e574cecc9bf414efa9bece652a643f9e1fca3e21caa83db",
-            "NickName": "梓帆",
-            "AttrStatus": 233829,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "周梓帆-Jerry",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@2aaddca95f1d42fbd4e5685b4cf2feed147a54a51afb3cb5f6082f35e01d86ba",
-            "NickName": "火炉烫小铁匠",
-            "AttrStatus": 102589,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "张冲_Mack",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@7bf421c8f21364be0d029d3bd1a45089d3d1fcaf623717f55139a5e0ea400779",
-            "NickName": "樊朵",
-            "AttrStatus": 102845,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@ffccf5a07ee9e1026e35e061dc49a1b6d994b0fbc015a91951e810525d79574c",
-            "NickName": "blingbling",
-            "AttrStatus": 99261,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "叶杏芳 Crystal",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@c543f5d7fd4cb85dc3df22986bd90454",
-            "NickName": "小欣",
-            "AttrStatus": 229813,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "叶颖欣june",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@6e9919bac3c8725df7d29d28960c20b8",
-            "NickName": "o0／聪0o",
-            "AttrStatus": 115135,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "林聪 Lynn",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@eddf664c6525fa692ed5b5b1a7fffe43f82db77493cc678cab017b89d2e213e4",
-            "NickName": "珍珍",
-            "AttrStatus": 100389,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "蔡淑珍 Kathy",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@9fc379de471ece5ee1f8b73cce2e141d2451dd9442cea3fd7a97d5b1c962284c",
-            "NickName": "夜风奇",
-            "AttrStatus": 102589,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "周楠 Victoria",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@af05305763802387a9f9d58c3e3aaff4",
-            "NickName": "nineSean",
-            "AttrStatus": 33788095,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "赖霄-Sean",
-            "KeyWord": ""
-        }
-    ]
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@7eac72fe912dc373b89323a4dac7a730",
+        "NickName": "Kyle.C",
+        "AttrStatus": 67903,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Kyle 程珺",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@1d089773de9d4e8ad63081268507c0b6",
+        "NickName": "估唔到",
+        "AttrStatus": 121957,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "林俊杰 Jackie",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@4f59f96f716b357e26cd6944b7141df6",
+        "NickName": "Wave",
+        "AttrStatus": 231525,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "严其龙 Wave",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@5b9a7eb1769353d46c0d282f9115e05935d01799928b105be3eda7304a925d27",
+        "NickName": "一碌蔗",
+        "AttrStatus": 50565221,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "罗文轩 Hins W X Luo",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@c006c6f34f015b82bac072b99251b4f696bb1b0f38ec38f1e2397a283ef27660",
+        "NickName": "我是婷婷🐾",
+        "AttrStatus": 50430309,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "伍楚婷＋Phoenix",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@8476cd42477c600c653568cce483bb12",
+        "NickName": "mobius",
+        "AttrStatus": 102783,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "秦宗健 Ajian",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@c8d0f91d751f004f34cf3b3dc09cc8c323534c8ac842f7101b22ba89042ad23b",
+        "NickName": "Sandy志杰",
+        "AttrStatus": 102757,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "常志杰Sandy",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@800bd3c839ea64a8181a541f16664f96206d5bc8361537ed8463a93042acd661",
+        "NickName": "易风",
+        "AttrStatus": 107751,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "刘远明 Nicky",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@57ebd111bd38d9d6efe412cff5bd1940",
+        "NickName": "KNOX",
+        "AttrStatus": 50563007,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "曹伟江-KNOX",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@734cba06884e5f305dc60a3b79691110",
+        "NickName": "F.H²⁰²¹",
+        "AttrStatus": 233573,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "樊华Leon",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@63ad4eabc19809a8c62c8cdaf886eabd36948bdd64e28725dc652cd32802c67a",
+        "NickName": "花丶蛤西",
+        "AttrStatus": 4285,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Kevin 梁思羽",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@99894feb452df930cc354a51bca9b046",
+        "NickName": "Draven",
+        "AttrStatus": 33661031,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "梁斌文Draven",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@af8d944352dcf6a69f00709b2214bdc0",
+        "NickName": "jan",
+        "AttrStatus": 99175,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "冼静 Jane",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@70ab754cafd2c3098449c0ee8261f930",
+        "NickName": "Socus",
+        "AttrStatus": 16980071,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "戴国明-Ming",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@69681929cb9cb588110c8f1cb8fc0a8b9ccd02a3186b5f9207762a32a414aa46",
+        "NickName": "阿祥",
+        "AttrStatus": 33788773,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "郑永祥Michael",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@99b9062da983d99096d58c14879adb166e2ede01bfb1124784e59e6897531e89",
+        "NickName": "Sheldon Xie",
+        "AttrStatus": 4427877,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Sheldon 谢毅滦",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@27540034d353fce06efaf1bcae031cabcbbd56561cfc7f4d98c9af3f4748f40b",
+        "NickName": "ZW",
+        "AttrStatus": 17007357,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "何志伟Daniel",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@652bb464453dbf03f8456f2388282ca7",
+        "NickName": "麦田",
+        "AttrStatus": 16882495,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "李彬特 winter",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@6f4f6967195efa07b3c5f0c03580fc04fb359b7e4c4726a98fb0a0fb7d40122b",
+        "NickName": "洋子",
+        "AttrStatus": 233575,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Ternence张广洋",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@54622abaf90ed22f8f7c2185020be82bcbfeb914f636bae13d2cf414c652e338",
+        "NickName": "陈红洋",
+        "AttrStatus": 233829,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "陈洋平—Carl",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@3cd972f79ccc20c556592048535225fa768540a2ff1a4939b23299dfee37cb9a",
+        "NickName": "H",
+        "AttrStatus": 17012669,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "黄文斌-Harvey",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@a36047e35b0d4e6d5f3dcccbb9d42266",
+        "NickName": "斌",
+        "AttrStatus": 100391,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "刘旭斌Daniel",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@cd4a84916caac802714171918be1e02a",
+        "NickName": "Caesar",
+        "AttrStatus": 33657383,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "文逸俊 Caesar",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@218e45ad8a57bcd2cd5d7142635ac9de93a11e19425623186bdeebac25919020",
+        "NickName": "星夜",
+        "AttrStatus": 102501,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "唐小兵 Leo",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@efce81bdeecf34315e80abf940a53d9b",
+        "NickName": "Vico Ye",
+        "AttrStatus": 202855,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@088905898531a4fe9799c1d87aa08948c92697b4b81dc44bef9bb805c565bb17",
+        "NickName": "Edwin",
+        "AttrStatus": 200767,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "朱雄伟 Edwin",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@a2e5f81b2daeaf0c81500ed8d965350a",
+        "NickName": "Frank_Zhong",
+        "AttrStatus": 33665127,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Frank 钟灵",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@4248faacc8a957ba288ca05e69a13d4ec6e86dbb650d21c5d1487b4548bd93ea",
+        "NickName": "小凳子",
+        "AttrStatus": 103525,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "曾超龙_Sheldon",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@49c55fca5f5f731792c6b4ccee84339321cf8403edaa2b41905d50b61a6adbfd",
+        "NickName": "Stefan",
+        "AttrStatus": 109735,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "彭伟涛 Stefan",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@5012ef7162113a7ff5f3611a09e1d487c2f8bdfeabf6c21051d2d922ea68c7d0",
+        "NickName": "🐮",
+        "AttrStatus": 242559,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Kolor 陈家乐",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@dac4440048222c77b6191393d268af27ec77b283d3789c42048f201808d27b54",
+        "NickName": "刘洪威",
+        "AttrStatus": 100677,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "刘洪威JackCode ",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@55e84c73ec16a7dbc2845261b8b06c15636c61b2e2cf55f55db9a857bffbd367",
+        "NickName": "金鱼",
+        "AttrStatus": 167975,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "李锦宇-joke",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@b2b28c7d5d92aaf90daca498d5513f2904d5968d4376a308abc5860875eb67bc",
+        "NickName": "方方方。。。方颖欢",
+        "AttrStatus": 33653061,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "方颖欢 Huan",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@619ff2f65613f7e0720cad4d16f80c76e3fc8817bc0f899d26f68aee045b30fc",
+        "NickName": "xx",
+        "AttrStatus": 33790269,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Alison_黄艳",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@e53a69e45d43d082aa769466a5ef3db1",
+        "NickName": "😂😂😂😂😂",
+        "AttrStatus": 104549,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Kyle 余翼",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@c4c231a7bae9d36f5913556aa07d4424dbf974c79d648a690e09e744c1a22215",
+        "NickName": "Ā白玫瑰,依旧是床前明🌙 光",
+        "AttrStatus": 16879741,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "覃淇韩",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@88459d3737f57e0a40fb3944e230c2b7",
+        "NickName": "Kid",
+        "AttrStatus": 75047,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "刘嘉奇Kid",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@96db7d249388e82e37149ab469a5222b93ad3764d7d27f40fff384a94acc8253",
+        "NickName": "傍晚吃酒看花",
+        "AttrStatus": 236325,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "叶庭强-jack",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@3e9cb2946f48481824281b47bc9905b0",
+        "NickName": "zion¹⁹⁹¹",
+        "AttrStatus": 200831,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "zion 徐治安",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@bffb762e3610463cced36e09d07b72b99e8d40268685b37681b8289a26076209",
+        "NickName": "Sun",
+        "AttrStatus": 2147582053,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "孙健强-Joey",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@ea02e78d7eef94f17a2bea905d461116",
+        "NickName": "曾慶龍",
+        "AttrStatus": 4280615,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "曾慶龍max",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@7c5986ec5430b447d60d4ad8b0da906f5fc37f57b169a3688833500a30d04dc6",
+        "NickName": "Boris",
+        "AttrStatus": 102501,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "黄波-Boris",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@055e776f687632b31e74c3086b1c5f03",
+        "NickName": "唐",
+        "AttrStatus": 102439,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "唐友华-tom",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@58e8b355ff227313b485903357de666141c65a4990afa90cd75acf8313a7bf33",
+        "NickName": "子厘车",
+        "AttrStatus": 72741,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "蔡日雄Symbol",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@750e4ea1ffc43ac032ba68b3b0c68573",
+        "NickName": "Manny",
+        "AttrStatus": 37847935,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "郑绵毅-Manny",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@7902a944aa0f622ba95ddcf2857756a0",
+        "NickName": "凌傑",
+        "AttrStatus": 114791,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "凌俊杰Jason",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@fa59d5fd1cd1a3d7f60339383784a412",
+        "NickName": "JKF",
+        "AttrStatus": 33786303,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "江克非 Leslie",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@01c69dc2f89a3e2b606b68c6423e3005878b025f785f03fdfa5079e5b47eef11",
+        "NickName": "oldfish燊",
+        "AttrStatus": 102437,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "于顺燊-Justin",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@d7fe41f096a073dd46f8fe48c53f5ff954ed43c56fc835fb72d64d313e609018",
+        "NickName": "Anson",
+        "AttrStatus": 111869,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "曾昊Anson",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@4e9275a8970845082bd3ab306e49ece9",
+        "NickName": "Daisy.🍒",
+        "AttrStatus": 231527,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "苏倩怡Daisy",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@65a1884495460a3bfb4ec4884d2baf97",
+        "NickName": "ViAnNa",
+        "AttrStatus": 122983,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@2ee716bcdc5edb5a9b396381f9412456",
+        "NickName": "WB",
+        "AttrStatus": 110631,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "徐鹏_Westbrook",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@213d9b43c96ecc32815b6f9eb294a469ef1f320ea29158cee60fe7eaa90248be",
+        "NickName": "Excetion",
+        "AttrStatus": 33796581,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "王伟达-Avater",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@5aba59079518a3172f9cc698c1d1b35c290d143c0fb7ec478bc04fa67848c0f8",
+        "NickName": "Sharon❇",
+        "AttrStatus": 233509,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "胡嘉敏-gami",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@7e593ea37dd44d90201f64c3667458dcfcfc01bf0e48f3e61e15c8fca96c17f9",
+        "NickName": "猫君2.0",
+        "AttrStatus": 104549,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "龚定显captain",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@5efeb528d5c6190f13dd95e7f512c68625efb85e3580258728e53f367246d470",
+        "NickName": "Two steps from hell",
+        "AttrStatus": 231717,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Driven-卢平清",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@88271229dcb4027a04bd04a07e44f131a83938e0207cbba2444cef2182132019",
+        "NickName": "Housem Mark",
+        "AttrStatus": 135205,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "马仲豪 Housem Mark",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@1d35f50ae0bb3ff5d7f668e72c46c9b5c0fc8134c115be1e00c52fad1bfac9f4",
+        "NickName": "Kyunban.Wong",
+        "AttrStatus": 233887,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "王权斌-Sam",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@fc7ac295e1999a95265569f97ae2089f8179cd6c0bbdd7738d7738aaf1c7c76a",
+        "NickName": "yilong",
+        "AttrStatus": 233509,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "谢祎龙jack",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@c696bd58a84131905e638911067767fe75862361ed6890fe5057bbaa10d6dbfc",
+        "NickName": "雪花",
+        "AttrStatus": 102501,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "杨元生_Yeson",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@c98421f3d7af8f95d0001515dccc13d5f99a2399e3836834ae5619b27db24172",
+        "NickName": "HAMY",
+        "AttrStatus": 104485,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "高海梅 Hamy",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@6968b333a925d17b50361d029aaf2fc8",
+        "NickName": "半藏",
+        "AttrStatus": 50565223,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Cloud李易承",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@56b3a86ec6ffe4aeab1c71322cdbe56e3d41d2e2466f3f3ec7d3ecf94e929b90",
+        "NickName": "俏如来",
+        "AttrStatus": 102757,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "刘建军-Thnaos",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@f67f3e7c8a33c31639bf7e328d8f2eab625dcb243150af510315c89ec8b7822c",
+        "NickName": "詹前力 LIVEN",
+        "AttrStatus": 33657189,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@3c369b9e9481b72aad8d26f7032ba0133ab9d56b199d52ea12d814da9cdc8fba",
+        "NickName": "吴织咩嘢城",
+        "AttrStatus": 100773,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "阮焯城 Sans",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@02a5fa8dbdf512db3cdb5f68ef0e1a56e230ec0719bf687b21a5b574de4f7461",
+        "NickName": "杨小过",
+        "AttrStatus": 229669,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "杨成业－Curry",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@1eecfb8b1a28df80eaff7eec25c9f54d",
+        "NickName": "国家二级烧烤运动员",
+        "AttrStatus": 4315239,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "郭明健 Joy",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@7a252a2392ee40926887e7195ba76881d8784e666112b64219354348de068616",
+        "NickName": "Done.🦁🦁",
+        "AttrStatus": 102845,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "丁小双 Rosh",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@86cd7063bd033eb8a8319dcb49d877f2",
+        "NickName": "胜哥",
+        "AttrStatus": 232871,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "黄江胜 Jason",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@5b21ce21332c3dbda8b29f46e32a9b564446e3000a2e505b133210ac3d4c602f",
+        "NickName": "奕",
+        "AttrStatus": 4301925,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "陈奕Yee",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@81fb99ab10d4b683fba38d41a27b7a5a",
+        "NickName": "seanhuang",
+        "AttrStatus": 33753277,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "黄少强-seanhuang",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@097672ce795a29df71b71870dfe37a12",
+        "NickName": "JIM俊",
+        "AttrStatus": 233575,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "JIM曾俊杰",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@90bb18495c443a60d17c68987c5bf625a20b4aee33f023de28b6bcf5edce077d",
+        "NickName": "梓帆",
+        "AttrStatus": 233829,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "周梓帆-Jerry",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@463d631d8728ff9ba12b50e37cdfa569a97696954fc3394102e0f54ccfba2d5b",
+        "NickName": "火炉烫小铁匠",
+        "AttrStatus": 102589,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "张冲_Mack",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@cd44c6b9bb213633f7a279a8452fa6c687c4ebc5982cb560112dd77daa64f2bd",
+        "NickName": "樊朵",
+        "AttrStatus": 102845,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@7f3300782f06418b15b08123243b443df9a789325645d5739d352af5dd6be08f",
+        "NickName": "blingbling",
+        "AttrStatus": 99261,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "叶杏芳 Crystal",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@81dd71ea71e0892b081dda760ba96d06",
+        "NickName": "小欣",
+        "AttrStatus": 229813,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "叶颖欣june",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@a1bfa2544c7dd97ca0c51f0fd6b1e6c9",
+        "NickName": "o0／聪0o",
+        "AttrStatus": 115135,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "林聪 Lynn",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@1d313e7265bdfe619f709197078200a3f7f15e67c429a51160fe4d43f2d6b0a1",
+        "NickName": "珍珍",
+        "AttrStatus": 100389,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "蔡淑珍 Kathy",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@c565af3eac438413672b8db79507666cc2a0a95fed16ae3d9e324ed3fc6c7086",
+        "NickName": "夜风奇",
+        "AttrStatus": 102589,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "周楠 Victoria",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@acc61930896f6c31e07800388f2adb37",
+        "NickName": "nineSean",
+        "AttrStatus": 33788095,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "赖霄-Sean",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@3010d26471aec08377bfa57b28c6dfeb11df8f3cbbb5586c4df9ab562634b604",
+        "NickName": "Kris",
+        "AttrStatus": 102759,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "罗兴惠 Kris",
+        "KeyWord": ""
+    },
+    {
+        "MemberList": [],
+        "Uin": 0,
+        "UserName": "@758af85ebb1da38fc5182b25cd2355f7",
+        "NickName": "nellie",
+        "AttrStatus": 98495,
+        "PYInitial": "",
+        "PYQuanPin": "",
+        "RemarkPYInitial": "",
+        "RemarkPYQuanPin": "",
+        "MemberStatus": 0,
+        "DisplayName": "Lanmon梁敏瑜",
+        "KeyWord": ""
+    }
+]
 
     def test_analysis(self):
         toggle = WeChatFeatureToggle.instance()
@@ -1542,6 +1501,12 @@ class WeChatDemoTestCase(TestCase):
         common = toggle.group.common
         self.assertEqual(common.expectedList, ["摸铃校友群", "骑洗衣机去地铁站", "【兄弟姐妹】", "Jade", "测试群", "Our Group"])
         self.assertTrue("摸铃校友群" in common.expectedList)
+        self.assertTrue("骑洗衣机去地铁站" in common.expectedList)
+        self.assertTrue("【兄弟姐妹】" in common.expectedList)
+        self.assertTrue("Jade" in common.expectedList)
+        self.assertTrue("测试群" in common.expectedList)
+        self.assertTrue("Our Group" in common.expectedList)
+        self.assertFalse("琶洲中软群" in common.expectedList)
         self.assertFalse("网银交付部大群" in common.expectedList)
         self.assertTrue(common.queue)
         self.assertFalse(common.imageReturn)
@@ -1567,24 +1532,22 @@ class WeChatDemoTestCase(TestCase):
 
         ourGroup = toggle.group.ourGroup
         self.assertEqual(ourGroup.expectedList, ["曾超龙", "罗文轩", "伍楚婷", "徐鹏", "林俊杰", "曹伟江", "张广洋", "严其龙", "朱雄伟",
-					"钟灵", "樊华", "夏锐东", "叶志扬", "秦宗健", "梁斌文", "李锦宇", "李彬特", "戴国明", "黄文斌", "程珺",
-					"梁思羽", "陈洋平", "何志伟", "叶庭强", "刘远明", "刘嘉奇", "冼静", "谢毅滦", "常志杰", "文逸俊", "刘洪威",
+					"钟灵", "樊华", "叶志扬", "秦宗健", "梁斌文", "李锦宇", "李彬特", "戴国明", "黄文斌", "程珺",
+					"梁思羽", "陈洋平", "何志伟", "叶庭强", "刘远明", "刘嘉奇", "冼静", "谢毅滦", "文逸俊", "刘洪威",
 					"彭伟涛", "刘旭斌", "唐小兵", "余翼", "黄艳", "陈家乐", "梁敏瑜", "郑永祥", "唐友华", "覃淇韩", "凌俊杰",
 					"方颖欢", "曾慶龍", "蔡日雄", "孙健强", "郑绵毅", "王伟达", "黄波", "江克非", "龚定显", "于顺燊",
 					"徐治安", "胡嘉敏", "罗兴惠", "马仲豪", "曾昊", "卢平清", "王权斌", "谢祎龙", "詹前力", "刘建军", "杨元生",
 					"高海梅", "郭明健", "杨成业", "李易承", "叶颖欣", "阮焯城", "丁小双", "曾俊杰", "黄少强", "陈奕",
 					"黄江胜", "张冲", "周梓帆", "林聪", "蔡淑珍", "赖霄", "周楠"])
-        print(len(ourGroup.expectedList))
-        self.assertTrue(len(ourGroup.expectedList) == 80)
-        self.assertTrue(ourGroup.queue)
+        self.assertTrue(len(ourGroup.expectedList) == 78)
+        self.assertFalse(ourGroup.queue)
         self.assertFalse(ourGroup.imageReturn)
         self.assertFalse(ourGroup.mapAnalysis)
         self.assertFalse(ourGroup.envelope)
         self.assertFalse(ourGroup.autoReply)
         self.assertFalse(ourGroup.atMeReply)
 
-
-    def test_wechatJadeFeatureToggle(self):
+    def test_weChatJadeFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
 
         jade = toggle.group.jade
@@ -1598,7 +1561,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertFalse(jade.autoReply)
         self.assertFalse(jade.atMeReply)
 
-    def test_wechatWasherFeatureToggle(self):
+    def test_weChatWasherFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
 
         washer = toggle.group.washer
@@ -1624,8 +1587,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertFalse(bns.autoReply)
         self.assertTrue(bns.atMeReply)
 
-
-    def test_wechatCommonPersonalFeatureToggle(self):
+    def test_weChatCommonPersonalFeatureToggle(self):
         toggle = WeChatFeatureToggle.instance()
 
         common = toggle.personal.common
@@ -1648,86 +1610,138 @@ class WeChatDemoTestCase(TestCase):
         group_members = toggle.group.ourGroup.expectedList
         msg = """
             #接龙
-6月24日welink健康打卡
+汇丰调查问卷完成统计
 
 1. 林俊杰 Jackie
-2. 常志杰Sandy
-3. 严其龙 Wave
-4. 赖霄-Sean
-5. 戴国明-Ming
-6. 张冲_Mack
-7. 罗兴惠 Kris
-8. 伍楚婷＋Phoenix
-9. 陈洋平—Carl
-10. 叶颖欣june
-11. 黄少强-seanhuang
+2. 周楠 Victoria
+3. 赖霄-Sean
+4. 黄波-Boris
+5. 马仲豪 Mark
+6. 黄少强-seanhuang
+7. 刘建军-Thnaos
+8. 杨成业－Curry
+9. Ternence张广洋
+10. 于顺燊-Justin
+11. 罗兴惠 Kris
 12. 覃淇韩
-13. 曾俊杰
-14. 郭明健 Joy
-15. 郑永祥Michael
-16. 陈奕Yee
-17. 樊华Leon
-18. 周楠 Victoria
-19. 于顺燊-Justin
-20. 林聪 Lynn
-21. 何志伟Daniel
-22. 江克非 Leslie
-23. 李锦宇
-24. 谢祎龙jack
-25. 杨成业－Curry
-26. 刘远明 Nicky
-27. 蔡淑珍 Kathy
-28. 冼静 Jane
-29. 阮焯城 Sans
-30. Cloud李易承
-31. 刘旭斌Daniel
-32. Kolor 陈家乐
-33. 黄波-Boris
-34. 曹伟江-KNOX
-35. 杨元生_Yeson
-36. 周梓帆-Jerry
-37. Ternence张广洋
-38. 孙健强-Joey
-39. Kyle 余翼
-40. 方颖欢 Huan
-41. Frank 钟灵
-42. 高海梅 Hamy
-43. 刘洪威JackCode
-44. Jason- 凌俊杰
-45. 丁小双 Rosh
-46. 夏锐东_Ray
-47. 罗文轩 Hins W X Luo
-48. 彭伟涛-Stefan
-49. 詹前力 LIVEN
-50. 曾慶龍max
-51. 黄江胜 Jason
-52. Alison_黄艳
-53. 曾超龙_Sheldon
-54. Sheldon 谢毅滦
-55. 郑绵毅-Manny
-56. zion 徐治安
-57. 黄文斌-Harvey
-58. 蔡日雄Symbol
-59. 胡嘉敏-gami
-60. Kevin 梁思羽
-61. 王伟达-Avater
-62. 文逸俊 Caesar
-63. 曾昊Anson
-64. 朱雄伟 Edwin
-65. 秦宗健 Ajian
-66. 龚定显captain
-67. Kyle 程珺
-68. 李彬特 winter
-69. 王权斌-Sam
-70. 刘建军-Thnaos
+13. 郭明健 Joy
+14. 刘洪威JackCode
+15. 陈奕Yee
+16. 谢祎龙jack
+17. 郑永祥Michael
+18. 高海梅 Hamy
+19. 蔡日雄Symbol
+20. 戴国明-Ming
+21. Sheldon 谢毅滦
+22. 何志伟Daniel
+23. 阮焯城 Sans
+24. 秦宗健 Ajian
+25. 孙健强-Joey
+26. 王伟达-Avater
+27. 丁小双 Rosh
+28. Kevin 梁思羽
+29. 曹伟江-KNOX
+30. 严其龙 Wave
+31. 詹前力 LIVEN
+32. 冼静 Jane
+33. 彭伟涛-Stefan
+34. 唐友华-tom
+35. 樊华Leon
+36. Kolor 陈家乐
+37. 梁斌文Draven
+38. Jason- 凌俊杰
+39. 王权斌-Sam
+40. 黄江胜 Jason
+41. 杨元生_Yeson
+42. 方颖欢 Huan
+43. 刘旭斌Daniel
+44. 曾慶龍max
+45. 叶颖欣june
+46. 周梓帆-Jerry
+47. Kyle 程珺
+48. 曾超龙_Sheldon
+49. 罗文轩 Hins W X Luo
+50. 曾俊杰 Jim
+51. 唐小兵 Leo
+52. 常志杰Sandy
+53. 林聪 Lynn
+54. 蔡淑珍 Kathy
+55. 曾昊Anson
+56. Alison_黄艳
+57. 李锦宇
         """
         result = WeChatAction.auto_reminder(self.our_group_chat_room_member, group_members, msg, 60)
-        print("-" * 100)
-        # print(result)
-        # print(len(result))
-        if result:
-            if len(result):
-                print("result: ", result)
+
+        reminder = """ 汇丰调查问卷完成统计 
+@伍楚婷＋Phoenix 
+@刘远明 Nicky 
+@李彬特 winter 
+@陈洋平—Carl 
+@黄文斌-Harvey 
+@文逸俊 Caesar 
+@朱雄伟 Edwin 
+@Frank 钟灵 
+@Kyle 余翼 
+@刘嘉奇Kid 
+@叶庭强-jack 
+@zion 徐治安 
+@郑绵毅-Manny 
+@江克非 Leslie 
+@徐鹏_Westbrook 
+@胡嘉敏-gami 
+@龚定显captain 
+@Driven-卢平清 
+@Cloud李易承 
+@张冲_Mack 
+@Lanmon梁敏瑜 
+
+未接龙人数还剩 21 人"""
+
+        self.assertEqual(result, reminder)
+
+        result = WeChatAction.auto_reminder(self.our_group_chat_room_member, group_members, msg, 20)
+        self.assertEqual(result, None)
+
+        result = WeChatAction.auto_reminder(self.our_group_chat_room_member,
+                                            group_members,
+                                            msg,
+                                            remind_num=30,
+                                            is_frequency_reduce=True,
+                                            frequency=4)
+        self.assertEqual(result, None)
+
+        msg += "\n@伍楚婷＋Phoenix "
+        reminder = """ 汇丰调查问卷完成统计 
+@刘远明 Nicky 
+@李彬特 winter 
+@陈洋平—Carl 
+@黄文斌-Harvey 
+@文逸俊 Caesar 
+@朱雄伟 Edwin 
+@Frank 钟灵 
+@Kyle 余翼 
+@刘嘉奇Kid 
+@叶庭强-jack 
+@zion 徐治安 
+@郑绵毅-Manny 
+@江克非 Leslie 
+@徐鹏_Westbrook 
+@胡嘉敏-gami 
+@龚定显captain 
+@Driven-卢平清 
+@Cloud李易承 
+@张冲_Mack 
+@Lanmon梁敏瑜 
+
+未接龙人数还剩 20 人"""
+
+        result = WeChatAction.auto_reminder(self.our_group_chat_room_member,
+                                            group_members,
+                                            msg,
+                                            remind_num=30,
+                                            is_frequency_reduce=True,
+                                            frequency=4)
+        self.assertEqual(result, reminder)
 
     def test_weChatJadeReminderLessThanTen(self):
         toggle = WeChatFeatureToggle.instance()
@@ -1758,7 +1772,7 @@ class WeChatDemoTestCase(TestCase):
 @于顺燊-Justin 
 @郑绵毅Manny 
 
-未打卡人数还剩 9 人"""
+未接龙人数还剩 9 人"""
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, new_msg)
         self.assertEqual(result, reminder)
@@ -1842,32 +1856,44 @@ class WeChatDemoTestCase(TestCase):
 #接龙
 6月21日welink健康打卡
 
-1. 林俊杰 - Jackie
-2. 于顺燊-Justin
-3. 何志伟Daniel
-4. 李彬特 winter
-5. 郑永祥-Michael
-6. 陈洋平-Carl
-7. 文逸俊 - Caesar
-8. 凌俊杰-Jason
+1. 张广洋-Ternence
+2. 林俊杰 - Jackie
+3. 于顺燊-Justin
+4. 凌俊杰-Jason
+5. 黄文斌_Harvey
+6. 文逸俊 - Caesar
+7. 郑永祥-Michael
+8. 戴国明-MING
+9. 何志伟Daniel
+10. 谢毅滦–Sheldon
+11. 郑绵毅-Manny
+12. 江克非-Leslie
+13. 刘旭斌Daniel
+14. 李彬特 winter
                 """
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, msg)
         print(result)
 
+    def test_weChatActionAvailableTime(self):
+        begin = "00:00"
+        end = "23:59"
+        result = WeChatAction.is_available_time(begin, end)
+        self.assertTrue(result)
+
+    def test_weChatActionUnavailableTime(self):
+        begin = "00:00"
+        end = "00:01"
+        result = WeChatAction.is_available_time(begin, end)
+        self.assertFalse(result)
+
     def test_our_group(self):
-        group_display_name_list = ['Kyle 程珺', '林俊杰 Jackie', '严其龙 Wave', '罗文轩 Hins W X Luo', '伍楚婷＋Phoenix', '秦宗健 Ajian', '志杰Sandy', '刘远明 Nicky', '曹伟江-KNOX', '樊华Leon', 'Kevin 梁思羽', '梁斌文Draven', '冼静 Jane', '戴国明-Ming', '郑永祥Michael', 'Sheldon 谢毅滦', '何志伟Daniel', '李彬特 winter', 'Ternence张广洋', '陈洋平—Carl', 'lanmon梁敏瑜', '黄文斌-Harvey', '刘旭斌Daniel', '文逸俊 Caesar', 'Leo 唐小兵', '朱雄伟 Edwin', 'Frank 钟灵', '曾超龙_Sheldon', '彭伟涛-Stefan', 'Kolor 陈家乐', '刘洪威JackCode ', '李锦宇-joke', '方颖欢 Huan', 'Alison_黄艳', 'Kyle 余翼', '覃淇韩', '刘嘉奇Kid', '叶庭强-jack', 'zion 徐治安', '孙健强-Joey', '曾慶龍max', '黄波-Boris', '唐友华-tom', '蔡日雄Symbol', '郑绵毅-Manny', 'Jason- 凌俊杰', '江克非 Leslie', '于顺燊-Justin', '曾昊Anson', '徐鹏_Westbrook', '王伟达-Avater', '胡嘉敏-gami', '龚定显captain', 'Driven-卢平清', '马仲豪 Housem Mark', '王权斌-Sam', '谢祎龙jack', '杨元生_Yeson', '高海梅 Hamy', 'Cloud李易承', '刘建军-Thnaos', '阮焯城 Sans', '杨成业－Curry', '郭明健 Joy', '丁小双 Rosh', '黄江胜 Jason', '陈奕Yee', '黄少强-seanhuang', 'JIM曾俊杰', '周梓帆-Jerry', '张冲_Mack', '叶颖欣june', '林聪 Lynn', '蔡淑珍 Kathy', '周楠 Victoria', '赖霄-Sean']
+        begin = datetime.strptime(str(datetime.now().date()) + '10:45', '%Y-%m-%d%H:%M')
+        end = datetime.strptime(str(datetime.now().date()) + '11:00', '%Y-%m-%d%H:%M')
+        print(begin)
+        print(end)
 
-        group_nickname_list = ['Vico Ye', '夏锐东', '詹前力 LIVEN']
+        now = datetime.now()
+        print(now)
 
-        name = ['曾超龙', '罗文轩', '伍楚婷', '徐鹏', '曹伟江', '严其龙', '朱雄伟', '钟灵', '樊华', '夏锐东', '叶志扬', '秦宗健', '梁斌文', '李锦宇', '程珺', '梁思羽', '叶庭强', '刘远明', '刘嘉奇', '冼静', '志杰', '刘洪威', '彭伟涛', '余翼', '黄艳', '陈家乐', '唐友华', '覃淇韩', '方颖欢', '曾庆龙', '蔡日雄', '孙健强', '王伟达', '黄波', '龚定显', '徐治安', '胡嘉敏', '罗兴惠', '马仲豪', '卢平清', '王权斌', '谢祎龙', '詹前力', '刘建军', '高海梅', '郭明健', '杨成业', '李易承', '叶颖欣', '阮焯城', '丁小双', '曾俊杰', '黄少强', '陈奕', '黄江胜', '张冲', '周梓帆', '林聪', '蔡淑珍', '赖霄', '周楠']
-
-        # print(len(group_display_name_list))
-        # print(len(group_nickname_list))
-        # print(len(name))
-
-        # print(20 % 4 == 0)
-        # print(19 % 4 == 0)
-        # print(18 % 4 == 0)
-        # print(17 % 4 == 0)
-        # print(16 % 4 == 0)
+        print(now >= begin and now <= end)

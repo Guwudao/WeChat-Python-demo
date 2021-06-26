@@ -251,15 +251,16 @@ def text_group_reply(msg):
             elif msg["User"]["NickName"] == "Our Group":
                 if "#接龙" in msg.text and toggle.group.ourGroup.queue:
                     group_members = toggle.group.ourGroup.expectedList
-                    remind_str = WeChatAction.auto_reminder(chat_room_members, group_members, msg.text, 30)
+                    remind_str = WeChatAction.auto_reminder(chat_room_members,
+                                                            group_members,
+                                                            msg.text,
+                                                            remind_num=30,
+                                                            is_frequency_reduce=True,
+                                                            frequency=4)
                     if remind_str:
                         if len(remind_str):
                             itchat.send_msg(remind_str, toUserName=msg.fromUserName)
 
-                print("-" * 100)
-                print(json.dumps(chat_room_members, indent=4, ensure_ascii=False))
-                print("-" * 100)
-                
             # else:
             #     content = WeChatAction.bot_auto_reply(msg.text)
             #     itchat.send_msg(content, toUserName=msg.fromUserName)

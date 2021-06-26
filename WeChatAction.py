@@ -3,6 +3,7 @@ import sys
 import re
 from TuringBot import TuringBot
 from xml.dom.minidom import parseString
+from datetime import datetime
 
 
 class WeChatAction:
@@ -55,8 +56,12 @@ class WeChatAction:
             return error_msg
 
     @staticmethod
-    def auto_reminder(chat_room_members, expect_member_list, message, remind_num=10):
-        # print("expect_member_list: ", expect_member_list)
+    def auto_reminder(chat_room_members,
+                      expect_member_list,
+                      message,
+                      remind_num=10,
+                      is_frequency_reduce=False,
+                      frequency=1):
 
         try:
             displayName_list, nickName_list = [], []
@@ -98,20 +103,23 @@ class WeChatAction:
                         reminder_list.remove(reminder)
                         rest_nick.append(nickname)
 
-            print(reminder_list)
-            print(counter)
+            # print(counter)
 
             if counter == 0:
                 return "恭喜大家完成本次接龙！！！"
             elif counter < remind_num:
-                if counter % 4 == 0:
-                    remaining = ("\n未打卡人数还剩 %s 人" % counter)
+                if is_frequency_reduce:
+                    if counter % frequency == 0:
+                        remaining = ("\n未接龙人数还剩 %s 人" % counter)
+                        reminder_str += remaining
+                        return reminder_str
+                else:
+                    remaining = ("\n未接龙人数还剩 %s 人" % counter)
                     reminder_str += remaining
 
                     # if len(reminder_list):
                     #     not_match = "\n\n以下同事名字未能匹配成功，请检查是否修改群备注：%s" % reminder_list
                     #     reminder_str += not_match
-
                     print("reminder_str: {}".format(reminder_str))
                     return reminder_str
 
@@ -119,6 +127,14 @@ class WeChatAction:
             s = sys.exc_info()
             print("Error '%s' happened on line %d" % e)
             return ("Error '%s' happened on line %d" % (s[1], s[2].tb_lineno))
+
+    @staticmethod
+    def is_available_time(begin, end):
+        begin_time = datetime.strptime(str(datetime.now().date()) + begin, "%Y-%m-%d%H:%M")
+        end_time = datetime.strptime(str(datetime.now().date()) + end, "%Y-%m-%d%H:%M")
+        now = datetime.now()
+
+        return now >= begin_time and now <= end_time
 
     @staticmethod
     def get_title(message):
