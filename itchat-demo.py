@@ -210,106 +210,7 @@ def text_reply(msg):
 def text_group_reply(msg):
     recall_message_handle(msg, is_group=True, group_name=msg.user["NickName"])
     # print(msg)
-
-    chat_room_members = msg["User"]["MemberList"]
-    is_available = msg.user["NickName"] in toggle.group.common.expectedList
-
-    if msg.type == "Text":
-        print("群聊【{}】 : {} : {}".format(msg.user["NickName"], msg["ActualNickName"], msg.text))
-        if not is_available: return
-
-        try:
-            if msg["User"]["NickName"] == "Jade":
-                if "#接龙" in msg.text and toggle.group.jade.queue:
-                    jade_members = toggle.group.jade.expectedList
-                    remind_str = WeChatAction.auto_reminder(chat_room_members, jade_members, msg.text)
-                    print("【Jade】接龙提醒名单：{}".format(remind_str))
-                    if remind_str:
-                        itchat.send_msg(remind_str, toUserName=msg.fromUserName)
-
-            elif msg["User"]["NickName"] == "摸铃校友群":
-                if msg.isAt and toggle.group.common.atMeReply:
-                    msg.user.send("假装已收到@我的消息，本条为自动回复[玫瑰]")
-
-            elif msg["User"]["NickName"] == "骑洗衣机去地铁站":
-                if "#接龙" in msg.text and toggle.group.washer.queue:
-                    wash_members = toggle.group.washer.expectedList
-                    remind_str = WeChatAction.auto_reminder(chat_room_members, wash_members, msg.text)
-                    print("【骑洗衣机去地铁站】测试提醒名单：{}".format(remind_str))
-                    if len(remind_str):
-                        itchat.send_msg(remind_str, toUserName=msg.fromUserName)
-
-            elif msg["User"]["NickName"] == "【兄弟姐妹】":
-                # @我消息
-                if msg.isAt and toggle.group.brotherAndSister.atMeReply:
-                    msg.user.send("假装已收到@我的消息，本条为自动回复[玫瑰]")
-
-            elif msg["User"]["NickName"] == "测试群":
-                if msg.isAt:
-                    msg.user.send("假装已收到@我的消息，本条为自动回复[玫瑰]")
-
-            elif msg["User"]["NickName"] == "Our Group":
-                if "#接龙" in msg.text and toggle.group.ourGroup.queue:
-                    group_members = toggle.group.ourGroup.expectedList
-                    remind_str = WeChatAction.auto_reminder(chat_room_members,
-                                                            group_members,
-                                                            msg.text,
-                                                            remind_num=30,
-                                                            is_frequency_reduce=True,
-                                                            frequency=4)
-                    if remind_str:
-                        if len(remind_str):
-                            itchat.send_msg(remind_str, toUserName=msg.fromUserName)
-
-            # else:
-            #     content = WeChatAction.bot_auto_reply(msg.text)
-            #     itchat.send_msg(content, toUserName=msg.fromUserName)
-        except Exception as e:
-            print(json.dumps(msg, indent=4, ensure_ascii=False))
-            s = sys.exc_info()
-            print("Group error '%s' happened on line %d" % (e, s[2].tb_lineno))
-
-    elif msg.type == "Picture":
-        print("收到群图片【{}】 : {}".format(msg.user["NickName"], msg["ActualNickName"]))
-        if not is_available: return
-
-        if msg["User"]["NickName"] == "【兄弟姐妹】":
-            if toggle.group.brotherAndSister.imageReturn:
-                group_image_return(msg)
-
-        elif msg["User"]["NickName"] == "测试群":
-            if toggle.group.test.imageReturn:
-                group_image_return(msg)
-
-        elif msg["User"]["NickName"] == "Our Group":
-            displayName_list, nickName_list = [], []
-            for member in chat_room_members:
-                if len(member["DisplayName"]):
-                    displayName_list.append(member["DisplayName"])
-                else:
-                    nickName_list.append(member["NickName"])
-
-            print(displayName_list)
-            print("-" * 100)
-            print(nickName_list)
-            print("-" * 100)
-
-    elif msg.type == "Video":
-        print("收到群视频【{}】 : {}".format(msg.user["NickName"], msg["ActualNickName"]))
-
-
-def group_image_return(msg):
-    if msg["HasProductId"] != 0:
-        # print("我是个么得感情的复读机器人 -- 但我并不打算复读微信商店提供的表情，不信你可以换一个")
-        itchat.send_msg("检测到微信商店提供的表情\n\n我是复读机器人\n\n但我并没有版权复读这个[旺柴]", toUserName=msg.fromUserName)
-    elif msg["MsgType"] == 47:
-        # 表情
-        msg.download(msg.fileName)
-        itchat.send_msg("检测到图片表情\n看我反弹大法[旺柴]", toUserName=msg.fromUserName)
-        itchat.send_image(msg.fileName, toUserName=msg.fromUserName)
-    elif msg["MsgType"] == 3:
-        # 图片
-        print("收到一张图片")
+    WeChatAction.group_chat_handle(msg)
 
 
 # 监听是否有消息撤回(NOTE)并进行相应操作
@@ -317,9 +218,10 @@ def group_image_return(msg):
 def send_msg_(msg):
     # print(msg)
     global face_package
-    is_available = msg.user["NickName"] in toggle.group.common.expectedList
 
     try:
+        is_available = msg.user["NickName"] in toggle.group.common.expectedList
+
         if "撤回了一条消息" in msg["Content"]:
             print("拦截到撤回了一条消息")
             # re匹配最后一次撤回消息的id
