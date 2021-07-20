@@ -9,7 +9,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@29bde775f477d23c870e8f8bfb5afaf9",
+            "UserName": "@c2d0c9a20cc624c11d43b256ee0ca12f",
             "NickName": "ViAnNa-黄英",
             "AttrStatus": 122983,
             "PYInitial": "",
@@ -23,7 +23,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@6e42fbfebf4a1bf047fef9a108f6d25b",
+            "UserName": "@a149549513e62346cc06bf80b82b514b",
             "NickName": "winter 李彬特",
             "AttrStatus": 16882495,
             "PYInitial": "",
@@ -37,7 +37,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@a8e53ac9a9c7632d79d7a844ef207c7a",
+            "UserName": "@9f71bcbd2e3cfd8bd1342914ddf7e678",
             "NickName": "戴国明",
             "AttrStatus": 16980071,
             "PYInitial": "",
@@ -51,7 +51,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@826978e47c47a477c8e3ad8cf12bc64312d791a1f803fa4bab9a41d33a2bc4c1",
+            "UserName": "@9063d9f85470a97cb13391f6a352e9e030ed6297f530e95b97400887fc61fba3",
             "NickName": "Harvey-黄文斌",
             "AttrStatus": 17012669,
             "PYInitial": "",
@@ -65,7 +65,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@5afe58cf92512cc7700340a29daa487b",
+            "UserName": "@5a66d3ab151f244c51a0c0d971bbfecc",
             "NickName": "估唔到",
             "AttrStatus": 121957,
             "PYInitial": "",
@@ -79,7 +79,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@4d15cbcaf524e38d22400990964ed042b2e91a9bbf55d5fbe79413c5278ea220",
+            "UserName": "@c8262c0afa5c7c9a69634c1c33d009d14272f27f96ecc1c17fba1fe59764d2c3",
             "NickName": "张广洋 Ternence",
             "AttrStatus": 233575,
             "PYInitial": "",
@@ -93,7 +93,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@1020cc7910d6c4afa10c7ab9d3a82af617d62134f5b659bba1bc93e9fce3d1d7",
+            "UserName": "@42442c705de312b4f27e906249463d05444de4b192d330af8723e88885c5fb34",
             "NickName": "Carl-陈洋平",
             "AttrStatus": 233829,
             "PYInitial": "",
@@ -107,7 +107,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@ea5fd403d5f0bfe7456f618f32d42029588bc610f8f6a6d536757b5f085786dd",
+            "UserName": "@35223bb111b06f678ab86fd627fb98ff8cc3fa14ba0145231b989bd98349fd35",
             "NickName": "Sheldon Xie",
             "AttrStatus": 4427877,
             "PYInitial": "",
@@ -121,7 +121,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@af9355d056188ad9eec151ca6d5637b6a3a6e3f6b9f609ccdd054226407ce792",
+            "UserName": "@b2cf464b8497ec416e4d9f7cfe7afe2407b6ca900a40f6b68d63eab429abfb2a",
             "NickName": "何志伟Daniel",
             "AttrStatus": 17007357,
             "PYInitial": "",
@@ -135,7 +135,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@dccfd70680f9a047462c36fb6b938883",
+            "UserName": "@905e83b17c23517c5f30bd0e25c7e956",
             "NickName": "Caesar文逸俊",
             "AttrStatus": 33657383,
             "PYInitial": "",
@@ -149,7 +149,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@148ea75a9d575d86594f40ba811be2ab",
+            "UserName": "@64fb0c4d3cb9115c982f45dbe6fe90fb",
             "NickName": "刘旭斌",
             "AttrStatus": 100391,
             "PYInitial": "",
@@ -163,7 +163,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@e9c03412002169b00d92158a996935486a7b11a8023aee907daf7495be07f153",
+            "UserName": "@13933949c493c4a75ecbd20db707fb7c2e262ed87391963d20756a0cd5e99405",
             "NickName": "唐小兵",
             "AttrStatus": 102501,
             "PYInitial": "",
@@ -177,7 +177,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@3d6ad0d1e69fadf0cb50e97c0689c653b6dbb34c9a570a8df6f67390ee6e6ae4",
+            "UserName": "@3a1c1fd4fc77a56392914963f9bcdd25d238f8990cdb603a2e456dc2e0dea433",
             "NickName": "郑永祥 Michael",
             "AttrStatus": 33788773,
             "PYInitial": "",
@@ -191,35 +191,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@5bb738f2b465fcd42a168877ff5b048211bccc676d14dccbb3fcb21847bc18db",
-            "NickName": "lanmon 梁敏瑜",
-            "AttrStatus": 98407,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "梁敏瑜 lanmon",
-            "KeyWord": ""
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@0e73f601217ccad9330b8dedcf4c0199",
-            "NickName": "叶超 Charles Java",
-            "AttrStatus": 33658919,
-            "PYInitial": "",
-            "PYQuanPin": "",
-            "RemarkPYInitial": "",
-            "RemarkPYQuanPin": "",
-            "MemberStatus": 0,
-            "DisplayName": "叶超-Charles",
-            "KeyWord": "cs5"
-        },
-        {
-            "MemberList": [],
-            "Uin": 0,
-            "UserName": "@cd76ec220a50bd23da10873cddba8f56",
+            "UserName": "@5f609d9f2e71df4494fc4ed7c41061a1",
             "NickName": "凌俊杰 iOS",
             "AttrStatus": 114791,
             "PYInitial": "",
@@ -233,7 +205,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@31d7e41a12eca85c7308fec865162f3d09229092d502145b00d03d6aea0eed1a",
+            "UserName": "@2e70a3c4bb37014e8f2758f27cefab6f44608f397d054feafe2c170280f11688",
             "NickName": "Anson曾昊",
             "AttrStatus": 111869,
             "PYInitial": "",
@@ -247,7 +219,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@0db4a94d989c0f79758a28570cf913d7",
+            "UserName": "@1a107b33c42aa3c658215141bc435c13",
             "NickName": "Leslie 江克非 SM",
             "AttrStatus": 33786303,
             "PYInitial": "",
@@ -261,7 +233,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@9f401e6e922ca61108b3823b566f30ee3afb39b596f81a431930c061e806463d",
+            "UserName": "@9d45b62bd96e9036c542e03d8d00fd6b948452b1249958ed40123fb7ba6aa06e",
             "NickName": "于顺燊 iOS",
             "AttrStatus": 102437,
             "PYInitial": "",
@@ -275,7 +247,7 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@6aa2242678de26d05c51722923b7e1d6",
+            "UserName": "@144ac8abb823f9aece4327d2c1aa385f",
             "NickName": "郑绵毅Manny",
             "AttrStatus": 37847935,
             "PYInitial": "",
@@ -283,13 +255,13 @@ class WeChatDemoTestCase(TestCase):
             "RemarkPYInitial": "",
             "RemarkPYQuanPin": "",
             "MemberStatus": 0,
-            "DisplayName": "",
+            "DisplayName": "郑绵毅-Manny",
             "KeyWord": "man"
         },
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@fdcd413958faf36fc71fe9e169f9b6d246bddb2fc4b7cfd9d854b8583e54048b",
+            "UserName": "@5558cfcb85adfbb6abd463fdee8eb3188b93a55e32a592d8e004a671d38b5f78",
             "NickName": "Java 杨元生",
             "AttrStatus": 102501,
             "PYInitial": "",
@@ -303,9 +275,9 @@ class WeChatDemoTestCase(TestCase):
         {
             "MemberList": [],
             "Uin": 0,
-            "UserName": "@b1c67ae05c8d5d0d533149719a58faf6",
+            "UserName": "@07170c434992fd2550f33cf07f3b0186",
             "NickName": "Daisy苏倩怡RM ",
-            "AttrStatus": 231527,
+            "AttrStatus": 100455,
             "PYInitial": "",
             "PYQuanPin": "",
             "RemarkPYInitial": "",
@@ -313,6 +285,90 @@ class WeChatDemoTestCase(TestCase):
             "MemberStatus": 0,
             "DisplayName": "",
             "KeyWord": "dai"
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@3e0b81120314bd7aa6cf68a915bc90e0",
+            "NickName": "nellie",
+            "AttrStatus": 98495,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "Lanmon梁敏瑜",
+            "KeyWord": "lia"
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@8533f5d545d998eefa38d5def6d456f874da04eb6c18edc861fc29bd20e0a27a",
+            "NickName": "蔡淑珍 Kathy PMO",
+            "AttrStatus": 100389,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "",
+            "KeyWord": ""
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@1243867e3b05eb509a9479bf4e475668",
+            "NickName": "林聪 UK convergency iOS",
+            "AttrStatus": 115135,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "林聪  Lynn",
+            "KeyWord": "lc4"
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@f2f73b9cda7cd58940ed469d9b2da11d",
+            "NickName": "叶颖欣 UK convergency iOS",
+            "AttrStatus": 229813,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "",
+            "KeyWord": "lov"
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@7a3e22089576b61334012709ec1962481a61b09db9880b639973334f46ce609a",
+            "NickName": "廖成龙 UK convergency iOS",
+            "AttrStatus": 102501,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "廖成龙-Jacky",
+            "KeyWord": ""
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@1e9696b5cce3aae34559b1f41b0c17c549e2471a6e6a977e94435e6ee9798093",
+            "NickName": "樊朵 RM",
+            "AttrStatus": 102845,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "",
+            "KeyWord": ""
         }
     ]
 
@@ -1553,7 +1609,9 @@ class WeChatDemoTestCase(TestCase):
         jade = toggle.group.jade
         self.assertEqual(jade.expectedList, ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟",
                                              "杨元生", "文逸俊", "黄文斌", "李彬特", "郑永祥", "梁敏瑜", "曾昊",
-                                             "于顺燊", "凌俊杰", "江克非", "郑绵毅"], "expect list should be equal")
+                                             "于顺燊", "凌俊杰", "江克非", "郑绵毅", "蔡淑珍", "林聪", "叶颖欣", "廖成龙"]
+                         , "expect list should be equal")
+        self.assertTrue(len(jade.expectedList) == len(self.jade_chat_room_member) - 3)
         self.assertTrue(jade.queue)
         self.assertFalse(jade.imageReturn)
         self.assertTrue(jade.mapAnalysis)
@@ -1748,31 +1806,35 @@ class WeChatDemoTestCase(TestCase):
         jade_members = toggle.group.jade.expectedList
         new_msg = """
                     #接龙
-                    6月12日welink健康打卡
-
+                    氛围调查
+                    
                     1. 林俊杰 - Jackie
-                    2. 江克非-Leslie
-                    3. 戴国明-MING
-                    4. 张广洋-Ternence
-                    5. 何志伟Daniel
-                    6. 黄文斌_Harvey
-                    7. 刘旭斌Daniel
-                    8. 杨元生-Yeson
-                    9. 谢毅滦–Sheldon
-                    10. 李彬特 winter
+                    2. 郑绵毅-Manny
+                    3. 唐小兵 Leo
+                    4. 叶颖欣
+                    5. 凌俊杰-Jason
+                    6. 张广洋-Ternence
+                    7. 林聪  Lynn
+                    8. 曾昊 Anson
+                    9. 戴国明-MING
+                    10. 刘旭斌Daniel
+                    11. 杨元生-Yeson
+                    12. 廖成龙-Jacky
+                    13. 李彬特 winter
+                    14. 文逸俊 - Caesar
+                    15. 黄文斌_Harvey
+                    16. 于顺燊-Justin
+                    17. Lanmon梁敏瑜
+                    18. 何志伟Daniel
                     """
-        reminder = """ 6月12日welink健康打卡 
+        reminder = """ 氛围调查 
 @陈洋平-Carl 
-@文逸俊 - Caesar 
-@唐小兵 Leo 
+@谢毅滦–Sheldon 
 @郑永祥-Michael 
-@梁敏瑜 lanmon 
-@凌俊杰-Jason 
-@曾昊 Anson 
-@于顺燊-Justin 
-@郑绵毅Manny 
+@江克非-Leslie 
+@蔡淑珍 Kathy PMO 
 
-未接龙人数还剩 9 人"""
+未接龙人数还剩 5 人"""
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, new_msg)
         self.assertEqual(result, reminder)
@@ -1804,28 +1866,31 @@ class WeChatDemoTestCase(TestCase):
         jade_members = toggle.group.jade.expectedList
         msg = """
             #接龙
-            6月15日welink健康打卡
-
-                1. 林俊杰 - Jackie
-                2. 凌俊杰-Jason
-                3. 黄文斌_Harvey
-                4. 何志伟Daniel
-                5. 文逸俊 - Caesar
-                6. 叶超-Charles
-                7. 张广洋-Ternence
-                8. 于顺燊-Justin
-                9. 曾昊 Anson
-                10. 刘旭斌Daniel
-                11. 戴国明-MING
-                12. 杨元生-Yeson
-                13. 郑永祥-Michael
-                14. 郑绵毅-Manny
-                15. 江克非-Leslie
-                16. 谢毅滦–Sheldon
-                17. 李彬特 winter
-                18. 陈洋平-Carl
-                19. 唐小兵-Leo
-                20. 梁敏瑜-Lanmon
+            氛围调查
+            
+            1. 林俊杰 - Jackie
+            2. 郑绵毅-Manny
+            3. 唐小兵 Leo
+            4. 叶颖欣
+            5. 凌俊杰-Jason
+            6. 张广洋-Ternence
+            7. 林聪  Lynn
+            8. 曾昊 Anson
+            9. 戴国明-MING
+            10. 刘旭斌Daniel
+            11. 杨元生-Yeson
+            12. 廖成龙-Jacky
+            13. 李彬特 winter
+            14. 文逸俊 - Caesar
+            15. 黄文斌_Harvey
+            16. 于顺燊-Justin
+            17. Lanmon梁敏瑜
+            18. 何志伟Daniel
+            19. 蔡淑珍
+            20. 郑永祥-Michael
+            21. 陈洋平-Carl
+            22. 谢毅滦–Sheldon
+            23. 江克非-Leslie
         """
         reminder = "恭喜大家完成本次接龙！！！"
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, msg)
@@ -1852,24 +1917,29 @@ class WeChatDemoTestCase(TestCase):
     def test_reminder(self):
         toggle = WeChatFeatureToggle.instance()
         jade_members = toggle.group.jade.expectedList
+        print("expectedList: ", jade_members)
         msg = """
 #接龙
-6月21日welink健康打卡
+氛围调查
 
-1. 张广洋-Ternence
-2. 林俊杰 - Jackie
-3. 于顺燊-Justin
-4. 凌俊杰-Jason
-5. 黄文斌_Harvey
-6. 文逸俊 - Caesar
-7. 郑永祥-Michael
-8. 戴国明-MING
-9. 何志伟Daniel
-10. 谢毅滦–Sheldon
-11. 郑绵毅-Manny
-12. 江克非-Leslie
-13. 刘旭斌Daniel
-14. 李彬特 winter
+1. 林俊杰 - Jackie
+2. 郑绵毅-Manny
+3. 唐小兵 Leo
+4. 叶颖欣
+5. 凌俊杰-Jason
+6. 张广洋-Ternence
+7. 林聪  Lynn
+8. 曾昊 Anson
+9. 戴国明-MING
+10. 刘旭斌Daniel
+11. 杨元生-Yeson
+12. 廖成龙-Jacky
+13. 李彬特 winter
+14. 文逸俊 - Caesar
+15. 黄文斌_Harvey
+16. 于顺燊-Justin
+17. Lanmon梁敏瑜
+18. 何志伟Daniel
                 """
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, msg)
