@@ -1920,26 +1920,26 @@ class WeChatDemoTestCase(TestCase):
         print("expectedList: ", jade_members)
         msg = """
 #接龙
-氛围调查
+7月工时确认完成接龙
 
 1. 林俊杰 - Jackie
-2. 郑绵毅-Manny
-3. 唐小兵 Leo
-4. 叶颖欣
-5. 凌俊杰-Jason
-6. 张广洋-Ternence
-7. 林聪  Lynn
-8. 曾昊 Anson
-9. 戴国明-MING
-10. 刘旭斌Daniel
-11. 杨元生-Yeson
-12. 廖成龙-Jacky
-13. 李彬特 winter
-14. 文逸俊 - Caesar
-15. 黄文斌_Harvey
-16. 于顺燊-Justin
-17. Lanmon梁敏瑜
-18. 何志伟Daniel
+2. 曾昊 Anson
+3. 于顺燊-Justin
+4. 刘旭斌Daniel
+5. 戴国明-MING
+6. 何志伟Daniel
+7. 唐小兵 Leo
+8. 黄文斌_Harvey
+9. 杨元生-Yeson
+10. 林聪  Lynn
+11. 廖成龙-Jacky
+12. 凌俊杰-Jason
+13. 谢毅滦–Sheldon
+14. 陈洋平-Carl
+15. 张广洋-Ternence
+16. 李彬特 winter
+17. 郑永祥-Michael
+18. 郑绵毅-Manny
                 """
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, msg)
