@@ -27,6 +27,7 @@ class Group:
                  common: CommonGroup,
                  test: CommonGroup,
                  ourGroup: CommonGroup,
+                 dhrGroup: CommonGroup,
                  jade: CommonGroup,
                  washer: CommonGroup,
                  brotherAndSister: CommonGroup):
@@ -34,6 +35,7 @@ class Group:
         self.common = common
         self.test = test
         self.ourGroup = ourGroup
+        self.dhrGroup = dhrGroup
         self.jade = jade
         self.washer = washer
         self.brotherAndSister = brotherAndSister
@@ -69,9 +71,11 @@ def object_hook(dic):
         washer = CommonGroup(dic["washer"])
         brotherAndSister = CommonGroup(dic["brotherAndSister"])
         ourGroup = CommonGroup(dic["ourGroup"])
+        dhrGroup = CommonGroup(dic["dhrGroup"])
         return {"common": common,
                 "test": test,
                 "ourGroup": ourGroup,
+                "dhr": dhrGroup,
                 "jade": jade,
                 "washer": washer,
                 "brotherAndSister": brotherAndSister
@@ -87,15 +91,18 @@ def object_hook(dic):
 
     if "feature" in keys:
         feature_dic = dic["feature"]
+        group_dic = feature_dic["group"]
+        personal_dic = feature_dic["personal"]
         group = Group(
-            feature_dic["group"]["common"],
-            feature_dic["group"]["test"],
-            feature_dic["group"]["ourGroup"],
-            feature_dic["group"]["jade"],
-            feature_dic["group"]["washer"],
-            feature_dic["group"]["brotherAndSister"]
+            group_dic["common"],
+            group_dic["test"],
+            group_dic["ourGroup"],
+            group_dic["dhr"],
+            group_dic["jade"],
+            group_dic["washer"],
+            group_dic["brotherAndSister"]
         )
-        personal = Personal(feature_dic["personal"]["common"], feature_dic["personal"]["jj"])
+        personal = Personal(personal_dic["common"], personal_dic["jj"])
         feature = WeChatFeatureToggle(group, personal, feature_dic["analysis"])
         return feature
 

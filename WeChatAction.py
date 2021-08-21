@@ -67,24 +67,24 @@ class WeChatAction:
                             if len(remind_str):
                                 msg.user.send_msg(remind_str, toUserName=msg.fromUserName)
 
-                elif msg["User"]["NickName"] == "网银交付部大群":
-                    pass
-                    # print("接收到了 网银交付部大群 的消息")
-                    # print("-" * 100)
-                    # print(json.dumps(chat_room_members, indent=4, ensure_ascii=False))
-                    # print("-" * 100)
-                    #
-                    # displayName_list, nickName_list = [], []
-                    # for member in chat_room_members:
-                    #     if len(member["DisplayName"]):
-                    #         displayName_list.append(member["DisplayName"])
-                    #     else:
-                    #         nickName_list.append(member["NickName"])
-                    #
-                    # print(displayName_list)
-                    # print("-" * 100)
-                    # print(nickName_list)
-                    # print("-" * 100)
+                elif msg["User"]["NickName"] == "网银业务交付部伙伴分群":
+                    # pass
+                    print("接收到了 网银业务交付部伙伴分群 的消息")
+                    print("-" * 100)
+                    print(json.dumps(chat_room_members, indent=4, ensure_ascii=False))
+                    print("-" * 100)
+
+                    displayName_list, nickName_list = [], []
+                    for member in chat_room_members:
+                        if len(member["DisplayName"]):
+                            displayName_list.append(member["DisplayName"])
+                        else:
+                            nickName_list.append(member["NickName"])
+
+                    print(displayName_list)
+                    print("-" * 100)
+                    print(nickName_list)
+                    print("-" * 100)
 
                 # else:
                 #     content = WeChatAction.bot_auto_reply(msg.text)
@@ -198,8 +198,8 @@ class WeChatAction:
                 if member not in message:
                     reminder_list.append(member)
 
-            # print("提醒总名单数组：{}".format(reminder_list))
-            # print(len(reminder_list))
+            print("提醒总名单数组：{}".format(reminder_list))
+            print(len(reminder_list))
 
             reminder_str = WeChatAction.get_title(message)
             counter = 0
@@ -221,6 +221,9 @@ class WeChatAction:
                         reminder_list.remove(reminder)
                         rest_nick.append(nickname)
 
+            print(" - " * 30)
+            print(rest_display)
+            print(rest_nick)
             # print(counter)
 
             if counter == 0:
@@ -235,9 +238,9 @@ class WeChatAction:
                     remaining = ("\n未接龙人数还剩 %s 人" % counter)
                     reminder_str += remaining
 
-                    # if len(reminder_list):
-                    #     not_match = "\n\n以下同事名字未能匹配成功，请检查是否修改群备注：%s" % reminder_list
-                    #     reminder_str += not_match
+                    if len(reminder_list):
+                        not_match = "\n\n以下同事名字未能匹配成功，请检查是否修改群备注：%s" % reminder_list
+                        reminder_str += not_match
                     print("reminder_str: {}".format(reminder_str))
                     return reminder_str
 
