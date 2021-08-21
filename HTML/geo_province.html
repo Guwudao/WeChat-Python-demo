@@ -8,11 +8,11 @@
 
 </head>
 <body>
-    <div id="e3008b2f5cdc4f14b21029bb21edf8fe" class="chart-container" style="width:900px; height:500px;"></div>
+    <div id="86756b0155834087957bf249258853cd" class="chart-container" style="width:900px; height:500px;"></div>
     <script>
-        var chart_e3008b2f5cdc4f14b21029bb21edf8fe = echarts.init(
-            document.getElementById('e3008b2f5cdc4f14b21029bb21edf8fe'), 'white', {renderer: 'canvas'});
-        var option_e3008b2f5cdc4f14b21029bb21edf8fe = {
+        var chart_86756b0155834087957bf249258853cd = echarts.init(
+            document.getElementById('86756b0155834087957bf249258853cd'), 'white', {renderer: 'canvas'});
+        var option_86756b0155834087957bf249258853cd = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -60,10 +60,10 @@
             "data": [
                 {
                     "name": "\u5e7f\u4e1c",
-                    "value": 591
+                    "value": 597
                 },
                 {
-                    "value": 170
+                    "value": 176
                 },
                 {
                     "name": "\u9655\u897f",
@@ -71,18 +71,22 @@
                 },
                 {
                     "name": "\u6cb3\u5357",
-                    "value": 22
+                    "value": 23
                 },
                 {
                     "name": "\u6e56\u5357",
                     "value": 15
                 },
                 {
-                    "name": "\u5317\u4eac",
-                    "value": 14
+                    "name": "\u56db\u5ddd",
+                    "value": 13
                 },
                 {
-                    "name": "\u56db\u5ddd",
+                    "name": "\u6e56\u5317",
+                    "value": 13
+                },
+                {
+                    "name": "\u5317\u4eac",
                     "value": 13
                 },
                 {
@@ -90,16 +94,12 @@
                     "value": 12
                 },
                 {
-                    "name": "\u6e56\u5317",
-                    "value": 12
+                    "name": "\u4e0a\u6d77",
+                    "value": 11
                 },
                 {
                     "name": "\u6c5f\u82cf",
                     "value": 10
-                },
-                {
-                    "name": "\u4e0a\u6d77",
-                    "value": 9
                 },
                 {
                     "name": "\u6cb3\u5317",
@@ -115,7 +115,11 @@
                 }
             ],
             "roam": true,
+            "aspectScale": 0.75,
+            "nameProperty": "name",
+            "selectedMode": false,
             "zoom": 1,
+            "mapValueCalculation": "sum",
             "showLegendSymbol": true,
             "emphasis": {}
         }
@@ -128,7 +132,11 @@
             "selected": {
                 "\u5fae\u4fe1\u597d\u53cb\u5206\u5e03geo\u56fe": true
             },
-            "show": true
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
         }
     ],
     "tooltip": {
@@ -138,15 +146,22 @@
         "axisPointer": {
             "type": "line"
         },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
         "textStyle": {
             "fontSize": 14
         },
-        "borderWidth": 0
+        "borderWidth": 0,
+        "padding": 5
     },
     "title": [
         {
             "text": "\u5fae\u4fe1\u597d\u53cb\u5206\u5e03\u5206\u5e03",
-            "left": "30px"
+            "left": "30px",
+            "padding": 5,
+            "itemGap": 10
         }
     ],
     "visualMap": {
@@ -162,12 +177,16 @@
             ]
         },
         "calculable": true,
+        "inverse": false,
         "splitNumber": 5,
         "orient": "vertical",
-        "showLabel": true
+        "showLabel": true,
+        "itemWidth": 20,
+        "itemHeight": 14,
+        "borderWidth": 0
     }
 };
-        chart_e3008b2f5cdc4f14b21029bb21edf8fe.setOption(option_e3008b2f5cdc4f14b21029bb21edf8fe);
+        chart_86756b0155834087957bf249258853cd.setOption(option_86756b0155834087957bf249258853cd);
     </script>
 </body>
 </html>
