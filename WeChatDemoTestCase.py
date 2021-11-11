@@ -1,7 +1,10 @@
 from unittest import TestCase
+import unittest
 from WeChatFeatureToggle import WeChatFeatureToggle
 from WeChatAction import WeChatAction
 from datetime import datetime
+from HTMLTestRunner import HTMLTestRunner
+import time
 
 
 class WeChatDemoTestCase(TestCase):
@@ -312,6 +315,20 @@ class WeChatDemoTestCase(TestCase):
             "RemarkPYQuanPin": "",
             "MemberStatus": 0,
             "DisplayName": "廖成龙-Jacky",
+            "KeyWord": ""
+        },
+        {
+            "MemberList": [],
+            "Uin": 0,
+            "UserName": "@6832dbf370fd217d3588b24621d0f94d63097f5ef0e94f05d0c441ba49b7bb2e",
+            "NickName": "刘锐 FD convergency 安卓",
+            "AttrStatus": 198693,
+            "PYInitial": "",
+            "PYQuanPin": "",
+            "RemarkPYInitial": "",
+            "RemarkPYQuanPin": "",
+            "MemberStatus": 0,
+            "DisplayName": "刘锐 Jack",
             "KeyWord": ""
         },
         {
@@ -2929,14 +2946,14 @@ class WeChatDemoTestCase(TestCase):
         analysis = self.toggle.analysis
 
         self.assertFalse(analysis.isAllEnabled)
-        self.assertFalse(analysis.sexAnalysis)
-        self.assertFalse(analysis.barCity)
-        self.assertFalse(analysis.barProvince)
-        self.assertFalse(analysis.pieCity)
-        self.assertFalse(analysis.pieProvince)
-        self.assertFalse(analysis.geoProvince)
-        self.assertFalse(analysis.pyechartsWordCloud)
-        self.assertFalse(analysis.pilWordCloud)
+        self.assertTrue(analysis.sexAnalysis)
+        self.assertTrue(analysis.barCity)
+        self.assertTrue(analysis.barProvince)
+        self.assertTrue(analysis.pieCity)
+        self.assertTrue(analysis.pieProvince)
+        self.assertTrue(analysis.geoProvince)
+        self.assertTrue(analysis.pyechartsWordCloud)
+        self.assertTrue(analysis.pilWordCloud)
 
     def test_wechatCommonGroupFeatureToggle(self):
         common = self.toggle.group.common
@@ -2986,7 +3003,7 @@ class WeChatDemoTestCase(TestCase):
         self.assertFalse(ourGroup.atMeReply)
 
     def test_weChatDHRFeatureToggle(self):
-        dhrGroup = self.toggle.group.dhr
+        dhrGroup = self.toggle.group.dhrGroup
 
         self.assertEqual(dhrGroup.expectedList, ["李凯", "宋甜甜", "王志超", "蔡耀", "屈欢", "许月英", "王磊", "谢研", "裴明明",
                                                  "魏建华", "贾瑾", "刘晶", "候梦璇", "徐苗淼", "胡丹", "郭著", "穆斌斌",
@@ -3025,7 +3042,7 @@ class WeChatDemoTestCase(TestCase):
         jade = self.toggle.group.jade
         self.assertEqual(jade.expectedList, ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟",
                                              "杨元生", "文逸俊", "黄文斌", "李彬特", "郑永祥", "梁敏瑜", "曾昊",
-                                             "于顺燊", "郑绵毅", "林聪", "叶颖欣", "廖成龙"] , "expect list should be equal")
+                                             "于顺燊", "郑绵毅", "林聪", "叶颖欣", "廖成龙", "刘锐"] , "expect list should be equal")
         self.assertTrue(len(jade.expectedList) == len(self.jade_chat_room_member) - 3)
         self.assertTrue(jade.queue)
         self.assertFalse(jade.imageReturn)
@@ -3108,11 +3125,12 @@ class WeChatDemoTestCase(TestCase):
                     18. 何志伟Daniel
                     """
         reminder = """ 氛围调查 
-@陈洋平-Carl
-@谢毅滦–Sheldon
-@郑永祥-Michael
+@陈洋平-Carl 
+@谢毅滦–Sheldon 
+@郑永祥-Michael 
+@刘锐 Jack 
 
-未接龙人数还剩 3 人"""
+未接龙人数还剩 4 人"""
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, new_msg)
         self.assertEqual(result, reminder)
@@ -3165,7 +3183,7 @@ class WeChatDemoTestCase(TestCase):
             20. 郑永祥-Michael
             21. 陈洋平-Carl
             22. 谢毅滦–Sheldon
-            23. 江克非-Leslie
+            23. 刘锐 Jack
         """
         reminder = "恭喜大家完成本次接龙！！！"
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, msg)
@@ -3194,24 +3212,23 @@ class WeChatDemoTestCase(TestCase):
         print("expectedList: ", jade_members)
         msg = """
 #接龙
-welink节前健康打卡
+工时确认无误
 
 1. 林俊杰 - Jackie
-2. 林聪  Lynn
-3. 于顺燊-Justin
-4. 郑绵毅-Manny
-5. 陈洋平-Carl
-6. 刘锐 Jack
-7. 廖成龙-Jacky
-8. 杨元生-Yeson
-9. 戴国明-MING
-10. 江克非-Leslie
-11. 文逸俊 - Caesar
-12. 何志伟Daniel
+2. 郑绵毅-Manny
+3. 曾昊 Anson
+4. 张广洋-Ternence
+5. 叶颖欣-june
+6. 廖成龙-Jacky
+7. 李彬特 winter
+8. 于顺燊-Justin
+9. 陈洋平-Carl
+10. 刘旭斌Daniel
+11. 何志伟Daniel
+12. 郑永祥-Michael
 13. 唐小兵 Leo
-14. 刘旭斌Daniel
-15. 郑永祥-Michael
-16. 张广洋-Ternence
+14. 黄文斌_Harvey
+15. 文逸俊 - Caesar
                 """
 
         result = WeChatAction.auto_reminder(self.jade_chat_room_member, jade_members, msg)
@@ -3239,3 +3256,25 @@ welink节前健康打卡
         print(now)
 
         print(now >= begin and now <= end)
+
+if __name__ == '__main__':
+
+    print("开始执行单元测试")
+    test_dir = './'
+    # test_dir为要指定的目录 ./为当前目录；pattern：为查找的.py文件的格式
+    discover = unittest.defaultTestLoader.discover(test_dir, pattern='WeChatDemoTestCase.py')
+    # 定义报告目录
+    file_dir = "./report/"
+    # 定义报告名称格式
+    now_time = time.strftime("%Y-%m-%d %H_%M_%S")
+    # 报告完整路径和名称
+    file_name = file_dir + now_time + "_report.html"
+    with open(file_name, "wb") as fp:
+        # 创建执行对象  是一个HTMLTestRunner的对象  生成测试结果报告内容
+        runner = HTMLTestRunner(stream=fp,
+                                title="测试报告",
+                                description="用例执行情况:",
+                                verbosity=2
+                                )
+        # 执行测试流程
+        runner.run(discover)

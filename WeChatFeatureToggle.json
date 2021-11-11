@@ -73,7 +73,7 @@
 			"jade": {
 				"expectedList": ["林俊杰", "张广洋", "谢毅滦", "陈洋平", "戴国明", "唐小兵", "刘旭斌", "何志伟", "杨元生",
 					"文逸俊", "黄文斌", "李彬特", "郑永祥", "梁敏瑜", "曾昊", "于顺燊", "郑绵毅",
-					"林聪", "叶颖欣", "廖成龙"],
+					"林聪", "叶颖欣", "廖成龙", "刘锐"],
 				"queue": true,
 				"imageReturn": false,
 				"mapAnalysis": true,
@@ -82,7 +82,8 @@
 				"atMeReply": false
 			},
 			"washer": {
-				"expectedList": ["离婚分一半", "@@@", "吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了", "军佬屌仔三米长，仲识分叉", "霸王别鸽", "罗平滢", "JJ"],
+				"expectedList": ["离婚分一半", "@@@", "吓\n得\n我\n昵\n称\n都\n空中旋转劈叉了", "军佬屌仔三米长，仲识分叉",
+					"霸王别鸽", "罗平滢", "JJ"],
 				"queue": true,
 				"imageReturn": false,
 				"mapAnalysis": true,
@@ -92,6 +93,7 @@
 			},
 			"brotherAndSister": {
 				"expectedList": [],
+
 				"queue": false,
 				"imageReturn": false,
 				"mapAnalysis": true,
